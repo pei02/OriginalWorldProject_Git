@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OriginalWorldModelStoreContainer" CdmEntityContainer="OriginalWorldEntities">
+    <EntitySetMapping Name="Administrator">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Administrator">
+        <MappingFragment StoreEntitySet="Administrator">
+          <ScalarProperty Name="Administrator_ID" ColumnName="Administrator_ID" />
+          <ScalarProperty Name="Adm_name" ColumnName="Adm_name" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="A_Password" ColumnName="A_Password" />
+          <ScalarProperty Name="Authority" ColumnName="Authority" />
+          <ScalarProperty Name="Confirm_pwd" ColumnName="Confirm_pwd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Announcement">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Announcement">
+        <MappingFragment StoreEntitySet="Announcement">
+          <ScalarProperty Name="Announcement_ID" ColumnName="Announcement_ID" />
+          <ScalarProperty Name="Announcement_title" ColumnName="Announcement_title" />
+          <ScalarProperty Name="Announcement_content" ColumnName="Announcement_content" />
+          <ScalarProperty Name="Announcement_time" ColumnName="Announcement_time" />
+          <ScalarProperty Name="Announcement_type_ID" ColumnName="Announcement_type_ID" />
+          <ScalarProperty Name="Administrator_ID" ColumnName="Administrator_ID" />
+          <ScalarProperty Name="Ann_Display" ColumnName="Ann_Display" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Announcement_type">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Announcement_type">
+        <MappingFragment StoreEntitySet="Announcement_type">
+          <ScalarProperty Name="Announcement_type_ID" ColumnName="Announcement_type_ID" />
+          <ScalarProperty Name="Announcement_type1" ColumnName="Announcement_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Approval_status">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Approval_status">
+        <MappingFragment StoreEntitySet="Approval_status">
+          <ScalarProperty Name="Approval_status_ID" ColumnName="Approval_status_ID" />
+          <ScalarProperty Name="Approval_status1" ColumnName="Approval_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_moodsheet">
+      <EntityTypeMapping TypeName="OriginalWorldModel.M_moodsheet">
+        <MappingFragment StoreEntitySet="M_moodsheet">
+          <ScalarProperty Name="M_moodsheet_num" ColumnName="M_moodsheet_num" />
+          <ScalarProperty Name="Moodsymbol_num" ColumnName="Moodsymbol_num" />
+          <ScalarProperty Name="Messagenumber" ColumnName="Messagenumber" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Member">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Member">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="M_Password" ColumnName="M_Password" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="M_status" ColumnName="M_status" />
+          <ScalarProperty Name="Writter_qualifications" ColumnName="Writter_qualifications" />
+          <ScalarProperty Name="Confirm_pwd" ColumnName="Confirm_pwd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Message">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="Messagenumber" ColumnName="Messagenumber" />
+          <ScalarProperty Name="Msg_Content" ColumnName="Msg_Content" />
+          <ScalarProperty Name="Messagetime" ColumnName="Messagetime" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="WorksContentID" ColumnName="WorksContentID" />
+          <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+          <ScalarProperty Name="Not_spoiler" ColumnName="Not_spoiler" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moodshee">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Moodshee">
+        <MappingFragment StoreEntitySet="Moodshee">
+          <ScalarProperty Name="Moodsymbol_num" ColumnName="Moodsymbol_num" />
+          <ScalarProperty Name="Moodsymbol" ColumnName="Moodsymbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Processing_method">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Processing_method">
+        <MappingFragment StoreEntitySet="Processing_method">
+          <ScalarProperty Name="Processing_method_ID" ColumnName="Processing_method_ID" />
+          <ScalarProperty Name="Processing_method1" ColumnName="Processing_method" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Processing_status_table">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Processing_status_table">
+        <MappingFragment StoreEntitySet="Processing_status_table">
+          <ScalarProperty Name="Processing_status_ID" ColumnName="Processing_status_ID" />
+          <ScalarProperty Name="Processing_status" ColumnName="Processing_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Re_message">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Re_message">
+        <MappingFragment StoreEntitySet="Re_message">
+          <ScalarProperty Name="Re_message_num" ColumnName="Re_message_num" />
+          <ScalarProperty Name="Moodsymbol_num" ColumnName="Moodsymbol_num" />
+          <ScalarProperty Name="RtamessageID" ColumnName="RtamessageID" />
+          <ScalarProperty Name="Attribute1" ColumnName="Attribute1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_category">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Report_category">
+        <MappingFragment StoreEntitySet="Report_category">
+          <ScalarProperty Name="Report_category_ID" ColumnName="Report_category_ID" />
+          <ScalarProperty Name="Report_category1" ColumnName="Report_category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_datail">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Report_datail">
+        <MappingFragment StoreEntitySet="Report_datail">
+          <ScalarProperty Name="Report_datail_ID" ColumnName="Report_datail_ID" />
+          <ScalarProperty Name="Reportdatail_content" ColumnName="Reportdatail_content" />
+          <ScalarProperty Name="Report_category_ID" ColumnName="Report_category_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_table">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Report_table">
+        <MappingFragment StoreEntitySet="Report_table">
+          <ScalarProperty Name="Report_event_ID" ColumnName="Report_event_ID" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Report_time" ColumnName="Report_time" />
+          <ScalarProperty Name="Processing_status_ID" ColumnName="Processing_status_ID" />
+          <ScalarProperty Name="Processing_method_ID" ColumnName="Processing_method_ID" />
+          <ScalarProperty Name="Administrator_ID" ColumnName="Administrator_ID" />
+          <ScalarProperty Name="Report_category_ID" ColumnName="Report_category_ID" />
+          <ScalarProperty Name="Report_datail_ID" ColumnName="Report_datail_ID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+          <ScalarProperty Name="WriterhomeID" ColumnName="WriterhomeID" />
+          <ScalarProperty Name="WriterID" ColumnName="WriterID" />
+          <ScalarProperty Name="Messagenumber" ColumnName="Messagenumber" />
+          <ScalarProperty Name="WorksContentID" ColumnName="WorksContentID" />
+          <ScalarProperty Name="RtamessageID" ColumnName="RtamessageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rta_message">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Rta_message">
+        <MappingFragment StoreEntitySet="Rta_message">
+          <ScalarProperty Name="RtamessageID" ColumnName="RtamessageID" />
+          <ScalarProperty Name="Rta_msg_Content" ColumnName="Rta_msg_Content" />
+          <ScalarProperty Name="Rtatime" ColumnName="Rtatime" />
+          <ScalarProperty Name="Messagenumber" ColumnName="Messagenumber" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+          <ScalarProperty Name="Not_spoiler" ColumnName="Not_spoiler" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Star">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Star">
+        <MappingFragment StoreEntitySet="Star">
+          <ScalarProperty Name="StarID" ColumnName="StarID" />
+          <ScalarProperty Name="Starscores" ColumnName="Starscores" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Star_table">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Star_table">
+        <MappingFragment StoreEntitySet="Star_table">
+          <ScalarProperty Name="StartableID" ColumnName="StartableID" />
+          <ScalarProperty Name="StarID" ColumnName="StarID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+          <ScalarProperty Name="Status1" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Track_work">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Track_work">
+        <MappingFragment StoreEntitySet="Track_work">
+          <ScalarProperty Name="Track_workID" ColumnName="Track_workID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Track_writer">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Track_writer">
+        <MappingFragment StoreEntitySet="Track_writer">
+          <ScalarProperty Name="Track_writerID" ColumnName="Track_writerID" />
+          <ScalarProperty Name="WriterID" ColumnName="WriterID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Type_table">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Type_table">
+        <MappingFragment StoreEntitySet="Type_table">
+          <ScalarProperty Name="AM_ID" ColumnName="AM_ID" />
+          <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+          <ScalarProperty Name="WorktypeID" ColumnName="WorktypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Website_type">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Website_type">
+        <MappingFragment StoreEntitySet="Website_type">
+          <ScalarProperty Name="Website_type_ID" ColumnName="Website_type_ID" />
+          <ScalarProperty Name="Website_type1" ColumnName="Website_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Work_status">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Work_status">
+        <MappingFragment StoreEntitySet="Work_status">
+          <ScalarProperty Name="WorkstatusID" ColumnName="WorkstatusID" />
+          <ScalarProperty Name="Workstatus" ColumnName="Workstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Work_type">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Work_type">
+        <MappingFragment StoreEntitySet="Work_type">
+          <ScalarProperty Name="WorktypeID" ColumnName="WorktypeID" />
+          <ScalarProperty Name="Worktype" ColumnName="Worktype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Works">
+        <MappingFragment StoreEntitySet="Works">
+          <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+          <ScalarProperty Name="Worksname" ColumnName="Worksname" />
+          <ScalarProperty Name="Cover" ColumnName="Cover" />
+          <ScalarProperty Name="Serialtime" ColumnName="Serialtime" />
+          <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+          <ScalarProperty Name="WorkstatusID" ColumnName="WorkstatusID" />
+          <ScalarProperty Name="WriterID" ColumnName="WriterID" />
+          <ScalarProperty Name="fans" ColumnName="fans" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works_Content">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Works_Content">
+        <MappingFragment StoreEntitySet="Works_Content">
+          <ScalarProperty Name="WorksContentID" ColumnName="WorksContentID" />
+          <ScalarProperty Name="WorksContent" ColumnName="WorksContent" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+          <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Writer">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Writer">
+        <MappingFragment StoreEntitySet="Writer">
+          <ScalarProperty Name="WriterID" ColumnName="WriterID" />
+          <ScalarProperty Name="Pseudonym" ColumnName="Pseudonym" />
+          <ScalarProperty Name="W_status" ColumnName="W_status" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="Writer_application_ID" ColumnName="Writer_application_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Writer_application">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Writer_application">
+        <MappingFragment StoreEntitySet="Writer_application">
+          <ScalarProperty Name="Writer_application_ID" ColumnName="Writer_application_ID" />
+          <ScalarProperty Name="Pseudonym" ColumnName="Pseudonym" />
+          <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+          <ScalarProperty Name="Works_name" ColumnName="Works_name" />
+          <ScalarProperty Name="Work_preview" ColumnName="Work_preview" />
+          <ScalarProperty Name="Approval_status_ID" ColumnName="Approval_status_ID" />
+          <ScalarProperty Name="Administrator_ID" ColumnName="Administrator_ID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Writer_home">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Writer_home">
+        <MappingFragment StoreEntitySet="Writer_home">
+          <ScalarProperty Name="WriterhomeID" ColumnName="WriterhomeID" />
+          <ScalarProperty Name="Coverphoto" ColumnName="Coverphoto" />
+          <ScalarProperty Name="Mugshot" ColumnName="Mugshot" />
+          <ScalarProperty Name="Fans" ColumnName="Fans" />
+          <ScalarProperty Name="WriterID" ColumnName="WriterID" />
+          <ScalarProperty Name="Writer_profile" ColumnName="Writer_profile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Writter_website">
+      <EntityTypeMapping TypeName="OriginalWorldModel.Writter_website">
+        <MappingFragment StoreEntitySet="Writter_website">
+          <ScalarProperty Name="Website_ID" ColumnName="Website_ID" />
+          <ScalarProperty Name="Website_link" ColumnName="Website_link" />
+          <ScalarProperty Name="Website_type_ID" ColumnName="Website_type_ID" />
+          <ScalarProperty Name="WriterhomeID" ColumnName="WriterhomeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="updateAdm" FunctionName="OriginalWorldModel.Store.updateAdm" />
+    <FunctionImportMapping FunctionImportName="updateMem" FunctionName="OriginalWorldModel.Store.updateMem" />
+  </EntityContainerMapping>
+</Mapping>

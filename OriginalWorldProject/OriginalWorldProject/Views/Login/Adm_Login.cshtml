@@ -1,0 +1,105 @@
+﻿@model OriginalWorldProject.Models.Administrator
+
+@{
+    ViewBag.Title = "Adm_Login";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    var Message = Json.Encode(@ViewBag.Message);
+}
+
+<div class="h-100 row">
+    <div class="bg-orange col-6">
+        <table class="h-100 w-100">
+            <tr>
+                <td class="text-center">
+                    <img src="~/img/bg_login.gif" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="bg-dark col-6">
+        <table class="w-100 h-100">
+            <tr>
+                <td class="text-center text-fm">
+                    <div class="row justify-content-center">
+                        <div class="col-8 bg-dark_op rounded-125">
+                            @using (Html.BeginForm())
+                            {
+
+                                <h3 class="text-orange mt-3">
+                                    <strong>Sign In</strong>
+                                </h3>
+
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+                                    <div class="form-group mt-5">
+                                        <div class="input-group justify-content-center">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-orange text-white" id="Account01"><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input class="form-control bg-brown text-orange" id="Account" name="Account" type="text" placeholder="請輸入管理員帳號" required>
+                                        </div>
+                                    </div>
+                                    <div id="show_hide_password">
+                                        <div class="form-group">
+                                            <div class="input-group justify-content-center">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text bg-orange text-white"><i class="fas fa-key"></i></span>
+                                                </div>
+                                                <input class="form-control bg-brown text-orange" id="A_Password" name="A_Password" type="password" placeholder="請輸入密碼" required>
+                                            </div>
+                                            <div class="input-group justify-content-center mt-3">
+                                                <div class="row col-8">
+                                                    <div class="col-8">
+                                                        <span class="text-orange text-fm">@ViewBag.Message</span>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input class="btn btn-orange-y btn-block" type="submit" value="登入">
+                                                </div>
+                                                <div class="col-6">
+                                                    <input class="btn btn-outline-gray btn-block" type="reset" value="清除">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').removeClass("fa-eye").addClass("fa-eye-slash");
+                    $('#pwd_show_color').removeClass("badge-orange").addClass("badge-secondary");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash").addClass("fa-eye");
+                    $('#pwd_show_color').removeClass("badge-secondary").addClass("badge-orange");
+                }
+            });
+
+        });
+
+    </script>
+
+}

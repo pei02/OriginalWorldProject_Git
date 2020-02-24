@@ -1,0 +1,147 @@
+﻿@*@model IEnumerable<Original_WorldProject.Models.Administrator>*@
+@using PagedList.Mvc
+@using PagedList
+@model IPagedList<OriginalWorldProject.Models.Administrator>
+@{
+    ViewBag.Title = "管理員列表";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    string[] aut = { "e", "true", "false" };
+    string[] autname = { "全部", "最高", "一般" };
+    int num = 0;
+    var checked_ = "";
+}
+
+
+
+<div class="row">
+    <div class="col-md-11">
+        <table>
+            <tr>
+                <td>
+                    <span class="text-fm text-white ts-36">管理員列表</span>
+                </td>
+                <td class="text-center" style="width:30px;">
+                    <a class="text-orange" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search" id="search_button">
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-minus-circle" style="display:none"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-1">
+        @Html.ActionLink(" ", "Create", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-green fas fa-user-plus" })
+    </div>
+</div>
+
+
+
+<p class="border-bottom mb-5"></p>
+
+<form action="@Url.Action("Index")" method="post">
+    @Html.AntiForgeryToken()
+    <div class="collapse" id="search">
+        <div class="form-group">
+            <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                <div class="row">
+
+                    @foreach (var i in aut)
+                    {
+                        checked_ = i == ViewBag.Authority ? "checked" : "";
+                        <div class="col-4">
+                            <label class="btn btn-orange-s  btn-block rounded-1 active mr-2">
+                                <input type="radio" name="Authority" value="@i" @checked_ class="d-none">@autname[num]
+                            </label>
+                        </div>
+                        num++;
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-11">
+                <div class="form-group">
+                    <label class="col-md-2 col-form-label text-white text-center">帳號搜索</label>
+                    <input id="Account" name="Account" type="text" class="form-control col-10" placeholder="請輸入欲查詢帳號" value="@ViewBag.Account" />
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 col-form-label text-white text-center">名稱搜索</label>
+                    <input id="Adm_name" name="Adm_name" type="text" class="form-control col-10" placeholder="請輸入欲查詢名稱" value="@ViewBag.Adm_name" />
+                </div>
+            </div>
+            <div class="col-1 align-self-center">
+                <button type="submit" class="btn-circle btn-orange-y">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+<table class="table-x table-x-striped table-dark table-x-hover">
+    <tr class="text-fm text-center ts-16">
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Administrator_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Adm_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Authority)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="text-fm text-center ts-16">
+            <td>
+                @Html.DisplayFor(modelItem => item.Administrator_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adm_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account)
+            </td>
+            <td>
+                @if (item.Authority == true)
+                {
+                    <span class="badge badge-orange">最高</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">一般</span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.Administrator_ID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+                @Html.ActionLink(" ", "Details", new { id = item.Administrator_ID, Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-purple far fa-file-alt" })
+                @Html.ActionLink(" ", "Delete", new { id = item.Administrator_ID }, new { @class = "btn-circle  btn-red far fa-trash-alt", onclick = "return confirm('資料一旦刪除將無法回復，您確定要刪除嗎??')" })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Authority = ViewBag.Authority, Account = ViewBag.Account, Adm_name = ViewBag.Adm_name, Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $('#search_button').click(function () {
+                $('#search_button>i').toggle();
+            });
+            
+        });
+
+    </script>
+
+}

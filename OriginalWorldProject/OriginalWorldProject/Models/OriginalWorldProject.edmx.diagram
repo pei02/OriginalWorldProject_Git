@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1966bae5fe2d41059340864de1ef3a95" Name="Diagram1">
+        <EntityTypeShape EntityType="OriginalWorldModel.Administrator" Width="1.5" PointX="3.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Announcement" Width="1.5" PointX="6" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Announcement_type" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Approval_status" Width="1.5" PointX="3.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.M_moodsheet" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Member" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Message" Width="1.5" PointX="21" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Moodshee" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Processing_method" Width="1.5" PointX="10.5" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Processing_status_table" Width="1.5" PointX="10.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Re_message" Width="1.5" PointX="25.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Report_category" Width="1.5" PointX="10.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Report_datail" Width="1.5" PointX="10.5" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Report_table" Width="1.5" PointX="12.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Rta_message" Width="1.5" PointX="23.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Star" Width="1.5" PointX="13.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Star_table" Width="1.5" PointX="15.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Status" Width="1.5" PointX="18.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Track_work" Width="1.5" PointX="15.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Track_writer" Width="1.5" PointX="10.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Type_table" Width="1.5" PointX="15.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Website_type" Width="1.5" PointX="10.5" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Work_status" Width="1.5" PointX="11.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Work_type" Width="1.5" PointX="13.5" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Works" Width="1.5" PointX="13.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Works_Content" Width="1.5" PointX="18.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Writer" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Writer_application" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Writer_home" Width="1.5" PointX="10.5" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OriginalWorldModel.Writter_website" Width="1.5" PointX="12.75" PointY="28.875" IsExpanded="true" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship105" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship112" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship181" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship97" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship104" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship49" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship85" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship87" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship109" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship194" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship68" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship73" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship79" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship83" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship84" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship88" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship102" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship198" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship57" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship86" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship58" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship183" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship182" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship59" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship184" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship185" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship186" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship195" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship196" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship197" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship199" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship200" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship103" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship53" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship82" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship101" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship69" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship71" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship41" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship46" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship107" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship33" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship75" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship81" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship110" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship44" ManuallyRouted="false" />
+        <AssociationConnector Association="OriginalWorldModel.Relationship111" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

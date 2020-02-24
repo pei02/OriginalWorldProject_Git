@@ -1,0 +1,107 @@
+﻿@model OriginalWorldProject.Models.Administrator
+
+@{
+    ViewBag.Title = "編輯管理員";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    var Authority = Json.Encode(ViewBag.Authority);
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal ts-16 text-white text-fm">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <span class="text-fm text-white ts-36">編輯管理員</span>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn-circle btn-orange-y">
+                            <i class="far fa-save"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink(" ", "Index", new { Page=Request.QueryString["page"]}, new { @class = "btn-circle btn-orange fas fa-reply" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="border-bottom mb-5"></p>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Administrator_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adm_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="control-label">@Model.Adm_name</label>
+                <div hidden>
+                    @Html.EditorFor(model => model.Adm_name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Adm_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="control-label">@Model.Account</label>
+                <div hidden>
+                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.A_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="control-label">
+                    <span class="badge badge-secondary">受到保護的欄位</span>
+                </label>
+                <div hidden>
+                    @Html.EditorFor(model => model.A_Password, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.A_Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div hidden>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Confirm_pwd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Authority, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="control-label">
+                    <input type="checkbox" id="Authority" name="Authority" value="true" />
+                    <label for="Authority">設定為最高權限</label>
+                    @Html.ValidationMessageFor(model => model.Authority, "", new { @class = "text-danger" })
+                </label>
+            </div>
+        </div>
+
+    </div>
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section scripts{
+    <script>
+        if (@Html.Raw(Authority)==true)
+        $('#Authority').attr("checked", true);
+    </script>
+}

@@ -1,0 +1,248 @@
+﻿@*@model IEnumerable<Original_WorldProject.Models.Member>*@
+@using PagedList.Mvc
+@using PagedList
+@model IPagedList<OriginalWorldProject.Models.Member>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    var Age_star = Json.Encode(ViewBag.Age_star);
+    var Age_end = Json.Encode(ViewBag.Age_end);
+    string[] val = { "e", "true", "false" };
+    string[] status = { "查看全部", "已停權", "未停權" };
+    string[] W_qua = { "查看全部", "具作家權限", "不具作家權限" };
+    string[] G = { "全部", "男", "女" };
+    int num;
+    var selected_ = "";
+}
+
+
+<div class="row">
+    <div class="col-md-11">
+        <table>
+            <tr>
+                <td>
+                    <span class="text-fm text-white ts-36">會員列表</span>
+                </td>
+                <td class="text-center" style="width:30px;">
+                    <a class="text-orange" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search" id="search_button">
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-minus-circle" style="display:none"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-------------------測試註冊功能用-------------------->
+    <div class="col-md-1">
+        @Html.ActionLink(" ", "Create", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-green fas fa-user-plus" })
+    </div>
+    <!----------------------------------------------------->
+</div>
+
+<p class="border-bottom mb-5"></p>
+
+<form method="post">
+    <div class="collapse" id="search">
+        <div class="row">
+            <div class="row col-11">
+                <div class="row col-12">
+                    <div class="form-group col-4">
+                        <select id="Gender" name="Gender" class="form-control">
+                            <option selected disabled>---請選擇性別---</option>
+                            @{
+                                num = 0;
+                                foreach (var i in val)
+                                {
+                                    selected_ = i == ViewBag.Gender ? "selected" : "";
+                                    <option value="@val[num]" @selected_>@G[num]</option>
+                                    num++;
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-4">
+                        <select id="M_status" name="M_status" class="form-control">
+                            <option selected disabled>---請選擇會員狀態---</option>
+                            @{
+                                num = 0;
+                                foreach (var i in val)
+                                {
+                                    selected_ = i == ViewBag.M_status ? "selected" : "";
+                                    <option value="@val[num]" @selected_>@status[num]</option>
+                                    num++;
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-4">
+                        <select id="Writter_qualifications" name="Writter_qualifications" class="form-control">
+                            <option selected disabled>---請選擇會員權限---</option>
+                            @{
+                                num = 0;
+                                foreach (var i in val)
+                                {
+                                    selected_ = i == ViewBag.M_status ? "selected" : "";
+                                    <option value="@val[num]" @selected_>@W_qua[num]</option>
+                                    num++;
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row col-12 ">
+                    <div class="text-white col-6">
+                        <div class="form-group">
+                            <table class="w-100">
+                                <tr>
+                                    <td class="w-25">
+                                        <label class="col-form-label">年齡區間介於</label>
+                                    </td>
+                                    <td class="w-25">
+                                        <input id="Age_star" type="number" min="0" max="130" name="Age_star" class="form-control" value="@ViewBag.Age_star" />
+                                    </td>
+                                    <td class="w-auto text-center">
+                                        <label class="col-form-label">～</label>
+                                    </td>
+                                    <td class="w-25">
+                                        <input id="Age_end" type="number" min="0" max="130" name="Age_end" class="form-control" value="@ViewBag.Age_end" />
+                                    </td>
+                                    <td class="w-auto text-center">
+                                        <label class="col-form-label">歲</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class=" text-white col-6">
+                        <div class="form-group">
+                            <label class="col-md-3 col-form-label">帳號查詢</label>
+                            <input id="Account" name="Account" type="text" value="@ViewBag.Account" class="form-control col-9" placeholder="請輸入欲查詢帳號" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 align-self-center">
+                <button type="submit" class="btn-circle btn-orange-y">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="table-x table-x-striped table-dark table-x-hover">
+    <tr class="text-fm text-center ts-16">
+        <td>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Nickname)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Account)
+        </td>
+
+        <td>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Gender)
+        </td>
+        <td>
+            年齡
+        </td>
+        <td data-toggle="tooltip" data-placement="right" title="提示：紅燈為封鎖狀態">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().M_status)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Writter_qualifications)
+        </td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="text-center">
+            <td>
+                @Html.DisplayFor(modelItem => item.Nickname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account)
+            </td>
+
+            <td>
+                @if (item.Gender == false)
+                {
+                    <span class="text-pink ts-16"><i class="fas fa-female"></i></span>
+                }
+                else
+                {
+                    <span class="text-blue ts-16"><i class="fas fa-male"></i></span>
+                }
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @{
+
+                    int s_year = item.Birthday.Year;
+                    int e_year = DateTime.Today.Year;
+                    int difference = e_year - s_year;
+                    int leapyear_sum = 0;
+                    for (int d = 0; d <= difference; d++)
+                    {
+                        s_year += d;
+                        if (DateTime.IsLeapYear(s_year))
+                        {
+                            leapyear_sum++;
+                        }
+                    }
+                    leapyear_sum--;
+                    var a_year_sum = (DateTime.Today - item.Birthday).TotalDays - leapyear_sum;
+                    var age = Math.Floor(a_year_sum / 365);
+                    @age;
+                }
+                @*@Html.DisplayFor(modelItem => item.Birthday)*@
+            </td>
+            <td>
+                @if (item.M_status == false)
+                {
+                    <span class="text-success"><i class="fas fa-circle"></i></span>
+                }
+                else
+                {
+                    <span class="text-danger"><i class="fas fa-circle"></i></span>
+                }
+                @*@Html.DisplayFor(modelItem => item.M_status)*@
+            </td>
+            <td>
+                @if (item.Writter_qualifications == false)
+                {
+                    <span class="badge badge-secondary">會員</span>
+                }
+                else
+                {
+                    <span class="badge badge-orange">作家</span>
+                }
+
+                @Html.DisplayFor(modelItem => item.Writter_qualifications)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.MemberID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="text-center">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $('#search_button').click(function () {
+                $('#search_button>i').toggle();
+            });
+
+            if (@Age_star== null)   $('#Age_star').val('18');
+            if (@Age_end== null)   $('#Age_end').val('35');
+        });
+
+    </script>
+
+}

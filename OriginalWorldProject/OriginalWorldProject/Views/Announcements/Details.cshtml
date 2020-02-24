@@ -1,0 +1,61 @@
+﻿@model OriginalWorldProject.Models.Announcement
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+}
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-10">
+            <span class="text-fm text-white ts-36">公告內容</span>
+        </div>
+        <div class="col-md-2">
+            <div class="col-md-4">
+                @*@Html.ActionLink(" ", "Edit", new { id = @ViewBag.id }, new { @class = "btn-circle  btn-blue far fa-edit" })*@
+                @Html.ActionLink(" ", "Edit", new { id = Model.Announcement_ID,Page=Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+
+            </div>
+            <div class="col-md-4">
+                @Html.ActionLink(" ", "Index",new {Page=Request.QueryString["page"] }, new {@class = "btn-circle btn-orange fas fa-reply"})
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="border-bottom mb-5"></p>
+
+
+<div>
+    <dl class="dl-horizontal text-white w-75">
+            <dd class="mb-3 border-bottom border-secondary">
+                <p class="ts-24 ts-20 ts-18">
+                    @{
+                        var type = Model.Announcement_type_ID;
+
+                        switch (type)
+                        {
+                            case "AT1":
+                                <span class="badge badge-purple ts-24 ts-20 ts-18">@Model.Announcement_type.Announcement_type1</span>
+                                break;
+                            case "AT2":
+                                <span class="badge badge-orange ts-24 ts-20 ts-18">@Model.Announcement_type.Announcement_type1</span>
+                                break;
+                            case "AT3":
+                                <span class="badge badge-blue ts-24 ts-20 ts-18">@Model.Announcement_type.Announcement_type1</span>
+                                break;
+                        }
+                    }
+                    @Html.DisplayFor(model => model.Announcement_title)
+                </p>
+            </dd>
+        
+        <dd class="mb-3 border-bottom border-secondary">
+            @Html.DisplayFor(model => model.Announcement_time)
+        </dd>
+
+        <dd>
+           @Html.Raw(Model.Announcement_content.ToString().Replace("\n","<br>"))
+        </dd>
+    </dl>
+</div>

@@ -1,0 +1,120 @@
+﻿@model OriginalWorldProject.Models.Announcement
+@{
+    ViewBag.Title = "新增公告";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal  text-white text-fm ts-16">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <span class="text-fm text-white ts-36">新增公告</span>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-md-4">
+                        <button type="reset" class="btn-circle btn-black">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn-circle btn-orange-y" id="submit_btn">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink(" ", "Index", new { Page=Request.QueryString["page"]}, new { @class = "btn-circle btn-orange fas fa-reply" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="border-bottom mb-5"></p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Announcement_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Announcement_ID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Announcement_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Announcement_type_ID, "公告類別", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("Announcement_type_ID", (IEnumerable<SelectListItem>)ViewBag.Ann_class, htmlAttributes: new { @class = "form-control" })*@
+                <select class="form-control" id="Announcement_type_ID" name="Announcement_type_ID" required>
+                    <option selected disabled>--請選擇--</option>
+                    <option value="AT1">系統</option>
+                    <option value="AT2">通知</option>
+                    <option value="AT3">祝賀</option>
+                    <option value="AT4">其他</option>
+                </select>
+                <div class="text-danger" id="inv_msg" hidden>
+                    請選擇類別
+                </div>
+                @Html.ValidationMessageFor(model => model.Announcement_type_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Administrator_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Administrator_ID, new { htmlAttributes = new { @class = "form-control" ,@Value=@Session["Adm_ID"],@readonly="readonly"} })
+                @Html.ValidationMessageFor(model => model.Administrator_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Announcement_title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Announcement_title, new { htmlAttributes = new { @class = "form-control", @id = "Announcement_title" } })
+                @Html.ValidationMessageFor(model => model.Announcement_title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Announcement_content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Announcement_content, new { @class = "form-control", @rows = "20", @id = "Announcement_content" })
+                @Html.ValidationMessageFor(model => model.Announcement_content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Announcement_time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Announcement_time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Announcement_time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script>
+        var i = [ '#Announcement_title', '#Announcement_content'];
+
+        $(document).ready(function () {
+
+            for (var j = 0; j <= i.length; j++) {
+                inv_msg(i[j]);
+            }
+        });
+
+        function inv_msg(a) {
+            $(a).on('click', function () {
+                if ($('#Announcement_type_ID').val() == null) {
+                    $('#Announcement_type_ID').addClass("is-invalid")
+                    $('#inv_msg').removeAttr("hidden","hidden");
+            } else {
+                    $('#Announcement_type_ID').removeClass("is-invalid");
+                    $('#inv_msg').attr("hidden","hidden");
+            }
+            });
+        }
+    </script>
+
+}

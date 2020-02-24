@@ -1,0 +1,140 @@
+﻿@model OriginalWorldProject.Models.Administrator
+
+@{
+    ViewBag.Title = "新增管理員";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    var verification = Json.Encode(ViewBag.verification);
+}
+
+@using (Html.BeginForm("Create","Administrators",FormMethod.Post,new {id="check-form" }))
+{
+    @*<form action="/Administrators/Create" method="post" novalidate="novalidate" id="check-form">*@
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal text-white text-fm ts-16">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <span class="text-fm text-white ts-36">新增管理員</span>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-md-4">
+                        <button type="reset" class="btn-circle btn-black">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        @*<button type="submit" class="btn-circle btn-orange-y">
+                                <i class="fas fa-check"></i>
+                            </button>*@
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink(" ", "Index", new { Page=Request.QueryString["page"]}, new { @class = "btn-circle btn-orange fas fa-reply" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="border-bottom mb-5"></p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Adm_name"><span class="text-danger">* </span>管理員名稱</label>
+            @*@Html.LabelFor(model => model.Adm_name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Adm_name, new { htmlAttributes = new { @class = "form-control", @id = "Adm_name", @placeholder = "請輸入管理員名稱" } })
+                @Html.ValidationMessageFor(model => model.Adm_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Account"><span class="text-danger">* </span>管理員帳號</label>
+            @*@Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @id = "Account", @placeholder = "請輸入管理員帳號" } })
+                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="show_hide_password">
+            <div class="form-group">
+                <label class="control-label col-md-2" for="A_Password"><span class="text-danger">* </span>管理員密碼</label>
+                <div class="col-md-10">
+                    <input class="form-control" id="pwd" name="A_Password" type="password" value="@ViewBag.RandomPwd" readonly />
+                    @*@Html.PasswordFor(model => model.A_Password, new { @class = "form-control", @id = "pwd", @placeholder = "請設定一組8-20字元的密碼，至少需包含一個數字、一個大寫或小寫字母、一個特殊符號。範例:aIGSD789@@"})*@
+                    @Html.ValidationMessageFor(model => model.A_Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Confirm_pwd"><span class="text-danger">* </span>確認密碼</label>
+                <div class="col-md-10">
+                    <input class="form-control" id="pwd2" name="Confirm_pwd" type="password" value="@ViewBag.RandomPwd" readonly />
+                    @*@Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @id = "pwd2", @placeholder = "請再次輸入密碼" })*@
+                    @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-10 mt-2 mb-2">
+                    <span class="badge text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            @*<div class="g-recaptcha is-invalid" data-sitekey="6Lc4DtYUAAAAAEeVsY_qjRZ5_C8scaPzLAr2K5yu" name="recaptcha"></div>*@
+            <div class="text-danger">@ViewBag.msg</div>
+        </div>
+    </div>
+}
+@*</form>*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section scripts{
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        var id = ['#Adm_name', '#Account'];
+
+        function onSubmit(token) {
+            document.getElementById("check-form").submit();
+        }
+
+        $(document).ready(function () {
+            for (var i = 0; i <= id.length; i++) {
+                Vaild(id[i]);
+            }
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').removeClass("fa-eye").addClass("fa-eye-slash");
+                    $('#pwd_show_color').removeClass("badge-orange").addClass("badge-secondary");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash").addClass("fa-eye");
+                    $('#pwd_show_color').removeClass("badge-secondary").addClass("badge-orange");
+                }
+            });
+
+        });
+
+        function Vaild(name) {
+            $(name).keyup(function () {
+                if ($(this).hasClass('input-validation-error')) {
+                    $(this).removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,97 @@
+﻿@model OriginalWorldProject.Models.Announcement
+
+@{
+    ViewBag.Title = "編輯公告";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    var Ann_Display = Json.Encode(ViewBag.Ann_Display);
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal ts-16 text-white text-fm">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <span class="text-fm text-white ts-36">編輯公告</span>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn-circle btn-orange-y">
+                            <i class="far fa-save"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink(" ", "Index", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-orange fas fa-reply" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="border-bottom mb-5"></p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Announcement_ID)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Announcement_type_ID, "公告類別", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Announcement_type_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Announcement_type_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Administrator_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Administrator_ID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Administrator_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Announcement_title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Announcement_title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Announcement_title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Announcement_content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Announcement_content, new { @class = "form-control", @rows = "20" })
+                @Html.ValidationMessageFor(model => model.Announcement_content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Announcement_time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Announcement_time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Announcement_time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ann_Display, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="control-label">
+                    <input type="checkbox" id="Ann_Display" name="Ann_Display" value="true" />
+                    <label for="Ann_Display">設為隱藏</label>
+                    @Html.ValidationMessageFor(model => model.Ann_Display, "", new { @class = "text-danger" })
+                </label>
+            </div>
+        </div>
+
+    </div>
+}
+
+@section scripts{
+    <script>
+        if (@Html.Raw(Ann_Display)==true)
+        $('#Ann_Display').attr("checked", true);
+    </script>
+}

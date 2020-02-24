@@ -1,0 +1,1094 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OriginalWorldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="Administrator_ID" />
+    </Key>
+    <Property Name="Administrator_ID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Adm_name" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Account" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="A_Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Authority" Type="bit" Nullable="false" />
+    <Property Name="Confirm_pwd" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Announcement">
+    <Key>
+      <PropertyRef Name="Announcement_ID" />
+    </Key>
+    <Property Name="Announcement_ID" Type="int" Nullable="false" />
+    <Property Name="Announcement_title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Announcement_content" Type="nvarchar" MaxLength="3000" Nullable="false" />
+    <Property Name="Announcement_time" Type="datetime" Nullable="false" />
+    <Property Name="Announcement_type_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Administrator_ID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Ann_Display" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Announcement_type">
+    <Key>
+      <PropertyRef Name="Announcement_type_ID" />
+    </Key>
+    <Property Name="Announcement_type_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Announcement_type" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Approval_status">
+    <Key>
+      <PropertyRef Name="Approval_status_ID" />
+    </Key>
+    <Property Name="Approval_status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Approval_status" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_moodsheet">
+    <Key>
+      <PropertyRef Name="M_moodsheet_num" />
+    </Key>
+    <Property Name="M_moodsheet_num" Type="int" Nullable="false" />
+    <Property Name="Moodsymbol_num" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Messagenumber" Type="int" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nickname" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Account" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="M_Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="bit" Nullable="false" />
+    <Property Name="Birthday" Type="datetime" Nullable="false" />
+    <Property Name="M_status" Type="bit" Nullable="false" />
+    <Property Name="Writter_qualifications" Type="bit" Nullable="false" />
+    <Property Name="Confirm_pwd" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Messagenumber" />
+    </Key>
+    <Property Name="Messagenumber" Type="int" Nullable="false" />
+    <Property Name="Msg_Content" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Messagetime" Type="datetime" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="WorksContentID" Type="int" Nullable="false" />
+    <Property Name="Status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Not_spoiler" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Moodshee">
+    <Key>
+      <PropertyRef Name="Moodsymbol_num" />
+    </Key>
+    <Property Name="Moodsymbol_num" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Moodsymbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Processing_method">
+    <Key>
+      <PropertyRef Name="Processing_method_ID" />
+    </Key>
+    <Property Name="Processing_method_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Processing_method" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Processing_status_table">
+    <Key>
+      <PropertyRef Name="Processing_status_ID" />
+    </Key>
+    <Property Name="Processing_status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Processing_status" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Re_message">
+    <Key>
+      <PropertyRef Name="Re_message_num" />
+    </Key>
+    <Property Name="Re_message_num" Type="int" Nullable="false" />
+    <Property Name="Moodsymbol_num" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="RtamessageID" Type="int" Nullable="false" />
+    <Property Name="Attribute1" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Report_category">
+    <Key>
+      <PropertyRef Name="Report_category_ID" />
+    </Key>
+    <Property Name="Report_category_ID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Report_category" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Report_datail">
+    <Key>
+      <PropertyRef Name="Report_datail_ID" />
+    </Key>
+    <Property Name="Report_datail_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Reportdatail_content" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Report_category_ID" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Report_table">
+    <Key>
+      <PropertyRef Name="Report_event_ID" />
+    </Key>
+    <Property Name="Report_event_ID" Type="int" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Report_time" Type="datetime" Nullable="false" />
+    <Property Name="Processing_status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Processing_method_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Administrator_ID" Type="nvarchar" MaxLength="4" />
+    <Property Name="Report_category_ID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Report_datail_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="WorksID" Type="nvarchar" MaxLength="10" />
+    <Property Name="WriterhomeID" Type="nvarchar" MaxLength="10" />
+    <Property Name="WriterID" Type="nvarchar" MaxLength="10" />
+    <Property Name="Messagenumber" Type="int" />
+    <Property Name="WorksContentID" Type="int" />
+    <Property Name="RtamessageID" Type="int" />
+  </EntityType>
+  <EntityType Name="Rta_message">
+    <Key>
+      <PropertyRef Name="RtamessageID" />
+    </Key>
+    <Property Name="RtamessageID" Type="int" Nullable="false" />
+    <Property Name="Rta_msg_Content" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Rtatime" Type="datetime" Nullable="false" />
+    <Property Name="Messagenumber" Type="int" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Status_ID" Type="nvarchar" MaxLength="2" />
+    <Property Name="Not_spoiler" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Star">
+    <Key>
+      <PropertyRef Name="StarID" />
+    </Key>
+    <Property Name="StarID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Starscores" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Star_table">
+    <Key>
+      <PropertyRef Name="StartableID" />
+    </Key>
+    <Property Name="StartableID" Type="int" Nullable="false" />
+    <Property Name="StarID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="WorksID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Status_ID" />
+    </Key>
+    <Property Name="Status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Track_work">
+    <Key>
+      <PropertyRef Name="Track_workID" />
+    </Key>
+    <Property Name="Track_workID" Type="int" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="WorksID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Track_writer">
+    <Key>
+      <PropertyRef Name="Track_writerID" />
+    </Key>
+    <Property Name="Track_writerID" Type="int" Nullable="false" />
+    <Property Name="WriterID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Type_table">
+    <Key>
+      <PropertyRef Name="AM_ID" />
+    </Key>
+    <Property Name="AM_ID" Type="int" Nullable="false" />
+    <Property Name="WorksID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="WorktypeID" Type="nvarchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Website_type">
+    <Key>
+      <PropertyRef Name="Website_type_ID" />
+    </Key>
+    <Property Name="Website_type_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Website_type" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Work_status">
+    <Key>
+      <PropertyRef Name="WorkstatusID" />
+    </Key>
+    <Property Name="WorkstatusID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Workstatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Work_type">
+    <Key>
+      <PropertyRef Name="WorktypeID" />
+    </Key>
+    <Property Name="WorktypeID" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Worktype" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Works">
+    <Key>
+      <PropertyRef Name="WorksID" />
+    </Key>
+    <Property Name="WorksID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Worksname" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Cover" Type="image" />
+    <Property Name="Serialtime" Type="datetime" Nullable="false" />
+    <Property Name="Endtime" Type="datetime" />
+    <Property Name="WorkstatusID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="WriterID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="fans" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Works_Content">
+    <Key>
+      <PropertyRef Name="WorksContentID" />
+    </Key>
+    <Property Name="WorksContentID" Type="int" Nullable="false" />
+    <Property Name="WorksContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="WorksID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Status_ID" Type="nvarchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Writer">
+    <Key>
+      <PropertyRef Name="WriterID" />
+    </Key>
+    <Property Name="WriterID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Pseudonym" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="W_status" Type="bit" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Writer_application_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Writer_application">
+    <Key>
+      <PropertyRef Name="Writer_application_ID" />
+    </Key>
+    <Property Name="Writer_application_ID" Type="int" Nullable="false" />
+    <Property Name="Pseudonym" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Introduction" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Works_name" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Work_preview" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Approval_status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Administrator_ID" Type="nvarchar" MaxLength="4" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Writer_home">
+    <Key>
+      <PropertyRef Name="WriterhomeID" />
+    </Key>
+    <Property Name="WriterhomeID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Coverphoto" Type="image" />
+    <Property Name="Mugshot" Type="image" />
+    <Property Name="Fans" Type="int" Nullable="false" />
+    <Property Name="WriterID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Writer_profile" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Writter_website">
+    <Key>
+      <PropertyRef Name="Website_ID" />
+    </Key>
+    <Property Name="Website_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Website_link" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Website_type_ID" Type="nvarchar" MaxLength="3" />
+    <Property Name="WriterhomeID" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="Relationship101">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Works_Content" Type="Self.Works_Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_ID" />
+      </Principal>
+      <Dependent Role="Works_Content">
+        <PropertyRef Name="Status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship102">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_ID" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="Status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship103">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Rta_message" Type="Self.Rta_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_ID" />
+      </Principal>
+      <Dependent Role="Rta_message">
+        <PropertyRef Name="Status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship104">
+    <End Role="Approval_status" Type="Self.Approval_status" Multiplicity="1" />
+    <End Role="Writer_application" Type="Self.Writer_application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval_status">
+        <PropertyRef Name="Approval_status_ID" />
+      </Principal>
+      <Dependent Role="Writer_application">
+        <PropertyRef Name="Approval_status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship105">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
+    <End Role="Writer_application" Type="Self.Writer_application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="Administrator_ID" />
+      </Principal>
+      <Dependent Role="Writer_application">
+        <PropertyRef Name="Administrator_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship107">
+    <End Role="Website_type" Type="Self.Website_type" Multiplicity="0..1" />
+    <End Role="Writter_website" Type="Self.Writter_website" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website_type">
+        <PropertyRef Name="Website_type_ID" />
+      </Principal>
+      <Dependent Role="Writter_website">
+        <PropertyRef Name="Website_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship109">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Writer_application" Type="Self.Writer_application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Writer_application">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship110">
+    <End Role="Writer_application" Type="Self.Writer_application" Multiplicity="1" />
+    <End Role="Writer" Type="Self.Writer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer_application">
+        <PropertyRef Name="Writer_application_ID" />
+      </Principal>
+      <Dependent Role="Writer">
+        <PropertyRef Name="Writer_application_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship111">
+    <End Role="Writer_home" Type="Self.Writer_home" Multiplicity="0..1" />
+    <End Role="Writter_website" Type="Self.Writter_website" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer_home">
+        <PropertyRef Name="WriterhomeID" />
+      </Principal>
+      <Dependent Role="Writter_website">
+        <PropertyRef Name="WriterhomeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship112">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="1" />
+    <End Role="Announcement" Type="Self.Announcement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="Administrator_ID" />
+      </Principal>
+      <Dependent Role="Announcement">
+        <PropertyRef Name="Administrator_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship181">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="Administrator_ID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="Administrator_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship182">
+    <End Role="Processing_status_table" Type="Self.Processing_status_table" Multiplicity="1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Processing_status_table">
+        <PropertyRef Name="Processing_status_ID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="Processing_status_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship183">
+    <End Role="Processing_method" Type="Self.Processing_method" Multiplicity="1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Processing_method">
+        <PropertyRef Name="Processing_method_ID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="Processing_method_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship184">
+    <End Role="Report_category" Type="Self.Report_category" Multiplicity="1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Report_category">
+        <PropertyRef Name="Report_category_ID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="Report_category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship185">
+    <End Role="Report_category" Type="Self.Report_category" Multiplicity="1" />
+    <End Role="Report_datail" Type="Self.Report_datail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Report_category">
+        <PropertyRef Name="Report_category_ID" />
+      </Principal>
+      <Dependent Role="Report_datail">
+        <PropertyRef Name="Report_category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship186">
+    <End Role="Report_datail" Type="Self.Report_datail" Multiplicity="1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Report_datail">
+        <PropertyRef Name="Report_datail_ID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="Report_datail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship194">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship195">
+    <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorksID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="WorksID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship196">
+    <End Role="Writer_home" Type="Self.Writer_home" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer_home">
+        <PropertyRef Name="WriterhomeID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="WriterhomeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship197">
+    <End Role="Writer" Type="Self.Writer" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer">
+        <PropertyRef Name="WriterID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="WriterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship198">
+    <End Role="Message" Type="Self.Message" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Messagenumber" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="Messagenumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship199">
+    <End Role="Works_Content" Type="Self.Works_Content" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works_Content">
+        <PropertyRef Name="WorksContentID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="WorksContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship200">
+    <End Role="Rta_message" Type="Self.Rta_message" Multiplicity="0..1" />
+    <End Role="Report_table" Type="Self.Report_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rta_message">
+        <PropertyRef Name="RtamessageID" />
+      </Principal>
+      <Dependent Role="Report_table">
+        <PropertyRef Name="RtamessageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship33">
+    <End Role="Work_status" Type="Self.Work_status" Multiplicity="1" />
+    <End Role="Works" Type="Self.Works" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Work_status">
+        <PropertyRef Name="WorkstatusID" />
+      </Principal>
+      <Dependent Role="Works">
+        <PropertyRef Name="WorkstatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship41">
+    <End Role="Works" Type="Self.Works" Multiplicity="1" />
+    <End Role="Type_table" Type="Self.Type_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorksID" />
+      </Principal>
+      <Dependent Role="Type_table">
+        <PropertyRef Name="WorksID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship44">
+    <End Role="Writer" Type="Self.Writer" Multiplicity="1" />
+    <End Role="Writer_home" Type="Self.Writer_home" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer">
+        <PropertyRef Name="WriterID" />
+      </Principal>
+      <Dependent Role="Writer_home">
+        <PropertyRef Name="WriterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship46">
+    <End Role="Work_type" Type="Self.Work_type" Multiplicity="1" />
+    <End Role="Type_table" Type="Self.Type_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Work_type">
+        <PropertyRef Name="WorktypeID" />
+      </Principal>
+      <Dependent Role="Type_table">
+        <PropertyRef Name="WorktypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship49">
+    <End Role="Moodshee" Type="Self.Moodshee" Multiplicity="1" />
+    <End Role="M_moodsheet" Type="Self.M_moodsheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moodshee">
+        <PropertyRef Name="Moodsymbol_num" />
+      </Principal>
+      <Dependent Role="M_moodsheet">
+        <PropertyRef Name="Moodsymbol_num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship53">
+    <End Role="Star" Type="Self.Star" Multiplicity="1" />
+    <End Role="Star_table" Type="Self.Star_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Star">
+        <PropertyRef Name="StarID" />
+      </Principal>
+      <Dependent Role="Star_table">
+        <PropertyRef Name="StarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship57">
+    <End Role="Message" Type="Self.Message" Multiplicity="1" />
+    <End Role="Rta_message" Type="Self.Rta_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Messagenumber" />
+      </Principal>
+      <Dependent Role="Rta_message">
+        <PropertyRef Name="Messagenumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship58">
+    <End Role="Moodshee" Type="Self.Moodshee" Multiplicity="1" />
+    <End Role="Re_message" Type="Self.Re_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moodshee">
+        <PropertyRef Name="Moodsymbol_num" />
+      </Principal>
+      <Dependent Role="Re_message">
+        <PropertyRef Name="Moodsymbol_num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship59">
+    <End Role="Rta_message" Type="Self.Rta_message" Multiplicity="1" />
+    <End Role="Re_message" Type="Self.Re_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rta_message">
+        <PropertyRef Name="RtamessageID" />
+      </Principal>
+      <Dependent Role="Re_message">
+        <PropertyRef Name="RtamessageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship68">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Track_work" Type="Self.Track_work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Track_work">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship69">
+    <End Role="Works" Type="Self.Works" Multiplicity="1" />
+    <End Role="Track_work" Type="Self.Track_work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorksID" />
+      </Principal>
+      <Dependent Role="Track_work">
+        <PropertyRef Name="WorksID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship71">
+    <End Role="Writer" Type="Self.Writer" Multiplicity="1" />
+    <End Role="Track_writer" Type="Self.Track_writer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer">
+        <PropertyRef Name="WriterID" />
+      </Principal>
+      <Dependent Role="Track_writer">
+        <PropertyRef Name="WriterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship73">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Rta_message" Type="Self.Rta_message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Rta_message">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship75">
+    <End Role="Writer" Type="Self.Writer" Multiplicity="1" />
+    <End Role="Works" Type="Self.Works" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writer">
+        <PropertyRef Name="WriterID" />
+      </Principal>
+      <Dependent Role="Works">
+        <PropertyRef Name="WriterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship79">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Star_table" Type="Self.Star_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Star_table">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship81">
+    <End Role="Works" Type="Self.Works" Multiplicity="1" />
+    <End Role="Works_Content" Type="Self.Works_Content" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorksID" />
+      </Principal>
+      <Dependent Role="Works_Content">
+        <PropertyRef Name="WorksID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship82">
+    <End Role="Works" Type="Self.Works" Multiplicity="1" />
+    <End Role="Star_table" Type="Self.Star_table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="WorksID" />
+      </Principal>
+      <Dependent Role="Star_table">
+        <PropertyRef Name="WorksID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship83">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Writer" Type="Self.Writer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Writer">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship84">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship85">
+    <End Role="Message" Type="Self.Message" Multiplicity="1" />
+    <End Role="M_moodsheet" Type="Self.M_moodsheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Messagenumber" />
+      </Principal>
+      <Dependent Role="M_moodsheet">
+        <PropertyRef Name="Messagenumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship86">
+    <End Role="Works_Content" Type="Self.Works_Content" Multiplicity="1" />
+    <End Role="Message" Type="Self.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works_Content">
+        <PropertyRef Name="WorksContentID" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="WorksContentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship87">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="M_moodsheet" Type="Self.M_moodsheet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="M_moodsheet">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship88">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Track_writer" Type="Self.Track_writer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="Track_writer">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship97">
+    <End Role="Announcement_type" Type="Self.Announcement_type" Multiplicity="1" />
+    <End Role="Announcement" Type="Self.Announcement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Announcement_type">
+        <PropertyRef Name="Announcement_type_ID" />
+      </Principal>
+      <Dependent Role="Announcement">
+        <PropertyRef Name="Announcement_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="updateAdm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Administrator_ID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Adm_name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Account" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="Authority" Type="bit" Mode="In" />
+    <Parameter Name="Confirm_pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateMem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MemberID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nickname" Type="nvarchar" Mode="In" />
+    <Parameter Name="Account" Type="varchar" Mode="In" />
+    <Parameter Name="M_Password" Type="varchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="bit" Mode="In" />
+    <Parameter Name="Birthday" Type="datetime" Mode="In" />
+    <Parameter Name="M_status" Type="bit" Mode="In" />
+    <Parameter Name="Writter_qualifications" Type="bit" Mode="In" />
+    <Parameter Name="Confirm_pwd" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="OriginalWorldModelStoreContainer">
+    <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Announcement" EntityType="Self.Announcement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Announcement_type" EntityType="Self.Announcement_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Approval_status" EntityType="Self.Approval_status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_moodsheet" EntityType="Self.M_moodsheet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Moodshee" EntityType="Self.Moodshee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Processing_method" EntityType="Self.Processing_method" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Processing_status_table" EntityType="Self.Processing_status_table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Re_message" EntityType="Self.Re_message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report_category" EntityType="Self.Report_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report_datail" EntityType="Self.Report_datail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Report_table" EntityType="Self.Report_table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rta_message" EntityType="Self.Rta_message" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Star" EntityType="Self.Star" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Star_table" EntityType="Self.Star_table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Track_work" EntityType="Self.Track_work" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Track_writer" EntityType="Self.Track_writer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Type_table" EntityType="Self.Type_table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Website_type" EntityType="Self.Website_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Work_status" EntityType="Self.Work_status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Work_type" EntityType="Self.Work_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Works_Content" EntityType="Self.Works_Content" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Writer" EntityType="Self.Writer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Writer_application" EntityType="Self.Writer_application" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Writer_home" EntityType="Self.Writer_home" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Writter_website" EntityType="Self.Writter_website" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Relationship101" Association="Self.Relationship101">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Works_Content" EntitySet="Works_Content" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship102" Association="Self.Relationship102">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship103" Association="Self.Relationship103">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Rta_message" EntitySet="Rta_message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship104" Association="Self.Relationship104">
+      <End Role="Approval_status" EntitySet="Approval_status" />
+      <End Role="Writer_application" EntitySet="Writer_application" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship105" Association="Self.Relationship105">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Writer_application" EntitySet="Writer_application" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship107" Association="Self.Relationship107">
+      <End Role="Website_type" EntitySet="Website_type" />
+      <End Role="Writter_website" EntitySet="Writter_website" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship109" Association="Self.Relationship109">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Writer_application" EntitySet="Writer_application" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship110" Association="Self.Relationship110">
+      <End Role="Writer_application" EntitySet="Writer_application" />
+      <End Role="Writer" EntitySet="Writer" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship111" Association="Self.Relationship111">
+      <End Role="Writer_home" EntitySet="Writer_home" />
+      <End Role="Writter_website" EntitySet="Writter_website" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship112" Association="Self.Relationship112">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Announcement" EntitySet="Announcement" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship181" Association="Self.Relationship181">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship182" Association="Self.Relationship182">
+      <End Role="Processing_status_table" EntitySet="Processing_status_table" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship183" Association="Self.Relationship183">
+      <End Role="Processing_method" EntitySet="Processing_method" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship184" Association="Self.Relationship184">
+      <End Role="Report_category" EntitySet="Report_category" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship185" Association="Self.Relationship185">
+      <End Role="Report_category" EntitySet="Report_category" />
+      <End Role="Report_datail" EntitySet="Report_datail" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship186" Association="Self.Relationship186">
+      <End Role="Report_datail" EntitySet="Report_datail" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship194" Association="Self.Relationship194">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship195" Association="Self.Relationship195">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship196" Association="Self.Relationship196">
+      <End Role="Writer_home" EntitySet="Writer_home" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship197" Association="Self.Relationship197">
+      <End Role="Writer" EntitySet="Writer" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship198" Association="Self.Relationship198">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship199" Association="Self.Relationship199">
+      <End Role="Works_Content" EntitySet="Works_Content" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship200" Association="Self.Relationship200">
+      <End Role="Rta_message" EntitySet="Rta_message" />
+      <End Role="Report_table" EntitySet="Report_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship33" Association="Self.Relationship33">
+      <End Role="Work_status" EntitySet="Work_status" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship41" Association="Self.Relationship41">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Type_table" EntitySet="Type_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship44" Association="Self.Relationship44">
+      <End Role="Writer" EntitySet="Writer" />
+      <End Role="Writer_home" EntitySet="Writer_home" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship46" Association="Self.Relationship46">
+      <End Role="Work_type" EntitySet="Work_type" />
+      <End Role="Type_table" EntitySet="Type_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship49" Association="Self.Relationship49">
+      <End Role="Moodshee" EntitySet="Moodshee" />
+      <End Role="M_moodsheet" EntitySet="M_moodsheet" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship53" Association="Self.Relationship53">
+      <End Role="Star" EntitySet="Star" />
+      <End Role="Star_table" EntitySet="Star_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship57" Association="Self.Relationship57">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="Rta_message" EntitySet="Rta_message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship58" Association="Self.Relationship58">
+      <End Role="Moodshee" EntitySet="Moodshee" />
+      <End Role="Re_message" EntitySet="Re_message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship59" Association="Self.Relationship59">
+      <End Role="Rta_message" EntitySet="Rta_message" />
+      <End Role="Re_message" EntitySet="Re_message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship68" Association="Self.Relationship68">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Track_work" EntitySet="Track_work" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship69" Association="Self.Relationship69">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Track_work" EntitySet="Track_work" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship71" Association="Self.Relationship71">
+      <End Role="Writer" EntitySet="Writer" />
+      <End Role="Track_writer" EntitySet="Track_writer" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship73" Association="Self.Relationship73">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Rta_message" EntitySet="Rta_message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship75" Association="Self.Relationship75">
+      <End Role="Writer" EntitySet="Writer" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship79" Association="Self.Relationship79">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Star_table" EntitySet="Star_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship81" Association="Self.Relationship81">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Works_Content" EntitySet="Works_Content" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship82" Association="Self.Relationship82">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="Star_table" EntitySet="Star_table" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship83" Association="Self.Relationship83">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Writer" EntitySet="Writer" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship84" Association="Self.Relationship84">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship85" Association="Self.Relationship85">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="M_moodsheet" EntitySet="M_moodsheet" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship86" Association="Self.Relationship86">
+      <End Role="Works_Content" EntitySet="Works_Content" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship87" Association="Self.Relationship87">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="M_moodsheet" EntitySet="M_moodsheet" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship88" Association="Self.Relationship88">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Track_writer" EntitySet="Track_writer" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship97" Association="Self.Relationship97">
+      <End Role="Announcement_type" EntitySet="Announcement_type" />
+      <End Role="Announcement" EntitySet="Announcement" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

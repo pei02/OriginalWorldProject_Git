@@ -1,0 +1,180 @@
+﻿@*@model IEnumerable<OriginalWorldProject.Models.Announcement>*@
+@model OriginalWorldProject.ViewModel.AnnouncementClass
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    var start = Json.Encode(ViewBag.start);
+    var end = Json.Encode(ViewBag.end);
+    var selected = "";
+}
+
+<div class="row">
+    <div class="col-md-11">
+        <table>
+            <tr>
+                <td>
+                    <span class="text-fm text-white ts-36">公告列表</span>
+                </td>
+                <td class="text-center" style="width:30px;">
+                    <a class="text-orange" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search" id="search_button">
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-minus-circle" style="display:none"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-1">
+        @Html.ActionLink(" ", "Create", new {Page=Request.QueryString["page"] }, new { @class = "btn-circle btn-green fas fa-user-plus" })
+    </div>
+</div>
+<p class="border-bottom mb-5"></p>
+
+<form action="@Url.Action("Index")" method="post">
+    @Html.AntiForgeryToken()
+    <div class="collapse" id="search">
+        <div class="row">
+            <div class="row col-11">
+                <div class="row col-12">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="col-md-3 col-form-label text-white">開始日期</label>
+                            <input type="date" name="start" id="start" value="@ViewBag.start" class="form-control col-md-9" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="col-md-3 col-form-label text-white">結束日期</label>
+                            <input type="date" name="end" id="end" value="@ViewBag.end" class="form-control col-9" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="col-md-3 col-form-label text-white">分類搜索</label>
+                            <select id="announcement_type_id" name="announcement_type_id" class="form-control col-9">
+                                <option selected disabled>-請選擇類別-</option>
+                                
+                                @foreach (var item in Model.Announcement_Types)
+                                {
+                                    selected = item.Announcement_type_ID == ViewBag.announcement_type_id ? "selected" : "";
+                                    <option value="@item.Announcement_type_ID" @selected>@item.Announcement_type1</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="col-md-3 col-form-label text-white">標題搜索</label>
+                            <input type="text" name="title" value="@ViewBag.titletext" class="form-control col-9" placeholder="請輸入標題" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 align-self-center">
+                <button type="submit" class="btn-circle btn-orange-y">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table-x table-x-striped table-dark table-x-hover" id="tab">
+    <tr class="text-fm text-center ts-16">
+        <td>
+            公告類別
+        </td>
+        <td>
+            公告標題
+        </td>
+        <td>
+            公告時間
+        </td>
+        <td>
+            發布人
+        </td>
+        <td data-toggle="tooltip" data-placement="right" title="提示：綠燈為顯示狀態">
+            顯示狀態
+        </td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model.Announcements)
+    {
+        var type = item.Announcement_type_ID;
+<tr class="text-fm text-center ts-16">
+    <td>
+        @switch (type)
+        {
+            case "AT1":
+                <span class="badge badge-purple">@item.Announcement_type.Announcement_type1</span>
+                break;
+            case "AT2":
+                <span class="badge badge-orange">@item.Announcement_type.Announcement_type1</span>
+                break;
+            case "AT3":
+                <span class="badge badge-danger">@item.Announcement_type.Announcement_type1</span>
+                break;
+            case "AT4":
+                <span class="badge badge-blue">@item.Announcement_type.Announcement_type1</span>
+                break;
+        }
+    </td>
+    <td>
+        <div class="w-50 over-flow">@Html.DisplayFor(modelItem => item.Announcement_title)</div> 
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Announcement_time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Administrator.Adm_name)
+    </td>
+    <td>
+        @if (item.Ann_Display == false) { 
+        <span class="text-success"><i class="fas fa-circle"></i></span>
+        } else { 
+    <span class="text-secondary"><i class="fas fa-circle"></i></span>
+        }
+        @*@Html.DisplayFor(modelItem => item.Ann_Display)*@
+    </td>
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.Announcement_ID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+        @Html.ActionLink(" ", "Details", new { id = item.Announcement_ID, Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-purple far fa-file-alt" })
+        @Html.ActionLink(" ", "Delete", new { id = item.Announcement_ID }, new { @class = "btn-circle  btn-red far fa-trash-alt", onclick = "return confirm('資料一旦刪除將無法回復，您確定要刪除嗎??')" })
+    </td>
+</tr>
+    }
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model.AnnouncementsPageList, Page => Url.Action("Index", new { start = ViewBag.start, end = ViewBag.end, announcement_type_id = ViewBag.announcement_type_id, title = ViewBag.titletext, Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+
+
+
+@section scripts{
+    <script>
+       var fullDate = new Date();
+       var yyyy = fullDate.getFullYear();
+       var MM = (fullDate.getMonth() + 1) >= 10 ? (fullDate.getMonth() + 1) : ("0" + (fullDate.getMonth() + 1));
+       var dd = fullDate.getDate() < 10 ? ("0"+fullDate.getDate()) : fullDate.getDate();
+       var today = yyyy + "-" + MM + "-" + dd;
+
+        if (@Html.Raw(start)== "" ||@Html.Raw(end)=="") {
+            $('#start').val('2017-01-01');
+            $('#end').val(today);
+        }
+        $(document).ready(function () {
+            $('#search_button').click(function () {
+                $('#search_button>i').toggle();
+            });
+
+        });
+    </script>
+
+}

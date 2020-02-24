@@ -1,0 +1,82 @@
+﻿@model OriginalWorldProject.Models.Administrator
+
+@{
+    ViewBag.Title = "詳細資料";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <span class="text-fm text-white ts-36">詳細資料</span>
+    </div>
+    <div class="col-md-2">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="button" id="btnPrint" onclick="onprint()" value="print" class="btn-circle btn-gray"><i class="fas fa-print"></i></button>
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink(" ", "Index", new { Page=Request.QueryString["page"]}, new { @class = "btn-circle btn-orange fas fa-reply" })
+        </div>
+    </div>
+</div>
+<p class="border-bottom mb-5"></p>
+
+<div id="printArea">
+    <div class="text-white text-fm">
+        <p class="mb-5 offset-2">
+            Hi @Model.Adm_name,<br>
+            歡迎您加入"寫書人"，以下資料為您的帳號密碼，請至網址: http://originalword.com 變更您的密碼。
+        </p>
+
+        <dl class="dl-horizontal offset-1">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Adm_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Adm_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Account)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Account)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.A_Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.A_Password)
+            </dd>
+        </dl>
+
+        <p class="mb-5 offset-2">
+            請至網址: http://originalword.com 變更您的密碼。
+        </p>
+    </div>
+</div>
+@section scripts{
+    <script>
+        function printHtml(html) {
+            var bodyHtml = document.body.innerHTML;
+            document.body.innerHTML = html;
+            window.print();
+            document.body.innerHTML = bodyHtml;
+            window.location.reload();
+        }
+        function onprint() {
+            $('a').each(function (index) {
+                $(this).replaceWith($(this).html());
+            });
+            var html = $("#printArea").html();
+            printHtml(html);
+        }
+
+    </script>
+}
