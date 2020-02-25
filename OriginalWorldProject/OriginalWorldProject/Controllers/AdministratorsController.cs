@@ -41,6 +41,11 @@ namespace OriginalWorldProject.Controllers
             var list = db.Administrator.Where(a => a.Authority.ToString().Contains(Authority) && a.Adm_name.Contains(Adm_name) && Account == "" ? a.Account.Contains(Account) : a.Account.Equals(Account)).OrderBy(a => a.Administrator_ID).ToPagedList(pagecurrent, pagesize).ToList();
             var pagelist = list.ToPagedList(pagecurrent, pagesize);
 
+
+            Google_reCAPTCHA google_ReCAPTCHA = new Google_reCAPTCHA();
+            Boolean reCAPTCHA = google_ReCAPTCHA.reCAPTCHA();
+
+
             ViewBag.Authority = Authority;
             ViewBag.Account = Account;
             ViewBag.Adm_name = Adm_name;

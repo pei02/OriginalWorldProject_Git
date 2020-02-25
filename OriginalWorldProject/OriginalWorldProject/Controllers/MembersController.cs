@@ -14,14 +14,13 @@ using GoogleRecaptcha;
 using System.Data.Common;
 using PagedList;
 
-
 namespace OriginalWorldProject.Controllers
 {
     public class MembersController : Controller
     {
         OriginalWorldEntities db = new OriginalWorldEntities();
 
-        // GET: Members
+
         public ActionResult Index(int? Age_star, int? Age_end, int page = 1, int pagesize = 10)
         {
             var list = db.Member.ToList();
@@ -54,42 +53,6 @@ namespace OriginalWorldProject.Controllers
             return View(pagelist);
         }
 
-        public ActionResult Create()
-        {
-            string id = db.Member.OrderByDescending(m => m.MemberID).Select(m => m.MemberID).FirstOrDefault();
-            if (id == "M999999999")
-            {
-                return View("~/Views/ErrorPage/ID_Full_Error.cshtml");
-            }
-            return View();
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Member member)
-        {
-            string id = db.Member.OrderByDescending(m => m.MemberID).Select(m => m.MemberID).FirstOrDefault();
-
-            if (id == null)
-            {
-                id = "M000000000";
-            }
-            NewID newID = new NewID();
-            string new_ID = newID.NewID_fuction(id, "M", 1, 9);
-            if (ModelState.IsValid)
-            {
-                member.MemberID = new_ID;
-                member.M_status = false;
-                member.Writter_qualifications = false;
-                db.Member.Add(member);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(member);
-        }
-
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -101,6 +64,10 @@ namespace OriginalWorldProject.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Writter_qualifications = member.Writter_qualifications;
+            ViewBag.M_status = member.M_status;
+            ViewBag.password = member.M_Password;
+            ViewBag.Gender = member.Gender;
             return View(member);
         }
 
@@ -108,46 +75,12 @@ namespace OriginalWorldProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Member member)
         {
-
-            try
-            {
-                SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OriginalWorldConnectionString"].ConnectionString);
-                SqlCommand Cmd = new SqlCommand("updateMem", Conn);
-                Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.Parameters.AddWithValue("MemberID", member.MemberID);
-                Cmd.Parameters.AddWithValue("Nickname", member.Nickname);
-                Cmd.Parameters.AddWithValue("Account", member.Account);
-                Cmd.Parameters.AddWithValue("M_Password", member.M_Password);
-                Cmd.Parameters.AddWithValue("Phone", member.Phone);
-                Cmd.Parameters.AddWithValue("Email", member.Email);
-                Cmd.Parameters.AddWithValue("Gender", member.Gender);
-                Cmd.Parameters.AddWithValue("Birthday", member.Birthday);
-                Cmd.Parameters.AddWithValue("M_status", member.M_status);
-                Cmd.Parameters.AddWithValue("Writter_qualifications", member.Writter_qualifications);
-                Cmd.Parameters.AddWithValue("Confirm_pwd", member.Confirm_pwd);
-
-                Conn.Open();
-                Cmd.ExecuteNonQuery();
-                Conn.Close();
-
+            if (ModelState.IsValid) { 
+                db.Entry(member).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch (DbException ex)
-            {
-                ViewBag.ex = ex.Message;
-            }
-
             return View(member);
         }
-
-        public JsonResult check_Nickname(string Nickname)
-        {
-            return Json(!db.Member.Any(x => x.Nickname.ToLower() == Nickname.ToLower()), JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult check_M_account(string Account)
-        {
-            return Json(!db.Member.Any(x => x.Account.ToLower() == Account.ToLower()), JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

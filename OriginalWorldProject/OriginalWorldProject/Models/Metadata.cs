@@ -82,15 +82,13 @@ namespace OriginalWorldProject.Models
         [DisplayName("暱稱")]
         [Required(ErrorMessage = "請輸入暱稱!!")]
         [StringLength(25, ErrorMessage = "暱稱不得超過25字!!")]
-        [Remote("check_Nickname", "Members", ErrorMessage = "暱稱已被使用")]
-        [CheckNickname]
+        [Remote("check_Nickname", "Signup", ErrorMessage = "暱稱已註冊")]
         public string Nickname { get; set; }
 
         [DisplayName("帳號")]
         [RegularExpression("[a-zA-Z0-9]{8,20}", ErrorMessage = "請輸入8-20字(含)以內字元，內容不可包含特殊符號。")]
         [Required(ErrorMessage = "請輸入帳號!!")]
-        [Remote("check_M_account", "Members", ErrorMessage = "帳號已被使用")]
-        [CheckM_Account]
+        [Remote("check_M_account", "Signup", ErrorMessage = "帳號已被註冊")]
         public string Account { get; set; }
 
         [DisplayName("密碼")]
@@ -99,13 +97,15 @@ namespace OriginalWorldProject.Models
         public string M_Password { get; set; }
 
         [DisplayName("電話")]
-        [Phone(ErrorMessage ="電話格式錯誤,請輸入正確電話格式!! 範例:0912345678")]
+        [Phone]
         [Required(ErrorMessage = "請輸入電話!!")]
+        [Remote("check_M_Phone", "Signup", ErrorMessage = "電話已被註冊")]
         public string Phone { get; set; }
 
         [DisplayName("信箱")]
         [EmailAddress(ErrorMessage ="格式錯誤,請輸入正確信箱格式!! 範例:abc123@gmail.com")]
         [Required(ErrorMessage = "請輸入信箱!!")]
+        [Remote("check_M_email", "Signup", ErrorMessage = "信箱已被註冊")]
         public string Email { get; set; }
 
         [DisplayName("性別")]
@@ -167,42 +167,42 @@ namespace OriginalWorldProject.Models
 
     }
 
-    public class CheckNickname : ValidationAttribute
-    {
-        OriginalWorldEntities db = new OriginalWorldEntities();
+    //public class CheckNickname : ValidationAttribute
+    //{
+    //    OriginalWorldEntities db = new OriginalWorldEntities();
 
-        public CheckNickname()
-        {
-            ErrorMessage = "暱稱已被使用";
-        }
+    //    public CheckNickname()
+    //    {
+    //        ErrorMessage = "暱稱已被使用";
+    //    }
 
-        public override bool IsValid(object value)
-        {
-            var result = db.Member.Where(c => c.Nickname == value.ToString()).FirstOrDefault();
-            if (result == null)
-                return true;
+    //    public override bool IsValid(object value)
+    //    {
+    //        var result = db.Member.Where(c => c.Nickname == value.ToString()).FirstOrDefault();
+    //        if (result == null)
+    //            return true;
 
-            return false;
-        }
+    //        return false;
+    //    }
 
-    }
-    public class CheckM_Account : ValidationAttribute
-    {
-        OriginalWorldEntities db = new OriginalWorldEntities();
+    //}
+    //public class CheckM_Account : ValidationAttribute
+    //{
+    //    OriginalWorldEntities db = new OriginalWorldEntities();
 
-        public CheckM_Account()
-        {
-            ErrorMessage = "帳號已被使用";
-        }
+    //    public CheckM_Account()
+    //    {
+    //        ErrorMessage = "帳號已被使用";
+    //    }
 
-        public override bool IsValid(object value)
-        {
-            var result = db.Member.Where(c => c.Account == value.ToString()).FirstOrDefault();
-            if (result == null)
-                return true;
+    //    public override bool IsValid(object value)
+    //    {
+    //        var result = db.Member.Where(c => c.Account == value.ToString()).FirstOrDefault();
+    //        if (result == null)
+    //            return true;
 
-            return false;
-        }
+    //        return false;
+    //    }
 
-    }
+    //}
 }
