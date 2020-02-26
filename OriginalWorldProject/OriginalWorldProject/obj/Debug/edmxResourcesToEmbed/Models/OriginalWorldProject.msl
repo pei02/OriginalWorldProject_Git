@@ -55,11 +55,11 @@
     <EntitySetMapping Name="Member">
       <EntityTypeMapping TypeName="OriginalWorldModel.Member">
         <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="Verify_status" ColumnName="Verify_status" />
           <ScalarProperty Name="MemberID" ColumnName="MemberID" />
           <ScalarProperty Name="Nickname" ColumnName="Nickname" />
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="M_Password" ColumnName="M_Password" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />

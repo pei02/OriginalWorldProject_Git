@@ -96,12 +96,6 @@ namespace OriginalWorldProject.Models
         [Required(ErrorMessage = "請輸入密碼!!")]
         public string M_Password { get; set; }
 
-        [DisplayName("電話")]
-        [Phone]
-        [Required(ErrorMessage = "請輸入電話!!")]
-        [Remote("check_M_Phone", "Signup", ErrorMessage = "電話已被註冊")]
-        public string Phone { get; set; }
-
         [DisplayName("信箱")]
         [EmailAddress(ErrorMessage ="格式錯誤,請輸入正確信箱格式!! 範例:abc123@gmail.com")]
         [Required(ErrorMessage = "請輸入信箱!!")]
@@ -126,6 +120,9 @@ namespace OriginalWorldProject.Models
         [Required(ErrorMessage = "請輸入密碼")]
         [System.Web.Mvc.Compare("M_Password", ErrorMessage = "密碼不相符，請再次輸入!!")]
         public string Confirm_pwd { get; set; }
+
+        [DisplayName("驗證狀態")]
+        public bool Verify_status { get; set; }
     }
 
     public class CheckAdmName : ValidationAttribute

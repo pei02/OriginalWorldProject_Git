@@ -40,5 +40,15 @@ namespace OriginalWorldProject.App_Code
 
             return get_pwd;
         }
+
+        public string RandomVerificationcode() {
+            string []ver_code_num = {"0","1","2","3","4","5","6","7","8","9" };
+            Random random = new Random();
+            string veri_code = "";
+            for (int i = 0; i <= 5; i++) {
+                veri_code += random.Next(0, 9);
+            }
+            return veri_code;
+        }
     }
 }

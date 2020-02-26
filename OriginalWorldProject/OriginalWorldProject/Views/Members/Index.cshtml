@@ -11,6 +11,7 @@
     string[] status = { "查看全部", "已停權", "未停權" };
     string[] W_qua = { "查看全部", "具作家權限", "不具作家權限" };
     string[] G = { "全部", "男", "女" };
+    string[] Vs = { "查看全部", "已驗證", "未驗證" };
     int num;
     var selected_ = "";
 }
@@ -46,7 +47,7 @@
         <div class="row">
             <div class="row col-11">
                 <div class="row col-12">
-                    <div class="form-group col-4">
+                    <div class="form-group col-3">
                         <select id="Gender" name="Gender" class="form-control">
                             <option selected disabled>---請選擇性別---</option>
                             @{
@@ -60,7 +61,7 @@
                             }
                         </select>
                     </div>
-                    <div class="form-group col-4">
+                    <div class="form-group col-3">
                         <select id="M_status" name="M_status" class="form-control">
                             <option selected disabled>---請選擇會員狀態---</option>
                             @{
@@ -74,7 +75,7 @@
                             }
                         </select>
                     </div>
-                    <div class="form-group col-4">
+                    <div class="form-group col-3">
                         <select id="Writter_qualifications" name="Writter_qualifications" class="form-control">
                             <option selected disabled>---請選擇會員權限---</option>
                             @{
@@ -83,6 +84,20 @@
                                 {
                                     selected_ = i == ViewBag.M_status ? "selected" : "";
                                     <option value="@val[num]" @selected_>@W_qua[num]</option>
+                                    num++;
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-3">
+                        <select id="Verify_status" name="Verify_status" class="form-control">
+                            <option selected disabled>---請選擇會員驗證狀態---</option>
+                            @{
+                                num = 0;
+                                foreach (var i in val)
+                                {
+                                    selected_ = i ==  ViewBag.Verify_status ? "selected" : "";
+                                    <option value="@val[num]" @selected_>@Vs[num]</option>
                                     num++;
                                 }
                             }
@@ -148,6 +163,9 @@
         <td data-toggle="tooltip" data-placement="right" title="提示：紅燈為封鎖狀態">
             @Html.DisplayNameFor(model => model.FirstOrDefault().M_status)
         </td>
+        <td data-toggle="tooltip" data-placement="right" title="提示：綠燈為通過驗證狀態">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Verify_status)
+        </td>
         <td>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Writter_qualifications)
         </td>
@@ -156,74 +174,87 @@
 
     @foreach (var item in Model)
     {
-        <tr class="text-center">
-            <td>
-                @Html.DisplayFor(modelItem => item.Nickname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account)
-            </td>
+<tr class="text-center">
+    <td>
+        @Html.DisplayFor(modelItem => item.Nickname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Account)
+    </td>
 
-            <td>
-                @if (item.Gender == false)
-                {
-                    <span class="text-pink ts-16"><i class="fas fa-female"></i></span>
-                }
-                else
-                {
-                    <span class="text-blue ts-16"><i class="fas fa-male"></i></span>
-                }
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @{
+    <td>
+        @if (item.Gender == false)
+        {
+            <span class="text-pink ts-16"><i class="fas fa-female"></i></span>
+        }
+        else
+        {
+            <span class="text-blue ts-16"><i class="fas fa-male"></i></span>
+        }
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @{
 
-                    int s_year = item.Birthday.Year;
-                    int e_year = DateTime.Today.Year;
-                    int difference = e_year - s_year;
-                    int leapyear_sum = 0;
-                    for (int d = 0; d <= difference; d++)
-                    {
-                        s_year += d;
-                        if (DateTime.IsLeapYear(s_year))
-                        {
-                            leapyear_sum++;
-                        }
-                    }
-                    leapyear_sum--;
-                    var a_year_sum = (DateTime.Today - item.Birthday).TotalDays - leapyear_sum;
-                    var age = Math.Floor(a_year_sum / 365);
-                    @age;
-                }
-                @*@Html.DisplayFor(modelItem => item.Birthday)*@
-            </td>
-            <td>
-                @if (item.M_status == false)
+            int s_year = item.Birthday.Year;
+            int e_year = DateTime.Today.Year;
+            int difference = e_year - s_year;
+            int leapyear_sum = 0;
+            for (int d = 0; d <= difference; d++)
+            {
+                s_year += d;
+                if (DateTime.IsLeapYear(s_year))
                 {
-                    <span class="text-success"><i class="fas fa-circle"></i></span>
+                    leapyear_sum++;
                 }
-                else
-                {
-                    <span class="text-danger"><i class="fas fa-circle"></i></span>
-                }
-                @*@Html.DisplayFor(modelItem => item.M_status)*@
-            </td>
-            <td>
-                @if (item.Writter_qualifications == false)
-                {
-                    <span class="badge badge-secondary">會員</span>
-                }
-                else
-                {
-                    <span class="badge badge-orange">作家</span>
-                }
+            }
+            leapyear_sum--;
+            var a_year_sum = (DateTime.Today - item.Birthday).TotalDays - leapyear_sum;
+            var age = Math.Floor(a_year_sum / 365);
+            @age;
+        }
+        @*@Html.DisplayFor(modelItem => item.Birthday)*@
+    </td>
+    <td>
+        @if (item.M_status == false)
+        {
+            <span class="text-success"><i class="fas fa-circle"></i></span>
+        }
+        else
+        {
+            <span class="text-danger"><i class="fas fa-circle"></i></span>
+        }
+        @*@Html.DisplayFor(modelItem => item.M_status)*@
+    </td>
+    <td>
+        @if (item.Verify_status == false)
+        {
+            <span class="text-secondary"><i class="fas fa-circle"></i></span>
+        }
+        else
+        {
+            <span class="text-success"><i class="fas fa-circle"></i></span>
+        }
+        @*@Html.DisplayFor(modelItem => item.Verify_status)*@
+    </td>
+    <td>
+        @if (item.Writter_qualifications == false)
+        {
+            <span class="badge badge-secondary">會員</span>
+        }
+        else
+        {
+            <span class="badge badge-orange">作家</span>
+        }
 
-                @Html.DisplayFor(modelItem => item.Writter_qualifications)
-            </td>
-            <td>
-                @Html.ActionLink(" ", "Edit", new { id = item.MemberID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
-            </td>
-        </tr>
+        @Html.DisplayFor(modelItem => item.Writter_qualifications)
+    </td>
+    
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.MemberID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+    </td>
+    
+</tr>
     }
 
 </table>

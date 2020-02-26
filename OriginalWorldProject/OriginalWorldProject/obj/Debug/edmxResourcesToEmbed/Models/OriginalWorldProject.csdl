@@ -64,7 +64,6 @@
     <Property Name="Nickname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="M_Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Gender" Type="Boolean" Nullable="false" />
     <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
@@ -80,6 +79,7 @@
     <NavigationProperty Name="Writer" Relationship="Self.Relationship83" FromRole="Member" ToRole="Writer" />
     <NavigationProperty Name="Message" Relationship="Self.Relationship84" FromRole="Member" ToRole="Message" />
     <NavigationProperty Name="Track_writer" Relationship="Self.Relationship88" FromRole="Member" ToRole="Track_writer" />
+    <Property Name="Verify_status" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Message">
     <Key>

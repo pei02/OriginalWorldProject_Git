@@ -34,13 +34,13 @@ namespace OriginalWorldProject.Models
         public string Nickname { get; set; }
         public string Account { get; set; }
         public string M_Password { get; set; }
-        public string Phone { get; set; }
         public string Email { get; set; }
         public bool Gender { get; set; }
         public System.DateTime Birthday { get; set; }
         public bool M_status { get; set; }
         public bool Writter_qualifications { get; set; }
         public string Confirm_pwd { get; set; }
+        public bool Verify_status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<M_moodsheet> M_moodsheet { get; set; }

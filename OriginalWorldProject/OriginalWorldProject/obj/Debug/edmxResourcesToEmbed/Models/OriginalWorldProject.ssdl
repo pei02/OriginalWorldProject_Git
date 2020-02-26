@@ -54,13 +54,13 @@
     <Property Name="Nickname" Type="nvarchar" MaxLength="25" Nullable="false" />
     <Property Name="Account" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="M_Password" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Gender" Type="bit" Nullable="false" />
     <Property Name="Birthday" Type="datetime" Nullable="false" />
     <Property Name="M_status" Type="bit" Nullable="false" />
     <Property Name="Writter_qualifications" Type="bit" Nullable="false" />
     <Property Name="Confirm_pwd" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Verify_status" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Message">
     <Key>

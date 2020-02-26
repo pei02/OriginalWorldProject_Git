@@ -5,6 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using OriginalWorldProject.Models;
 using OriginalWorldProject.App_Code;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Data.Entity;
 
 namespace OriginalWorldProject.Controllers
 {
@@ -25,15 +30,15 @@ namespace OriginalWorldProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Signup(string nickname,string account,string m_password,string phone,string email,DateTime birthday,Boolean gender,string confirm_pwd)
+        [ValidateAntiForgeryToken]
+        public ActionResult Signup(string nickname, string account, string m_password, string email, DateTime birthday, Boolean gender, string confirm_pwd)
         {
 
 
             string id = db.Member.OrderByDescending(m => m.MemberID).Select(m => m.MemberID).FirstOrDefault();
-            string nickname_vaild = db.Member.Where(m => m.Nickname==nickname).Select(m=>m.Nickname).FirstOrDefault();
-            string account_vaild = db.Member.Where(m => m.Account==account).Select(m => m.Account).FirstOrDefault();
-            string phone_vaild = db.Member.Where(m => m.Phone==phone).Select(m => m.Phone).FirstOrDefault();
-            string email_vaild = db.Member.Where(m => m.Email==email).Select(m => m.Email).FirstOrDefault();
+            string nickname_vaild = db.Member.Where(m => m.Nickname == nickname).Select(m => m.Nickname).FirstOrDefault();
+            string account_vaild = db.Member.Where(m => m.Account == account).Select(m => m.Account).FirstOrDefault();
+            string email_vaild = db.Member.Where(m => m.Email == email).Select(m => m.Email).FirstOrDefault();
 
             if (id == null)
             {
@@ -45,15 +50,16 @@ namespace OriginalWorldProject.Controllers
             Boolean reCAPTCHA = google_ReCAPTCHA.reCAPTCHA();
 
             Member member = new Member();
+
             if (reCAPTCHA == true)
             {
-                if (nickname_vaild == null && account_vaild == null && phone_vaild == null && email_vaild == null && confirm_pwd == m_password)
+                if (nickname_vaild == null && account_vaild == null && email_vaild == null && confirm_pwd == m_password)
                 {
                     member.MemberID = new_ID;
                     member.Nickname = nickname;
                     member.Account = account;
                     member.M_Password = m_password;
-                    member.Phone = phone;
+                    member.Verify_status = false;
                     member.Email = email;
                     member.Gender = gender;
                     member.Birthday = birthday;
@@ -63,18 +69,104 @@ namespace OriginalWorldProject.Controllers
 
                     db.Member.Add(member);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Members");
+                    return RedirectToAction("Verification_usermail", new { memberID = new_ID });
                 }
             }
-                if(nickname_vaild != null || account_vaild != null || phone_vaild != null || email_vaild != null || confirm_pwd != m_password){ 
-                    if (nickname_vaild != null) ViewBag.Nickname = "名稱已被使用!!";
-                    if (account_vaild != null) ViewBag.Account = "帳號已被註冊!!";
-                    if (phone_vaild != null) ViewBag.Phone = "電話已被註冊!!";
-                    if (email_vaild != null) ViewBag.Email = "信箱已被註冊!!";
-                    if (confirm_pwd != m_password) ViewBag.Confirm_pwd = "密碼不相符!!";
+            if (nickname_vaild != null || account_vaild != null || email_vaild != null || confirm_pwd != m_password)
+            {
+                if (nickname_vaild != null) ViewBag.Nickname = "名稱已被使用!!";
+                if (account_vaild != null) ViewBag.Account = "帳號已被註冊!!";
+                if (email_vaild != null) ViewBag.Email = "信箱已被註冊!!";
+                if (confirm_pwd != m_password) ViewBag.Confirm_pwd = "密碼不相符!!";
             }
-            
+
             return View(member);
+        }
+
+        public ActionResult Verification_usermail(string memberID)
+        {
+
+            if (memberID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Member member = db.Member.Find(memberID);
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+            //RandomPassword ver_code = new RandomPassword();
+            //string Verificationcode = ver_code.RandomVerificationcode();
+            //VerificationEmail(member.Email, member.Nickname);
+            //Session["Verificationcode"] = Verificationcode;
+            Session["usermail"] = member.Email;
+            Session["username"] = member.Nickname;
+
+            return View(member);
+        }
+
+        [HttpPost]
+        public ActionResult Verification_usermail(Member member, string verify_code)
+        {
+            //RandomPassword ver_code = new RandomPassword();
+            //string Verificationcode = ver_code.RandomVerificationcode();
+
+            //VerificationEmail(member.Email, member.Nickname, Verificationcode);
+
+
+            if (Session["Verificationcode"].Equals(verify_code) == false)
+            {
+                ViewBag.verify_code = "驗證碼錯誤!!";
+                return View();
+            }
+
+            if (ModelState.IsValid)
+            {
+                member.Verify_status = true;
+                db.Entry(member).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("Index", "Members");
+
+        }
+
+
+        public ActionResult VerificationEmail(string usermail,string username)
+        {
+
+            RandomPassword ver_code = new RandomPassword();
+            string Verificationcode = ver_code.RandomVerificationcode();
+            
+            Session["Verificationcode"] = Verificationcode;
+
+            string smtpAddress = "smtp.gmail.com";
+            int portNumber = 587;
+            bool enableSSL = true;
+            string emailFrom = "im.writter0221@gmail.com";
+            string password = "asd7821778@";
+
+            string emailto = usermail;
+            string subject = "您好" + username + ",感謝您加入寫書人,請驗證您的信箱";
+            string body = "您的驗證碼是" + Verificationcode;
+
+
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(emailFrom, "寫書人", System.Text.Encoding.UTF8);
+                mail.To.Add(emailto);
+                mail.Subject = subject;
+                mail.Body = body;
+
+                mail.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+                {
+                    smtp.Credentials = new NetworkCredential(emailFrom, password);
+                    smtp.EnableSsl = enableSSL;
+                    smtp.Send(mail);
+                }
+            }
+            return View();
         }
 
         public JsonResult check_Nickname(string Nickname)
@@ -88,10 +180,6 @@ namespace OriginalWorldProject.Controllers
         public JsonResult check_M_email(string Email)
         {
             return Json(!db.Member.Any(x => x.Email.ToLower() == Email.ToLower()), JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult check_M_Phone(string Phone)
-        {
-            return Json(!db.Member.Any(x => x.Phone.ToLower() == Phone.ToLower()), JsonRequestBehavior.AllowGet);
         }
     }
 }

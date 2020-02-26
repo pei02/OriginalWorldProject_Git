@@ -26,22 +26,21 @@ namespace OriginalWorldProject.Controllers
             var list = db.Member.ToList();
             int pagecurrent = page < 1 ? 1 : page;
             var pagelist = list.ToPagedList(pagecurrent, pagesize);
-
-
+            
             ViewBag.Age_star = Age_star;
             ViewBag.Age_end = Age_end;
             return View(pagelist);
         }
 
         [HttpPost]
-        public ActionResult Index(int Age_star, int Age_end, string M_status, string Gender, string Writter_qualifications, string Account, int page = 1, int pagesize = 10)
+        public ActionResult Index(int Age_star, int Age_end, string M_status, string Gender, string Writter_qualifications, string Account,string Verify_status, int page = 1, int pagesize = 10)
         {
             Birthday_Interval birthday_Interval = new Birthday_Interval();
             DateTime Age_bth_star = birthday_Interval.Birthday_interval(Age_star).Date;
             DateTime Age_bth_end = birthday_Interval.Birthday_interval(Age_end).AddDays(-365).Date;
 
             int pagecurrent = page < 1 ? 1 : page;
-            var list = db.Member.Where(m => m.Gender.ToString().Contains(Gender) && m.Birthday <= Age_bth_star && m.Birthday >= Age_bth_end && m.M_status.ToString().Contains(M_status) && m.Writter_qualifications.ToString().Contains(Writter_qualifications) && Account == "" ? m.Account.Contains(Account) : m.Account.Equals(Account)).OrderBy(a => a.MemberID).ToPagedList(pagecurrent, pagesize).ToList();
+            var list = db.Member.Where(m => m.Gender.ToString().Contains(Gender) && m.Birthday <= Age_bth_star && m.Birthday >= Age_bth_end && m.M_status.ToString().Contains(M_status) && m.Writter_qualifications.ToString().Contains(Writter_qualifications)&&m.Verify_status.ToString().Contains(Verify_status) && Account == "" ? m.Account.Contains(Account) : m.Account.Equals(Account)).OrderBy(a => a.MemberID).ToPagedList(pagecurrent, pagesize).ToList();
             var pagelist = list.ToPagedList(pagecurrent, pagesize);
 
             ViewBag.Age_star = Age_star;
@@ -50,6 +49,7 @@ namespace OriginalWorldProject.Controllers
             ViewBag.Gender = Gender;
             ViewBag.Writter_qualifications = Writter_qualifications;
             ViewBag.Account = Account;
+            ViewBag.Verify_status = Verify_status;
             return View(pagelist);
         }
 
