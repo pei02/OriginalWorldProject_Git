@@ -1,150 +1,186 @@
 ﻿@model OriginalWorldProject.Models.Member
 
+
 @{
     ViewBag.Title = "Signup";
-    Layout = "~/Views/Shared/_Layout_blank.cshtml";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
 }
+
+
 
 <h2>Signup</h2>
 
-
-@using (Html.BeginForm("Signup","Signup",FormMethod.Post,new {id="check-form" }))
+@using (Html.BeginForm("Signup", "Signup", FormMethod.Post, new { id = "check-form" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Member</h4>
-    @ViewBag.Nickname
-    @ViewBag.Account
-    @ViewBag.Email
-    @ViewBag.Phone
-    @ViewBag.confirm_pwd
+    <div class="form-horizontal">
+        <h4>Member</h4>
+        @ViewBag.Nickname
+        @ViewBag.Account
+        @ViewBag.Email
+        @ViewBag.Phone
+        @ViewBag.confirm_pwd
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.MemberID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.MemberID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
 
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control" ,@id="Nickname"} })
-            @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" ,@id="Account"} })
-            @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.M_Password, new { htmlAttributes = new { @class = "form-control" ,@id="M_Password"} })
-            @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Confirm_pwd, new { htmlAttributes = new { @class = "form-control" ,@id="Confirm_pwd"} })
-            @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" ,@id="Email"}})
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                @*@Html.EditorFor(model => model.Gender)*@
-                <label class="btn btn-orange-s rounded active mr-1">
-                    <input type="radio" name="Gender" id="Genderf" autocomplete="off" value="true" checked> 男
-                </label>
-                <label class="btn btn-orange-s rounded">
-                    <input type="radio" name="Gender" id="Genderm" autocomplete="off" value="false"> 女
-                </label>
-                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.M_status)
-                @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", @id = "Nickname" } })
+                @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Writter_qualifications)
-                @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @id = "Account" } })
+                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit">
-                <i class="fas fa-check"></i>
-            </button>
+        <div class="form-group">
+            @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.M_Password, new { htmlAttributes = new { @class = "form-control", @id = "M_Password" } })
+                @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-</div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Confirm_pwd, new { htmlAttributes = new { @class = "form-control", @id = "Confirm_pwd" } })
+                @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "Email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    @*@Html.EditorFor(model => model.Gender)*@
+                    <label class="btn btn-orange-s rounded active mr-1">
+                        <input type="radio" name="Gender" id="Genderf" autocomplete="off" value="true" checked> 男
+                    </label>
+                    <label class="btn btn-orange-s rounded">
+                        <input type="radio" name="Gender" id="Genderm" autocomplete="off" value="false"> 女
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @id = "Birthday" } })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.M_status)
+                    @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Writter_qualifications)
+                    @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+
+
+
+
+    </div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
+        var id = ['#Nickname', '#Account','#M_Password','#Confirm_pwd','#Email','#Birthday'];
+
         function onSubmit(token) {
-            if ($('#Nickname').val == null) {
-                $('#Nickname').attr("required", "required");
+            onload();
+        }
+
+        function validate(event) {
+            event.preventDefault();
+          
+            if (!document.getElementById('Nickname').value || !document.getElementById('Account').value || !document.getElementById('M_Password').value || !document.getElementById('Confirm_pwd').value || !document.getElementById('Email').value || !document.getElementById('Birthday').value) {
+                if (!document.getElementById('Nickname').value) $('#Nickname').addClass('is-invalid');
+                if (!document.getElementById('Account').value) $('#Account').addClass('is-invalid');
+                if (!document.getElementById('M_Password').value) $('#M_Password').addClass('is-invalid');
+                if (!document.getElementById('Confirm_pwd').value) $('#Confirm_pwd').addClass('is-invalid');
+                if (!document.getElementById('Email').value) $('#Email').addClass('is-invalid');
+                if (!document.getElementById('Birthday').value) $('#Birthday').addClass('is-invalid');
             } else {
-            document.getElementById("check-form").submit();
+                grecaptcha.execute();
+                document.getElementById("check-form").submit();
             }
-            
+        }
+
+        function onload() {
+            var element = document.getElementById('btn_sub');
+            element.onclick = validate;
+        }
+
+        $(document).ready(function () {
+            for (var i = 0; i <= id.length; i++) {
+                Vaild(id[i]);
+            }
+        });
+
+        function Vaild(name) {
+            $(name).keyup(function () {
+                if ($(this).hasClass('input-validation-error')) {
+                    $(this).removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
         }
 
 
     </script>
-
-
-}
+    
+    }
+    

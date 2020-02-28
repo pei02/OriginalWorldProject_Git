@@ -15,9 +15,7 @@
     <link href="~/Content/AllStyle.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
     @Scripts.Render("~/bundles/modernizr")
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="bg-gray">
@@ -103,7 +101,7 @@
                             </li>
                         </ul>
                     </nav>
-                    <div class="container body-content mt-5" >
+                    <div class="container body-content mt-5">
                         @RenderBody()
 
                     </div>
@@ -126,12 +124,5 @@
     @Scripts.Render("~/bundles/offcanvasJS")
     @RenderSection("scripts", required: false)
 
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
-    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
-    @*<script src="~/Scripts/offcanvasJS.js"></script>
-        <script src="~/Scripts/umd/popper-utils.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 </body>
 </html>

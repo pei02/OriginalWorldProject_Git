@@ -6,9 +6,8 @@
     var verification = Json.Encode(ViewBag.verification);
 }
 
-@using (Html.BeginForm("Create","Administrators",FormMethod.Post,new {id="check-form" }))
+@using (Html.BeginForm("Create", "Administrators", FormMethod.Post, new { id = "check-form" }))
 {
-    @*<form action="/Administrators/Create" method="post" novalidate="novalidate" id="check-form">*@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal text-white text-fm ts-16">
@@ -24,15 +23,12 @@
                         </button>
                     </div>
                     <div class="col-md-4">
-                        <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit">
+                        <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
                             <i class="fas fa-check"></i>
                         </button>
-                        @*<button type="submit" class="btn-circle btn-orange-y">
-                                <i class="fas fa-check"></i>
-                            </button>*@
                     </div>
                     <div class="col-md-4">
-                        @Html.ActionLink(" ", "Index", new { Page=Request.QueryString["page"]}, new { @class = "btn-circle btn-orange fas fa-reply" })
+                        @Html.ActionLink(" ", "Index", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-orange fas fa-reply" })
                     </div>
                 </div>
             </div>
@@ -94,7 +90,7 @@
         </div>
     </div>
 }
-@*</form>*@
+
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -105,7 +101,25 @@
         var id = ['#Adm_name', '#Account'];
 
         function onSubmit(token) {
-            document.getElementById("check-form").submit();
+            onload();
+        }
+
+        function validate(event) {
+            event.preventDefault();
+          
+            if (!document.getElementById('Adm_name').value || !document.getElementById('Account').value) {
+                if (!document.getElementById('Adm_name').value) $('#Adm_name').addClass('is-invalid');
+                if (!document.getElementById('Account').value) $('#Account').addClass('is-invalid');
+               
+            } else {
+                grecaptcha.execute();
+                document.getElementById("check-form").submit();
+            }
+        }
+
+        function onload() {
+            var element = document.getElementById('btn_sub');
+            element.onclick = validate;
         }
 
         $(document).ready(function () {

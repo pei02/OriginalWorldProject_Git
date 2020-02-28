@@ -68,6 +68,7 @@ namespace OriginalWorldProject.Controllers
             ViewBag.M_status = member.M_status;
             ViewBag.password = member.M_Password;
             ViewBag.Gender = member.Gender;
+            ViewBag.Verify_status = member.Verify_status;
             return View(member);
         }
 
@@ -82,5 +83,40 @@ namespace OriginalWorldProject.Controllers
             }
             return View(member);
         }
+
+
+        public ActionResult Edit_Member(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Member member = db.Member.Find(id);
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Writter_qualifications = member.Writter_qualifications;
+            ViewBag.M_status = member.M_status;
+            ViewBag.password = member.M_Password;
+            ViewBag.Gender = member.Gender;
+            ViewBag.Verify_status = member.Verify_status;
+
+            return View(member);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit_Member(Member member)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(member).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(member);
+        }
+
     }
 }

@@ -34,7 +34,6 @@ namespace OriginalWorldProject.Controllers
         public ActionResult Signup(string nickname, string account, string m_password, string email, DateTime birthday, Boolean gender, string confirm_pwd)
         {
 
-
             string id = db.Member.OrderByDescending(m => m.MemberID).Select(m => m.MemberID).FirstOrDefault();
             string nickname_vaild = db.Member.Where(m => m.Nickname == nickname).Select(m => m.Nickname).FirstOrDefault();
             string account_vaild = db.Member.Where(m => m.Account == account).Select(m => m.Account).FirstOrDefault();
@@ -95,10 +94,7 @@ namespace OriginalWorldProject.Controllers
             {
                 return HttpNotFound();
             }
-            //RandomPassword ver_code = new RandomPassword();
-            //string Verificationcode = ver_code.RandomVerificationcode();
-            //VerificationEmail(member.Email, member.Nickname);
-            //Session["Verificationcode"] = Verificationcode;
+          
             Session["usermail"] = member.Email;
             Session["username"] = member.Nickname;
 
@@ -108,31 +104,28 @@ namespace OriginalWorldProject.Controllers
         [HttpPost]
         public ActionResult Verification_usermail(Member member, string verify_code)
         {
-            //RandomPassword ver_code = new RandomPassword();
-            //string Verificationcode = ver_code.RandomVerificationcode();
-
-            //VerificationEmail(member.Email, member.Nickname, Verificationcode);
-
 
             if (Session["Verificationcode"].Equals(verify_code) == false)
             {
                 ViewBag.verify_code = "驗證碼錯誤!!";
-                return View();
             }
+            else { 
 
             if (ModelState.IsValid)
             {
                 member.Verify_status = true;
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
+                return RedirectToAction("Index", "Members");
 
             }
-            return RedirectToAction("Index", "Members");
+            }
+             return View(member);
 
         }
 
 
-        public ActionResult VerificationEmail(string usermail,string username)
+        public void VerificationEmail()
         {
 
             RandomPassword ver_code = new RandomPassword();
@@ -146,9 +139,9 @@ namespace OriginalWorldProject.Controllers
             string emailFrom = "im.writter0221@gmail.com";
             string password = "asd7821778@";
 
-            string emailto = usermail;
-            string subject = "您好" + username + ",感謝您加入寫書人,請驗證您的信箱";
-            string body = "您的驗證碼是" + Verificationcode;
+            string emailto = Session["usermail"].ToString();
+            string subject = "您好" + Session["username"].ToString() + ",感謝您加入寫書人,請驗證您的信箱";
+            string body = "您的驗證碼是" + Verificationcode+"<br>執行重新取得驗證碼此組驗證碼將失效";
 
 
             using (MailMessage mail = new MailMessage())
@@ -166,7 +159,6 @@ namespace OriginalWorldProject.Controllers
                     smtp.Send(mail);
                 }
             }
-            return View();
         }
 
         public JsonResult check_Nickname(string Nickname)

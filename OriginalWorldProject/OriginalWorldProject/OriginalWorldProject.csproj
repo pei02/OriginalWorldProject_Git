@@ -166,7 +166,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
-    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -471,13 +470,12 @@
     <Content Include="Views\Announcements\Details.cshtml" />
     <Content Include="Views\Announcements\Edit.cshtml" />
     <Content Include="Views\Announcements\Index.cshtml" />
-    <Content Include="Views\Members\Create.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
     <Content Include="Views\Signup\Signup.cshtml" />
-    <Content Include="Views\test\aaa.cshtml" />
-    <Content Include="Views\test\Index.cshtml" />
     <Content Include="Views\Signup\Verification_usermail.cshtml" />
+    <Content Include="Views\Members\Edit_Member.cshtml" />
+    <Content Include="Views\Shared\_FrontendLayoutStyle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

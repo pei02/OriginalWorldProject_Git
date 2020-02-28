@@ -2,17 +2,17 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
-    var M_status=Json.Encode(ViewBag.M_status);
-    var Writter_qualifications=Json.Encode(ViewBag.Writter_qualifications);
-    var Gender=Json.Encode(ViewBag.Gender);
+    Layout = "~/Views/Shared/_Layout_blank.cshtml";
+    var M_status = Json.Encode(ViewBag.M_status);
+    var Writter_qualifications = Json.Encode(ViewBag.Writter_qualifications);
+    var Gender = Json.Encode(ViewBag.Gender);
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal ts-16 text-white text-fm">
+    <div class="form-horizontal text-fm">
         <div class="form-group">
             <div class="row">
                 <div class="col-md-10">
@@ -59,10 +59,10 @@
             </div>
         </div>
 
-        <div class="form-group" hidden>
+        <div class="form-group">
             @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.M_Password, new { @class = "form-control", @Value = @ViewBag.password, @readonly = "readonly" })
+                @Html.PasswordFor(model => model.M_Password, new { @class = "form-control", @Value = @ViewBag.password })
                 @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -152,7 +152,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="control-label">
@@ -163,7 +163,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <label class="control-label">
@@ -175,10 +175,10 @@
             </div>
         </div>
 
-        <div class="form-group" hidden>
+        <div class="form-group">
             @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @Value = @ViewBag.password, @readonly = "readonly" })
+                @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @Value = @ViewBag.password })
                 @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -197,7 +197,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script>
+    <script>
     if (@Html.Raw(M_status)==true)
         $('#M_status').attr("checked", true);
 
@@ -208,5 +208,5 @@
         $('#Gender').attr("checked", true);
 
     </script>
-    
+
 }

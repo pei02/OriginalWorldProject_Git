@@ -1,4 +1,5 @@
-﻿/************************background-color***************************/
+﻿/*******************************************************************/
+/************************background-color***************************/
 .over-flow {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -40,12 +41,34 @@ a.badge-blue:hover, a.badge-blue:focus {
     color: #fff;
     background-color: #016779;
 }
+
+.badge-green {
+    color: #fff;
+    background-color: #008e10;
+}
+
+a.badge-green:hover, a.badge-green:focus {
+    color: #fff;
+    background-color: #006b0c;
+}
+
+.badge-pink {
+    color: #fff;
+    background-color: #ff5292;
+}
+
+a.badge-pink:hover, a.badge-pink:focus {
+    color: #fff;
+    background-color: #ba3f6c;
+}
 /*******************************************************************/
 /************************background-color***************************/
 .bg-orange {
     background-color: #ff8d00 !important;
 }
-
+.bg-black {
+    background-color: #000000 !important;
+}
 .bg-gray {
     background-color: #2d2e33 !important;
 }
@@ -182,6 +205,11 @@ a.text-blue:hover, a.text-blue:focus {
     /*text*/
     .ts-16 {
         font-size: 16px !important;
+        font-weight: 900;
+    }
+
+    .ts-li-10 {
+        font-size: 10px !important;
         font-weight: 900;
     }
 
