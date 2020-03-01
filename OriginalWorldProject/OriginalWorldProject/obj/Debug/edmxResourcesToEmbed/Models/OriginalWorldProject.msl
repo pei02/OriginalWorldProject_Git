@@ -284,6 +284,8 @@
     <EntitySetMapping Name="Writer_application">
       <EntityTypeMapping TypeName="OriginalWorldModel.Writer_application">
         <MappingFragment StoreEntitySet="Writer_application">
+          <ScalarProperty Name="Date_of_Application" ColumnName="Date_of_Application" />
+          <ScalarProperty Name="Review_date" ColumnName="Review_date" />
           <ScalarProperty Name="Writer_application_ID" ColumnName="Writer_application_ID" />
           <ScalarProperty Name="Pseudonym" ColumnName="Pseudonym" />
           <ScalarProperty Name="Introduction" ColumnName="Introduction" />

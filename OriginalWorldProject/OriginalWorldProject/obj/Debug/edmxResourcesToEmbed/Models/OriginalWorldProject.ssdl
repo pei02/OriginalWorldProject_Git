@@ -265,6 +265,8 @@
     <Property Name="Approval_status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
     <Property Name="Administrator_ID" Type="nvarchar" MaxLength="4" />
     <Property Name="MemberID" Type="nvarchar" MaxLength="10" />
+    <Property Name="Review_date" Type="datetime" />
+    <Property Name="Date_of_Application" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Writer_home">
     <Key>

@@ -11,7 +11,9 @@ namespace OriginalWorldProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(MetadataWriter_application))]
     public partial class Writer_application
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,6 +30,8 @@ namespace OriginalWorldProject.Models
         public string Approval_status_ID { get; set; }
         public string Administrator_ID { get; set; }
         public string MemberID { get; set; }
+        public Nullable<System.DateTime> Review_date { get; set; }
+        public System.DateTime Date_of_Application { get; set; }
     
         public virtual Administrator Administrator { get; set; }
         public virtual Approval_status Approval_status { get; set; }

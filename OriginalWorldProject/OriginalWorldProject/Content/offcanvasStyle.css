@@ -135,6 +135,9 @@ html {
         }
 
         .sidebar-nav li:nth-child(9):before {
+            background-color: #ff2c73;
+        }
+        .sidebar-nav li:nth-child(10):before {
             background-color: #727272;
         }
 

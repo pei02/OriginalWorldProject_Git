@@ -1,0 +1,40 @@
+﻿@model OriginalWorldProject.Models.Member
+
+@{
+    ViewBag.Title = "Mem_Login";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+}
+
+<h2>Mem_Login</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal text-white">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="Account" name="Account" type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control"  id="M_Password" name="M_Password" type="text">
+            </div>
+        </div>
+        <span class="text-danger">@ViewBag.Message</span>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

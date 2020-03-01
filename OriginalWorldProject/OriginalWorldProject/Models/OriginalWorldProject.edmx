@@ -270,6 +270,8 @@
           <Property Name="Approval_status_ID" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="Administrator_ID" Type="nvarchar" MaxLength="4" />
           <Property Name="MemberID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Review_date" Type="datetime" />
+          <Property Name="Date_of_Application" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Writer_home">
           <Key>
@@ -1454,6 +1456,8 @@
           <NavigationProperty Name="Approval_status" Relationship="Self.Relationship104" FromRole="Writer_application" ToRole="Approval_status" />
           <NavigationProperty Name="Member" Relationship="Self.Relationship109" FromRole="Writer_application" ToRole="Member" />
           <NavigationProperty Name="Writer" Relationship="Self.Relationship110" FromRole="Writer_application" ToRole="Writer" />
+          <Property Name="Review_date" Type="DateTime" Precision="3" />
+          <Property Name="Date_of_Application" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Writer_home">
           <Key>
@@ -2574,6 +2578,8 @@
           <EntitySetMapping Name="Writer_application">
             <EntityTypeMapping TypeName="OriginalWorldModel.Writer_application">
               <MappingFragment StoreEntitySet="Writer_application">
+                <ScalarProperty Name="Date_of_Application" ColumnName="Date_of_Application" />
+                <ScalarProperty Name="Review_date" ColumnName="Review_date" />
                 <ScalarProperty Name="Writer_application_ID" ColumnName="Writer_application_ID" />
                 <ScalarProperty Name="Pseudonym" ColumnName="Pseudonym" />
                 <ScalarProperty Name="Introduction" ColumnName="Introduction" />

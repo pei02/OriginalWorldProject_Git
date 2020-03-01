@@ -354,6 +354,8 @@
     <NavigationProperty Name="Approval_status" Relationship="Self.Relationship104" FromRole="Writer_application" ToRole="Approval_status" />
     <NavigationProperty Name="Member" Relationship="Self.Relationship109" FromRole="Writer_application" ToRole="Member" />
     <NavigationProperty Name="Writer" Relationship="Self.Relationship110" FromRole="Writer_application" ToRole="Writer" />
+    <Property Name="Review_date" Type="DateTime" Precision="3" />
+    <Property Name="Date_of_Application" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="Writer_home">
     <Key>

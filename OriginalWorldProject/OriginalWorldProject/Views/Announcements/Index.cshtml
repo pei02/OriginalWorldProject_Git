@@ -152,7 +152,7 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager(Model.AnnouncementsPageList, Page => Url.Action("Index", new { start = ViewBag.start, end = ViewBag.end, announcement_type_id = ViewBag.announcement_type_id, title = ViewBag.titletext, Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    @Html.PagedListPager(Model.AnnouncementsPageList, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
 </div>
 
 

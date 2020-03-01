@@ -1,0 +1,205 @@
+﻿@*@model IEnumerable<OriginalWorldProject.Models.Writer_application>*@
+@model OriginalWorldProject.ViewModel.Writer_applicationClass
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    var start = Json.Encode(ViewBag.Doa_star);
+    var end = Json.Encode(ViewBag.Doa_end);
+    var active_ = "";
+    var selected_ = "";
+    int[] wa_count = { ViewBag.WA1, ViewBag.WA2, ViewBag.WA3, ViewBag.WA4 };
+    int num;
+}
+<div class="col-md-1">
+    @Html.ActionLink(" ", "Create", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-green fas fa-user-plus" })
+</div>
+<div class="row">
+    <div class="col-md-11">
+        <table>
+            <tr>
+                <td>
+                    <span class="text-fm text-white ts-36">作者申請書列表</span>
+                </td>
+                <td class="text-center" style="width:30px;">
+                    <a class="text-orange" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search" id="search_button">
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-minus-circle" style="display:none"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<p class="border-bottom mb-5"></p>
+<form action="@Url.Action("Index",new {Approval_status_ID=ViewBag.Approval_status_ID ,Doa_star=ViewBag.Doa_star,Doa_end=ViewBag.Doa_end,Works_name=ViewBag.Works_name})" method="post">
+    @Html.AntiForgeryToken()
+    <div class="collapse" id="search">
+        <div class="row">
+            <div class="row col-11">
+                <div class="row col-12 form-group">
+                    <div class="col-7">
+                        <table class="w-100">
+                            <tr>
+                                <td class="w-25">
+                                    <label class="text-white col-form-label">申請日期從</label>
+                                </td>
+                                <td class="w-25">
+                                    <input id="Doa_star" type="date" name="Doa_star" value="@ViewBag.Doa_star" class="form-control" />
+                                </td>
+                                <td class="w-auto text-center">
+                                    <label class="text-white col-form-label">至</label>
+                                </td>
+                                <td class="w-25">
+                                    <input id="Doa_end" type="date" name="Doa_end" value="@ViewBag.Doa_end" class="form-control" />
+                                </td>
+                                <td class="w-auto text-center">
+                                    <label class="text-white col-form-label">間</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-5 row">
+                        <select id="Approval_status_ID" name="Approval_status_ID" class="form-control col-11">
+                            <option selected disabled>---請選擇審核狀態---</option>
+                            @foreach (var i in Model.Approval_Statuses)
+                            {
+                                selected_ = i.Approval_status_ID == ViewBag.Approval_status_ID ? "selected" : "";
+                                <option value="@i.Approval_status_ID" @selected_>@i.Approval_status1</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row col-12">
+                    <div class="form-group col-6 row">
+                        <label class="text-white col-form-label col-3">查詢名稱</label>
+                        <input id="Works_name" type="text" name="Works_name" value="@ViewBag.Works_name" class="form-control col-9" placeholder="請輸入作品名稱" />
+                    </div>
+                    <div class="form-group col-6 row">
+                        <label class="text-white col-form-label col-3">查詢筆名</label>
+                        <input id="Pseudonym" type="text" name="Pseudonym" value="@ViewBag.Pseudonym" class="form-control col-9" placeholder="請輸入作者筆名" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 align-self-center ">
+                <button type="submit" class="btn-circle btn-orange-y">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="card text-center bg-dark_op">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-tabs nav-fill">
+            @{
+                num = 0;
+                foreach (var item in Model.Approval_Statuses)
+                {
+                    active_ = item.Approval_status_ID == ViewBag.Approval_status_ID ? "active" : "";
+
+                    <li class="nav-item @active_">
+                        <a href="/Writer_application?Approval_status_ID=@item.Approval_status_ID" class="text-white">@item.Approval_status1  <span>（@wa_count[num]）</span></a>
+                    </li>
+                    num++;
+                }
+
+
+            }
+
+        </ul>
+    </div>
+    <div class="card-body">
+        <table class="table-x table-x-striped table-dark table-x-hover" id="tab">
+            <tr class="text-fm text-center ts-16">
+                <td>
+                    申請人
+                </td>
+                <td>
+                    筆名
+                </td>
+                <td>
+                    作品名稱
+                </td>
+                <td>
+                    申請日期
+                </td>
+                <td>
+                    審核日期
+                </td>
+                <td>
+                    審核人
+                </td>
+
+                <td></td>
+            </tr>
+
+            @if (ViewBag.count == 0)
+            {
+
+                <tr class="text-fm text-center ts-36">
+                    <td colspan="8">查無資料</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model.Writer_Applications)
+                {
+                    <tr class="text-fm text-center ts-16">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Member.Nickname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pseudonym)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Works_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date_of_Application)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Review_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Administrator.Adm_name)
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "Edit", new { id = item.Writer_application_ID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+                            @Html.ActionLink(" ", "Details", new { id = item.Writer_application_ID, Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-purple far fa-file-alt" })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="text-center">
+        @Html.PagedListPager(Model.Writer_applicationPageList, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+       var fullDate = new Date();
+       var yyyy = fullDate.getFullYear();
+       var MM = (fullDate.getMonth() + 1) >= 10 ? (fullDate.getMonth() + 1) : ("0" + (fullDate.getMonth() + 1));
+       var dd = fullDate.getDate() < 10 ? ("0"+fullDate.getDate()) : fullDate.getDate();
+       var today = yyyy + "-" + MM + "-" + dd;
+
+        if (@Html.Raw(start)== "" ||@Html.Raw(end)=="") {
+            $('#Doa_star').val('2017-01-01');
+            $('#Doa_end').val(today);
+        }
+        $(document).ready(function () {
+            $('#search_button').click(function () {
+                $('#search_button>i').toggle();
+            });
+
+        });
+    </script>
+
+}

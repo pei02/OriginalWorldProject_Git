@@ -58,6 +58,7 @@ namespace OriginalWorldProject.Models
         public string Announcement_content { get; set; }
 
         [DisplayName("公告時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime Announcement_time { get; set; }
 
         [DisplayName("公告類別")]
@@ -107,7 +108,7 @@ namespace OriginalWorldProject.Models
 
         [DisplayName("生日")]
         [Required(ErrorMessage = "請輸入生日!!")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd }", ApplyFormatInEditMode = true)]
         public System.DateTime Birthday { get; set; }
 
         [DisplayName("會員狀態")]
@@ -123,6 +124,50 @@ namespace OriginalWorldProject.Models
 
         [DisplayName("驗證狀態")]
         public bool Verify_status { get; set; }
+    }
+    public class MetadataWriter_application
+    {
+        [DisplayName("申請書流水號")]
+        [Key]
+        public int Writer_application_ID { get; set; }
+
+        [DisplayName("筆名")]
+        [Required(ErrorMessage = "請輸入筆名")]
+        [StringLength(25, ErrorMessage = "筆名不得超過25字!!")]
+        [Remote("check_Pseudonym", "Writer_application", ErrorMessage = "筆名無法使用")]
+        public string Pseudonym { get; set; }
+
+        [DisplayName("作品簡介")]
+        [Required(ErrorMessage ="請輸入作品簡介")]
+        [StringLength(25, ErrorMessage = "簡介不得超過100字!!")]
+        public string Introduction { get; set; }
+
+        [DisplayName("作品名稱")]
+        [Required(ErrorMessage ="請輸入作品名稱")]
+        [StringLength(25, ErrorMessage = "作品名稱不得超過25字!!")]
+        public string Works_name { get; set; }
+
+        [DisplayName("作品試讀")]
+        [Required(ErrorMessage = "請提供作品試讀,至少一話")]
+        public string Work_preview { get; set; }
+
+        [DisplayName("審核狀態")]
+        public string Approval_status_ID { get; set; }
+
+        [DisplayName("審核人編號")]
+        public string Administrator_ID { get; set; }
+
+        [DisplayName("會員編號")]
+        public string MemberID { get; set; }
+
+        [DisplayName("審核日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> Review_date { get; set; }
+
+        [DisplayName("申請日期")]
+        [Required(ErrorMessage = "填寫日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
+        public System.DateTime Date_of_Application { get; set; }
     }
 
     public class CheckAdmName : ValidationAttribute

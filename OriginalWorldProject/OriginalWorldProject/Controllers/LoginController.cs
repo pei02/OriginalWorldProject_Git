@@ -54,5 +54,45 @@ namespace OriginalWorldProject.Controllers
             Session.Clear();
             return RedirectToAction("Adm_Login", "Login");
         }
+
+
+
+        public ActionResult Mem_Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Mem_Login(string Account, string M_Password)
+        {
+            var All_Mem = db.Member.Where(a => a.Email == Account && a.M_Password == M_Password  || a.Account == Account && a.M_Password == M_Password).FirstOrDefault();
+            int val;
+
+            if (All_Mem == null)
+            {
+                ViewBag.Message = "帳號或密碼錯誤!!";
+                return View();
+            }
+            if (All_Mem.Verify_status == false)
+            {
+                val = 0;
+            }
+            else {
+                val = 1;
+            }
+
+            Session["Member"] = All_Mem;
+            Session["Verify_status"] = val;
+            Session["Member_Nickname"] = All_Mem.Nickname;
+            Session["Member_ID"] = All_Mem.MemberID;
+            return RedirectToAction("Index", "Writer_application");
+        }
+
+
+        public ActionResult Mem_Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Mem_Login", "Login");
+        }
     }
 }
