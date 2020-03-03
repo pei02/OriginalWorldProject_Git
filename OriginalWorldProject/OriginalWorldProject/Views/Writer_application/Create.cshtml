@@ -7,47 +7,48 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Writer_application", FormMethod.Post, new { id = "check-form" }))
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal text-white">
     <h4>Writer_application</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
     <div class="form-group">
         @Html.LabelFor(model => model.Pseudonym, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control", @id = "Pseudonym" } })
             @Html.ValidationMessageFor(model => model.Pseudonym, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Introduction, new { @class = "form-control" , @rows = "10"})
-            @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
+            <span class="text-danger">@ViewBag.Pseudonym_vaild</span>
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Works_name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Works_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Works_name, new { htmlAttributes = new { @class = "form-control", @id = "Works_name" } })
             @Html.ValidationMessageFor(model => model.Works_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Introduction, new { @class = "form-control", @rows = "10", @id = "Introduction" })
+            @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Work_preview, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Work_preview, new  { @class = "form-control" , @rows = "20"} )
+            @Html.TextAreaFor(model => model.Work_preview, new { @class = "form-control", @rows = "20", @id = "Work_preview" })
             @Html.ValidationMessageFor(model => model.Work_preview, "", new { @class = "text-danger" })
         </div>
     </div>
+
     <div class="form-group" hidden>
         @Html.LabelFor(model => model.MemberID, "MemberID", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -58,7 +59,10 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-danger" />
+            <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
+                <i class="fas fa-check"></i>
+            </button>
+            <span>@ViewBag.msg</span>
         </div>
     </div>
 </div>
@@ -67,3 +71,52 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+@section Scripts {
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        var id = ['#Pseudonym', '#Introduction','#Works_name','#Work_preview'];
+
+        function onSubmit(token) {
+            onload();
+        }
+
+        function validate(event) {
+            event.preventDefault();
+
+            if (!document.getElementById('Pseudonym').value || !document.getElementById('Introduction').value || !document.getElementById('Works_name').value || !document.getElementById('Work_preview').value) {
+                if (!document.getElementById('Pseudonym').value) $('#Pseudonym').addClass('is-invalid');
+                if (!document.getElementById('Introduction').value) $('#Introduction').addClass('is-invalid');
+                if (!document.getElementById('Works_name').value) $('#Works_name').addClass('is-invalid');
+                if (!document.getElementById('Work_preview').value) $('#Work_preview').addClass('is-invalid');
+            } else {
+                grecaptcha.execute();
+                document.getElementById("check-form").submit();
+            }
+        }
+
+        function onload() {
+            var element = document.getElementById('btn_sub');
+            element.onclick = validate;
+        }
+
+        $(document).ready(function () {
+            for (var i = 0; i <= id.length; i++) {
+                Vaild(id[i]);
+            }
+        });
+
+        function Vaild(name) {
+            $(name).keyup(function () {
+                if ($(this).hasClass('input-validation-error')) {
+                    $(this).removeClass('is-valid').addClass('is-invalid');
+                } else {
+                    $(this).removeClass('is-invalid');
+                }
+            });
+        }
+
+
+    </script>
+
+}

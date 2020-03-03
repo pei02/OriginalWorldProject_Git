@@ -1,0 +1,105 @@
+﻿@*@model IEnumerable<OriginalWorldProject.Models.Writer>*@
+@model OriginalWorldProject.ViewModel.WritterClass
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+     string[] val = { "e", "true", "false" };
+    string[] status = { "查看全部", "已停權", "未停權" };
+     int num;
+    var selected_ = "";
+}
+
+    <div class="row">
+        <div class="col-md-11">
+            <table>
+                <tr>
+                    <td>
+                        <span class="text-fm text-white ts-36">作家列表</span>
+                    </td>
+                    <td class="text-center" style="width:30px;">
+                        <a class="text-orange" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search" id="search_button">
+                            <i class="fas fa-plus-circle"></i>
+                            <i class="fas fa-minus-circle" style="display:none"></i>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p class="border-bottom mb-5"></p>
+
+    <form method="post">
+        <div class="collapse mb-1" id="search">
+            <div class="row">
+                <div class="row col-11">
+                        <div class="form-group col-6">
+                            <select id="W_status" name="W_status" class="form-control">
+                                <option selected disabled>---請選擇作家權限狀態---</option>
+                                @{
+                                    num = 0;
+                                    foreach (var i in val)
+                                    {
+                                        selected_ = i == ViewBag.W_status ? "selected" : "";
+                                        <option value="@val[num]" @selected_>@status[num]</option>
+                                        num++;
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class=" text-white col-6">
+                            <div class="form-group">
+                                <label class="col-md-3 col-form-label">筆名查詢</label>
+                                <input id="Pseudonym" name="Pseudonym" type="text" value="@ViewBag.Pseudonym " class="form-control col-9" placeholder="請輸入欲查詢筆名" />
+                            </div>
+                        </div>
+                </div>
+                <div class="col-1 align-self-center">
+                    <button type="submit" class="btn-circle btn-orange-y">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+<table class="table-x table-x-striped table-dark table-x-hover" id="tab">
+    <tr class="text-fm text-center ts-16">
+        <td>
+            筆名
+        </td>
+        <td data-toggle="tooltip" data-placement="right" title="提示：紅燈為停權狀態">
+            狀態
+        </td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model.writers)
+    {
+        <tr class="text-fm text-center ts-16">
+            <td>
+                @Html.DisplayFor(modelItem => item.Pseudonym)
+            </td>
+            <td>
+                @if (item.W_status == false)
+                {
+                    <span class="text-success"><i class="fas fa-circle"></i></span>
+                }
+                else
+                {
+                    <span class="text-danger"><i class="fas fa-circle"></i></span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.WriterID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model.WritersPageList, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>

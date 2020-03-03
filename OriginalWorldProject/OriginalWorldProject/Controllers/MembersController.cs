@@ -16,6 +16,7 @@ using PagedList;
 
 namespace OriginalWorldProject.Controllers
 {
+    [LoginRule]
     public class MembersController : Controller
     {
         OriginalWorldEntities db = new OriginalWorldEntities();

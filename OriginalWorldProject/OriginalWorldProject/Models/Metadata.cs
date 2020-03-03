@@ -134,12 +134,11 @@ namespace OriginalWorldProject.Models
         [DisplayName("筆名")]
         [Required(ErrorMessage = "請輸入筆名")]
         [StringLength(25, ErrorMessage = "筆名不得超過25字!!")]
-        [Remote("check_Pseudonym", "Writer_application", ErrorMessage = "筆名無法使用")]
         public string Pseudonym { get; set; }
 
         [DisplayName("作品簡介")]
         [Required(ErrorMessage ="請輸入作品簡介")]
-        [StringLength(25, ErrorMessage = "簡介不得超過100字!!")]
+        [StringLength(100, ErrorMessage = "簡介不得超過100字!!")]
         public string Introduction { get; set; }
 
         [DisplayName("作品名稱")]
@@ -169,6 +168,30 @@ namespace OriginalWorldProject.Models
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime Date_of_Application { get; set; }
     }
+
+    public class MetadataWriter
+    {
+        [DisplayName("作者編號")]
+        [Key]
+        public string WriterID { get; set; }
+
+        [DisplayName("筆名")]
+        [Required]
+        public string Pseudonym { get; set; }
+
+        [DisplayName("權限狀態")]
+        public bool W_status { get; set; }
+
+        [DisplayName("會員編號")]
+        [Required]
+        public string MemberID { get; set; }
+
+        [DisplayName("作家申請書編號")]
+        [Required]
+        public int Writer_application_ID { get; set; }
+
+    }
+
 
     public class CheckAdmName : ValidationAttribute
     {

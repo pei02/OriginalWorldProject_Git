@@ -3,148 +3,179 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    string[] Approval_status_ID = { "A1", "A2", "A3", "A4" };
+    string[] Approval_status = { "尚未處理", "處理中", "審核通過", "未通過審核" };
+    var checked_ = "";
+    int num;
 }
-
-<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+
     
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <span class="text-fm text-white ts-36">申請書審核</span>
+                </div>
+                <div class="col-md-2">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn-circle btn-orange-y">
+                            <i class="far fa-save"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.ActionLink(" ", "Index", new { Approval_status_ID=ViewBag.Approval_status_ID,Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-orange fas fa-reply" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="border-bottom mb-5"></p>
+        @Html.AntiForgeryToken()
+
 <div class="form-horizontal text-white">
-    <h4>Writer_application</h4>
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Writer_application_ID)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Date_of_Application, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <label class="col-form-label">@Model.Date_of_Application.ToString("yyyy/MM/dd HH:mm")</label>
-            <div hidden>
-                @Html.EditorFor(model => model.Date_of_Application, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date_of_Application, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Pseudonym, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <label class="col-form-label">@Model.Pseudonym</label>
-            <div hidden>
-                @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pseudonym, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Works_name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <label class="col-form-label">@Model.Works_name</label>
-            <div hidden>
-                @Html.EditorFor(model => model.Works_name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Works_name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <p class="text-capitalize col-form-label">
-                @Html.Raw(Model.Introduction.ToString().Replace("\n", "<br>"))
-            </p>
-            <div hidden>
-                @Html.EditorFor(model => model.Introduction, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Work_preview, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <p class="text-capitalize col-form-label">
-                @Html.Raw(Model.Work_preview.ToString().Replace("\n", "<br>"))
-            </p>
-            <div hidden>
-                @Html.EditorFor(model => model.Work_preview, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Work_preview, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
     <div class="form-group">
         <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
             <div class="row">
-                <div class="col-4">
-                    <label class="btn btn-orange-s  btn-block rounded-1 active mr-2">
-                        <input type="radio" name="Approval_status_ID" value="A2" class="d-none">處理中
-                    </label>
-                </div>
-                <div class="col-4">
-                    <label class="btn btn-orange-s  btn-block rounded-1 active mr-2">
-                        <input type="radio" name="Approval_status_ID" value="A3" class="d-none">審核通過
-                    </label>
-                </div>
-                <div class="col-4">
-                    <label class="btn btn-orange-s  btn-block rounded-1 active mr-2">
-                        <input type="radio" name="Approval_status_ID" value="A4" class="d-none">未通過審核
-                    </label>
-                </div>
+                @{
+                    num = 0;
+                    foreach (var i in Approval_status_ID)
+                    {
+                        checked_ = i == ViewBag.Approval_status_ID ? "checked" : "";
+                        <div class="col-3">
+                            <label class="btn btn-orange-s  btn-block rounded-1 active mr-2">
+                                <input type="radio" name="Approval_status_ID" value="@i" class="d-none" @checked_>@Approval_status[num]
+                            </label>
+                        </div>
+                        num++;
+
+                    }
+
+                }
             </div>
         </div>
     </div>
-    @*<div class="form-group">
-            <label class="control-label  col-md-2">審核狀態</label>
-            @Html.LabelFor(model => model.Approval_status_ID, "Approval_status_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+
+    <hr />
+    @if (TempData["mem_vaild"] != null || @TempData["wa_vaild"] != null || @TempData["mem_vaild"] != null)
+    {
+
+        <div class="alert alert-red alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p><strong>※注意：</strong></p>
+            <p>@TempData["writter_vaild"]</p>
+            <p>@TempData["wa_vaild"]</p>
+            <p>@TempData["mem_vaild"]</p>
+        </div>
+    }
+
+    <div class="card bg-dark_op">
+        <div class="card-body">
+            <h3 class="card-title"><b>@Model.Works_name</b></h3>
+            <p class="border-bottom border-secondary"></p>
+            <p class="card-text">@Html.Raw(Model.Introduction.ToString().Replace("\n", "<br>"))</p>
+            <p class="border-bottom border-secondary"></p>
+            <p>@Html.Raw(Model.Work_preview.ToString().Replace("\n", "<br />"))</p>
+            <p class="border-bottom border-light"></p>
+            <b class="text-right"># @Model.Pseudonym</b><p class="card-text"><small class="text-white">@Model.Date_of_Application.ToString("yyyy/MM/dd HH:mm")</small></p>
+        </div>
+    </div>
+
+    <div hidden>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date_of_Application, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Approval_status_ID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Approval_status_ID, "", new { @class = "text-danger" })
+                <label class="col-form-label">@Model.Date_of_Application.ToString("yyyy/MM/dd HH:mm")</label>
+                <div hidden>
+                    @Html.EditorFor(model => model.Date_of_Application, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date_of_Application, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>*@
-
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.Administrator_ID, "Administrator_ID", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Administrator_ID, new { htmlAttributes = new { @class = "form-control", @Value = Session["Adm_ID"] } })
-            @Html.ValidationMessageFor(model => model.Administrator_ID, "", new { @class = "text-danger" })
         </div>
-    </div>
 
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.MemberID, "MemberID", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pseudonym, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="col-form-label">@Model.Pseudonym</label>
+                <div hidden>
+                    @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Pseudonym, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.Review_date, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Review_date, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Review_date, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Works_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="col-form-label">@Model.Works_name</label>
+                <div hidden>
+                    @Html.EditorFor(model => model.Works_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Works_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
-    </div>
 
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <p class="text-capitalize col-form-label">
+                    @Html.Raw(Model.Introduction.ToString().Replace("\n", "<br>"))
+                </p>
+                <div hidden>
+                    @Html.TextAreaFor(model => model.Introduction, new { @class = "form-control", @rows = "10", @id = "Introduction" })
+                    @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Work_preview, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <p class="text-capitalize col-form-label">
+                    @Html.Raw(Model.Work_preview.ToString().Replace("\n", "<br />"))
+                </p>
+                <div hidden>
+                    @Html.TextAreaFor(model => model.Work_preview, new { @class = "form-control", @rows = "20", @id = "Work_preview" })
+                    @Html.ValidationMessageFor(model => model.Work_preview, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Administrator_ID, "Administrator_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Administrator_ID, new { htmlAttributes = new { @class = "form-control", @Value = Session["Adm_ID"] } })
+                @Html.ValidationMessageFor(model => model.Administrator_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.MemberID, "MemberID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Review_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Review_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Review_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
     </div>
 </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+ @Scripts.Render("~/bundles/jqueryval")
+ }
