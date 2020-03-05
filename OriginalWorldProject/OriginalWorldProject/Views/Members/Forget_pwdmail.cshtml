@@ -1,0 +1,43 @@
+﻿@model OriginalWorldProject.Models.Member
+
+@{
+    ViewBag.Title = "Forget_pwdmail";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+}
+
+<h2>Forget_pwdmail</h2>
+
+@using (Html.BeginForm("Forget_pwdmail", "Members", FormMethod.Post, new { id = "verify_form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <img id="code" hidden />
+        <input type="button" onclick="verify_form.code.src = '/Members/VerificationEmail?' + Math.random()" id="btn_verify" value="傳送驗證碼">
+    </div>
+    <input id="verify_code" type="text" name="verify_code" />
+    <span class="text-secondary" id="notice" hidden>驗證碼已發送</span>
+
+
+    <span class="text-danger">@ViewBag.verify_code</span>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-danger" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    <script>
+        $('#btn_verify').mousedown(function () {
+            $('#notice').removeAttr("hidden");
+        });
+    </script>
+
+
+}

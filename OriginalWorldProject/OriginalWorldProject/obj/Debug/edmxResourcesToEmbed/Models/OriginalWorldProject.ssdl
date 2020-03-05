@@ -198,13 +198,6 @@
     <Property Name="WorksID" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="WorktypeID" Type="nvarchar" MaxLength="4" Nullable="false" />
   </EntityType>
-  <EntityType Name="Website_type">
-    <Key>
-      <PropertyRef Name="Website_type_ID" />
-    </Key>
-    <Property Name="Website_type_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
-    <Property Name="Website_type" Type="nvarchar" MaxLength="20" Nullable="false" />
-  </EntityType>
   <EntityType Name="Work_status">
     <Key>
       <PropertyRef Name="WorkstatusID" />
@@ -275,18 +268,8 @@
     <Property Name="WriterhomeID" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Coverphoto" Type="image" />
     <Property Name="Mugshot" Type="image" />
-    <Property Name="Fans" Type="int" Nullable="false" />
     <Property Name="WriterID" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="Writer_profile" Type="nvarchar" MaxLength="200" />
-  </EntityType>
-  <EntityType Name="Writter_website">
-    <Key>
-      <PropertyRef Name="Website_ID" />
-    </Key>
-    <Property Name="Website_ID" Type="nvarchar" MaxLength="3" Nullable="false" />
-    <Property Name="Website_link" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Website_type_ID" Type="nvarchar" MaxLength="3" />
-    <Property Name="WriterhomeID" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <Association Name="Relationship101">
     <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
@@ -348,18 +331,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Relationship107">
-    <End Role="Website_type" Type="Self.Website_type" Multiplicity="0..1" />
-    <End Role="Writter_website" Type="Self.Writter_website" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Website_type">
-        <PropertyRef Name="Website_type_ID" />
-      </Principal>
-      <Dependent Role="Writter_website">
-        <PropertyRef Name="Website_type_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="Relationship109">
     <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
     <End Role="Writer_application" Type="Self.Writer_application" Multiplicity="*" />
@@ -381,18 +352,6 @@
       </Principal>
       <Dependent Role="Writer">
         <PropertyRef Name="Writer_application_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Relationship111">
-    <End Role="Writer_home" Type="Self.Writer_home" Multiplicity="0..1" />
-    <End Role="Writter_website" Type="Self.Writter_website" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Writer_home">
-        <PropertyRef Name="WriterhomeID" />
-      </Principal>
-      <Dependent Role="Writter_website">
-        <PropertyRef Name="WriterhomeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -895,7 +854,6 @@
     <EntitySet Name="Track_work" EntityType="Self.Track_work" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Track_writer" EntityType="Self.Track_writer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Type_table" EntityType="Self.Type_table" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Website_type" EntityType="Self.Website_type" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Work_status" EntityType="Self.Work_status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Work_type" EntityType="Self.Work_type" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
@@ -903,7 +861,6 @@
     <EntitySet Name="Writer" EntityType="Self.Writer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Writer_application" EntityType="Self.Writer_application" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Writer_home" EntityType="Self.Writer_home" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Writter_website" EntityType="Self.Writter_website" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="Relationship101" Association="Self.Relationship101">
       <End Role="Status" EntitySet="Status" />
       <End Role="Works_Content" EntitySet="Works_Content" />
@@ -924,10 +881,6 @@
       <End Role="Administrator" EntitySet="Administrator" />
       <End Role="Writer_application" EntitySet="Writer_application" />
     </AssociationSet>
-    <AssociationSet Name="Relationship107" Association="Self.Relationship107">
-      <End Role="Website_type" EntitySet="Website_type" />
-      <End Role="Writter_website" EntitySet="Writter_website" />
-    </AssociationSet>
     <AssociationSet Name="Relationship109" Association="Self.Relationship109">
       <End Role="Member" EntitySet="Member" />
       <End Role="Writer_application" EntitySet="Writer_application" />
@@ -935,10 +888,6 @@
     <AssociationSet Name="Relationship110" Association="Self.Relationship110">
       <End Role="Writer_application" EntitySet="Writer_application" />
       <End Role="Writer" EntitySet="Writer" />
-    </AssociationSet>
-    <AssociationSet Name="Relationship111" Association="Self.Relationship111">
-      <End Role="Writer_home" EntitySet="Writer_home" />
-      <End Role="Writter_website" EntitySet="Writter_website" />
     </AssociationSet>
     <AssociationSet Name="Relationship112" Association="Self.Relationship112">
       <End Role="Administrator" EntitySet="Administrator" />

@@ -183,6 +183,7 @@
     <Compile Include="Models\Approval_status.cs">
       <DependentUpon>OriginalWorldProject.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Forget_Pwd_Rule.cs" />
     <Compile Include="Models\H_LoginRule.cs" />
     <Compile Include="Models\LoginRule.cs" />
     <Compile Include="Models\Member.cs">
@@ -253,9 +254,6 @@
     <Compile Include="Models\Type_table.cs">
       <DependentUpon>OriginalWorldProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Website_type.cs">
-      <DependentUpon>OriginalWorldProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Works.cs">
       <DependentUpon>OriginalWorldProject.tt</DependentUpon>
     </Compile>
@@ -275,9 +273,6 @@
       <DependentUpon>OriginalWorldProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Writer_home.cs">
-      <DependentUpon>OriginalWorldProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Writter_website.cs">
       <DependentUpon>OriginalWorldProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -487,6 +482,9 @@
     <Content Include="Views\Writer_application\Edit.cshtml" />
     <Content Include="Views\Writers\Edit.cshtml" />
     <Content Include="Views\Writers\Index.cshtml" />
+    <Content Include="Views\Members\Forget_pwd.cshtml" />
+    <Content Include="Views\Members\Forget_pwdmail.cshtml" />
+    <Content Include="Views\Members\Edit_pwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

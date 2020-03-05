@@ -123,7 +123,7 @@ namespace OriginalWorldProject.Controllers
             }
             if (Pseudonym_vaild != null) ViewBag.Pseudonym_vaild = "筆名已被註冊!!";
 
-            ViewBag.msg = "發生錯誤,請重新執行!!";
+            ViewBag.msg = "驗證失敗,請重新執行!!";
             ViewBag.Approval_status_ID = new SelectList(db.Approval_status, "Approval_status_ID", "Approval_status1", writer_application.Approval_status_ID);
             return View(writer_application);
         }
@@ -179,14 +179,16 @@ namespace OriginalWorldProject.Controllers
             if (old_id == null) old_id = "W000000000";
             NewID newID = new NewID();
             Writer writer = new Writer();
+            string new_id= newID.NewID_fuction(old_id, "W", 1, 9);
             if (writter_vaild == null && wa_vaild == null && mem_vaild == null) {
-                writer.WriterID = newID.NewID_fuction(old_id, "W", 1, 9);
+                writer.WriterID = new_id;
                 writer.Pseudonym = Pseudonym;
                 writer.W_status = false;
                 writer.MemberID = MemberID;
                 writer.Writer_application_ID = Writer_application_ID;
                 db.Writer.Add(writer);
                 db.SaveChanges();
+                Writer_home(new_id);
                 return true;
             }
             if (writter_vaild != null || wa_vaild != null || mem_vaild != null) {
@@ -203,6 +205,24 @@ namespace OriginalWorldProject.Controllers
             member.MemberID = id;
             member.Writter_qualifications = true;
             db.Entry(member).State = EntityState.Modified;
+            db.SaveChanges();
+
+        }
+
+        public void Writer_home(string id) {
+            Writer_home writer_home = new Writer_home();
+            var old_id = db.Writer_home.OrderByDescending(w => w.WriterhomeID).Select(w => w.WriterhomeID).FirstOrDefault();
+            if (old_id == null) {
+                old_id = "H000000000";
+            }
+            NewID newID = new NewID();
+            string new_id = newID.NewID_fuction(old_id, "H", 1, 9);
+            writer_home.WriterhomeID = new_id;
+            writer_home.Coverphoto = null;
+            writer_home.Mugshot = null;
+            writer_home.WriterID = id;
+            writer_home.Writer_profile = null;
+            db.Writer_home.Add(writer_home);
             db.SaveChanges();
         }
 

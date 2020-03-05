@@ -11,27 +11,25 @@ namespace OriginalWorldProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(MetadataWriter_home))]
     public partial class Writer_home
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Writer_home()
         {
             this.Report_table = new HashSet<Report_table>();
-            this.Writter_website = new HashSet<Writter_website>();
         }
     
         public string WriterhomeID { get; set; }
         public byte[] Coverphoto { get; set; }
         public byte[] Mugshot { get; set; }
-        public int Fans { get; set; }
         public string WriterID { get; set; }
         public string Writer_profile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report_table> Report_table { get; set; }
         public virtual Writer Writer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Writter_website> Writter_website { get; set; }
     }
 }

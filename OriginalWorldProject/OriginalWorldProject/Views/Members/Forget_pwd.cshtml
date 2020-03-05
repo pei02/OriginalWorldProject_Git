@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Forget_pwd";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+}
+
+<h2>Forget_pwd</h2>
+<form method="post">
+    @Html.AntiForgeryToken()
+    <input id="email" type="text" name="email" />
+    <input id="Submit1" type="submit" value="submit" />
+</form>

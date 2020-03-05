@@ -48,7 +48,6 @@ namespace OriginalWorldProject.Models
         public virtual DbSet<Track_work> Track_work { get; set; }
         public virtual DbSet<Track_writer> Track_writer { get; set; }
         public virtual DbSet<Type_table> Type_table { get; set; }
-        public virtual DbSet<Website_type> Website_type { get; set; }
         public virtual DbSet<Work_status> Work_status { get; set; }
         public virtual DbSet<Work_type> Work_type { get; set; }
         public virtual DbSet<Works> Works { get; set; }
@@ -56,7 +55,6 @@ namespace OriginalWorldProject.Models
         public virtual DbSet<Writer> Writer { get; set; }
         public virtual DbSet<Writer_application> Writer_application { get; set; }
         public virtual DbSet<Writer_home> Writer_home { get; set; }
-        public virtual DbSet<Writter_website> Writter_website { get; set; }
     
         public virtual int updateAdm(string administrator_ID, string adm_name, string account, string password, Nullable<bool> authority, string confirm_pwd)
         {

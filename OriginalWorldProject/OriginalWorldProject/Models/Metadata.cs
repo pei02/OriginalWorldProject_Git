@@ -191,7 +191,26 @@ namespace OriginalWorldProject.Models
         public int Writer_application_ID { get; set; }
 
     }
+    public class MetadataWriter_home
+    {
+        [DisplayName("主頁編號")]
+        [Key]
+        public string WriterhomeID { get; set; }
 
+        [DisplayName("封面")]
+        public byte[] Coverphoto { get; set; }
+
+        [DisplayName("大頭照")]
+        public byte[] Mugshot { get; set; }
+
+        [DisplayName("作家編號")]
+        [Required]
+        public string WriterID { get; set; }
+
+        [DisplayName("簡介")]
+        public string Writer_profile { get; set; }
+ 
+    }
 
     public class CheckAdmName : ValidationAttribute
     {

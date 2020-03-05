@@ -104,7 +104,7 @@ namespace OriginalWorldProject.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.msg = "發生錯誤,請重新執行!!";
+            ViewBag.msg = "驗證失敗,請重新執行!!";
             RandomPassword randomPassword = new RandomPassword();
             string pwd = randomPassword.RandomPwd();
             ViewBag.RandomPwd = pwd;

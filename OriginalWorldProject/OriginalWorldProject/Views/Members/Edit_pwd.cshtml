@@ -1,30 +1,31 @@
 ﻿@model OriginalWorldProject.Models.Member
 
 @{
-    Layout = "~/Views/Shared/_Layout_blank.cshtml";
+    ViewBag.Title = "Edit_pwd";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
 }
 
 
-@using (Html.BeginForm("Verification_usermail", "Signup", FormMethod.Post, new { id = "verify_form" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal" hidden>
+    
+    <div class="form-horizontal text-white">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MemberID)
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly"} })
                 @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly"} })
                 @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,52 +35,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.M_Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Gender)
-                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.M_status)
-                    @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Writter_qualifications)
-                    @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
-                </div>
+            <span class="text-danger">@ViewBag.pwdvaild</span>
             </div>
         </div>
 
@@ -91,7 +47,53 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Gender)
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.M_status)
+                    @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Writter_qualifications)
+                    @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
             @Html.LabelFor(model => model.Verify_status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -100,31 +102,19 @@
                 </div>
             </div>
         </div>
-    </div>
-        <div>
-            <img id="code" hidden />
-            <input type="button" onclick="verify_form.code.src = '/Signup/VerificationEmail?' + Math.random()" id="btn_verify" value="傳送驗證碼">
-        </div>
-        <input id="verify_code" type="text" name="verify_code" />
-        <span class="text-secondary" id="notice" hidden>驗證碼已發送</span>
 
-
-        <span class="text-danger">@ViewBag.verify_code</span>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-        }
+    </div>
+}
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
-        @section Scripts {
-            <script>
-                $('#btn_verify').mousedown(function () {
-                    $('#notice').removeAttr("hidden");
-                });
-            </script>
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

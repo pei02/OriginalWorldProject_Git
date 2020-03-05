@@ -220,14 +220,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Website_type">
-      <EntityTypeMapping TypeName="OriginalWorldModel.Website_type">
-        <MappingFragment StoreEntitySet="Website_type">
-          <ScalarProperty Name="Website_type_ID" ColumnName="Website_type_ID" />
-          <ScalarProperty Name="Website_type1" ColumnName="Website_type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Work_status">
       <EntityTypeMapping TypeName="OriginalWorldModel.Work_status">
         <MappingFragment StoreEntitySet="Work_status">
@@ -303,19 +295,8 @@
           <ScalarProperty Name="WriterhomeID" ColumnName="WriterhomeID" />
           <ScalarProperty Name="Coverphoto" ColumnName="Coverphoto" />
           <ScalarProperty Name="Mugshot" ColumnName="Mugshot" />
-          <ScalarProperty Name="Fans" ColumnName="Fans" />
           <ScalarProperty Name="WriterID" ColumnName="WriterID" />
           <ScalarProperty Name="Writer_profile" ColumnName="Writer_profile" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Writter_website">
-      <EntityTypeMapping TypeName="OriginalWorldModel.Writter_website">
-        <MappingFragment StoreEntitySet="Writter_website">
-          <ScalarProperty Name="Website_ID" ColumnName="Website_ID" />
-          <ScalarProperty Name="Website_link" ColumnName="Website_link" />
-          <ScalarProperty Name="Website_type_ID" ColumnName="Website_type_ID" />
-          <ScalarProperty Name="WriterhomeID" ColumnName="WriterhomeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -15,13 +15,25 @@
     <h4>Writer_application</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+    @{
+        if (ViewBag.Pseudonym_vaild != null)
+        {
+
+            <div class="alert alert-red alert-dismissible fade show" role="alert">
+                <p><strong>※注意</strong>  @ViewBag.Pseudonym_vaild</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
 
     <div class="form-group">
         @Html.LabelFor(model => model.Pseudonym, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control", @id = "Pseudonym" } })
             @Html.ValidationMessageFor(model => model.Pseudonym, "", new { @class = "text-danger" })
-            <span class="text-danger">@ViewBag.Pseudonym_vaild</span>
         </div>
     </div>
 
@@ -62,7 +74,7 @@
             <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
                 <i class="fas fa-check"></i>
             </button>
-            <span>@ViewBag.msg</span>
+            <span class="text-danger">@ViewBag.msg</span>
         </div>
     </div>
 </div>
