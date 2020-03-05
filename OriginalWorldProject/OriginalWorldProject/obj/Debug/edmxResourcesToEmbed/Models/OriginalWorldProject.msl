@@ -112,7 +112,6 @@
           <ScalarProperty Name="Re_message_num" ColumnName="Re_message_num" />
           <ScalarProperty Name="Moodsymbol_num" ColumnName="Moodsymbol_num" />
           <ScalarProperty Name="RtamessageID" ColumnName="RtamessageID" />
-          <ScalarProperty Name="Attribute1" ColumnName="Attribute1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -246,7 +245,6 @@
           <ScalarProperty Name="Endtime" ColumnName="Endtime" />
           <ScalarProperty Name="WorkstatusID" ColumnName="WorkstatusID" />
           <ScalarProperty Name="WriterID" ColumnName="WriterID" />
-          <ScalarProperty Name="fans" ColumnName="fans" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

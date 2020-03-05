@@ -109,11 +109,15 @@ namespace OriginalWorldProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Writter_qualifications = member.Writter_qualifications;
-            ViewBag.M_status = member.M_status;
-            ViewBag.password = member.M_Password;
-            ViewBag.Gender = member.Gender;
-            ViewBag.Verify_status = member.Verify_status;
+            var b = Session["id"].ToString();
+            int result = string.Compare(b, id);
+            switch (result)
+            {
+                case 0:
+                    break;
+                default:
+                    return View("~/Views/Login/Low_Authority.cshtml");
+            }
             return View(member);
         }
 
@@ -131,13 +135,8 @@ namespace OriginalWorldProject.Controllers
                 }
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
-                return Content("<script>alert('修改密碼成功!!<br/> 請重新登入');window.location.href='/Login/Mem_Login';</script>");
+                return Content("<script>alert('修改密碼成功!! 請重新登入');window.location.href='/Login/Mem_Login';</script>");
             }
-            ViewBag.Writter_qualifications = member.Writter_qualifications;
-            ViewBag.M_status = member.M_status;
-            ViewBag.password = member.M_Password;
-            ViewBag.Gender = member.Gender;
-            ViewBag.Verify_status = member.Verify_status;
             return View(member);
         }
 
@@ -240,9 +239,10 @@ namespace OriginalWorldProject.Controllers
             {
                 return HttpNotFound();
             }
-            TempData["id"] = memberID;
+            Session["id"] = memberID;
             Session["mail"] = member.Email;
             Session["name"] = member.Nickname;
+            Session["result"] = "";
             return View(member);
         }
 
@@ -262,7 +262,7 @@ namespace OriginalWorldProject.Controllers
              result = "1";
              Session["result"] = result;
             }
-            return RedirectToAction("Edit_pwd",new { id= TempData["id"] });
+            return RedirectToAction("Edit_pwd",new { id= Session["id"] });
         }
         public void VerificationEmail()
         {

@@ -102,7 +102,6 @@
     <Property Name="Re_message_num" Type="int" Nullable="false" />
     <Property Name="Moodsymbol_num" Type="nvarchar" MaxLength="2" Nullable="false" />
     <Property Name="RtamessageID" Type="int" Nullable="false" />
-    <Property Name="Attribute1" Type="char" MaxLength="1" />
   </EntityType>
   <EntityType Name="Report_category">
     <Key>
@@ -223,7 +222,6 @@
     <Property Name="Endtime" Type="datetime" />
     <Property Name="WorkstatusID" Type="nvarchar" MaxLength="3" Nullable="false" />
     <Property Name="WriterID" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="fans" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Works_Content">
     <Key>

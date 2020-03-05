@@ -37,10 +37,13 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MemberID)
 
-        @{ 
-            if (ViewBag.email_vaild != null) { 
+        @{
+            if (ViewBag.email_vaild != null)
+            {
                 <div class="alert alert-red alert-dismissible fade show" role="alert">
-                    <p><strong>※注意：</strong> </p>
+                    <p>
+                        <strong>※注意：</strong>
+                    </p>
                     <p>@ViewBag.email_vaild</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -70,23 +73,26 @@
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">修改密碼</label>
-            @*@Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.M_Password, new { @class = "form-control", @Value = @ViewBag.password })
-                @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
+        <div id="show_hide_password">
+            <div class="form-group">
+                <label class="control-label col-md-2">修改密碼</label>
+                @*@Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.M_Password, new { @class = "form-control", @Value = @ViewBag.password })
+                    @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @Value = @ViewBag.password })
+                    @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-10 mt-2 mb-2">
+                <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @Value = @ViewBag.password })
-                @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -220,6 +226,19 @@
     if (@Html.Raw(Gender)==true)
         $('#Gender').attr("checked", true);
 
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').removeClass("fa-eye").addClass("fa-eye-slash");
+                    $('#pwd_show_color').removeClass("badge-orange").addClass("badge-secondary");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash").addClass("fa-eye");
+                    $('#pwd_show_color').removeClass("badge-secondary").addClass("badge-orange");
+                }
+            });
+        });
     </script>
-
 }

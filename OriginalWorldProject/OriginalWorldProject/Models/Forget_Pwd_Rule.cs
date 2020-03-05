@@ -10,7 +10,7 @@ namespace OriginalWorldProject.Models
     {
         void LoginCheck(HttpContext context)
         {
-            if (context.Session["mail"] == null)
+            if (context.Session["mail"] == null || context.Session["result"].ToString() == "")
             {
                 context.Response.Redirect("/Login/Low_Authority");
             }

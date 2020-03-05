@@ -19,17 +19,17 @@
     @{
         if (ViewBag.Nickname != null || ViewBag.Account != null || ViewBag.Email != null || ViewBag.Phone != null || ViewBag.confirm_pwd != null)
         {
-        <div class="alert alert-red alert-dismissible fade show" role="alert">
-            <p><strong>※注意</strong></p>
-            <p>@ViewBag.Nickname</p>
-            <p>@ViewBag.Accoun</p>
-            <p>@ViewBag.Email</p>
-            <p>@ViewBag.Phone</p>
-            <p>@ViewBag.confirm_pwd</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+            <div class="alert alert-red alert-dismissible fade show" role="alert">
+                <p><strong>※注意</strong></p>
+                <p>@ViewBag.Nickname</p>
+                <p>@ViewBag.Accoun</p>
+                <p>@ViewBag.Email</p>
+                <p>@ViewBag.Phone</p>
+                <p>@ViewBag.confirm_pwd</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         }
     }
 
@@ -62,21 +62,26 @@
             @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div id="show_hide_password">
+        <div class="form-group">
+            @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.M_Password, new { @class = "form-control", @id = "M_Password" })
+                @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @id = "Confirm_pwd" })
+                @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+            <div class="col-md-10 mt-2 mb-2">
+                <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
+            </div>
+    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.M_Password, new { htmlAttributes = new { @class = "form-control", @id = "M_Password" } })
-            @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Confirm_pwd, new { htmlAttributes = new { @class = "form-control", @id = "Confirm_pwd" } })
-            @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
-        </div>
-    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -135,10 +140,6 @@
             </button>
         </div>
     </div>
-
-
-
-
 </div>
 }
 
@@ -150,7 +151,7 @@
 @section Scripts {
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        var id = ['#Nickname', '#Account','#M_Password','#Confirm_pwd','#Email','#Birthday'];
+        var id = ['#Nickname', '#Account', '#M_Password', '#Confirm_pwd', '#Email', '#Birthday'];
 
         function onSubmit(token) {
             onload();
@@ -158,7 +159,7 @@
 
         function validate(event) {
             event.preventDefault();
-          
+
             if (!document.getElementById('Nickname').value || !document.getElementById('Account').value || !document.getElementById('M_Password').value || !document.getElementById('Confirm_pwd').value || !document.getElementById('Email').value || !document.getElementById('Birthday').value) {
                 if (!document.getElementById('Nickname').value) $('#Nickname').addClass('is-invalid');
                 if (!document.getElementById('Account').value) $('#Account').addClass('is-invalid');
@@ -181,6 +182,19 @@
             for (var i = 0; i <= id.length; i++) {
                 Vaild(id[i]);
             }
+
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').removeClass("fa-eye").addClass("fa-eye-slash");
+                    $('#pwd_show_color').removeClass("badge-orange").addClass("badge-secondary");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash").addClass("fa-eye");
+                    $('#pwd_show_color').removeClass("badge-secondary").addClass("badge-orange");
+                }
+            });
         });
 
         function Vaild(name) {
@@ -195,6 +209,5 @@
 
 
     </script>
-    
-    }
-    
+
+}

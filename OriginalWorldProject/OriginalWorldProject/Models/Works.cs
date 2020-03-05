@@ -31,7 +31,6 @@ namespace OriginalWorldProject.Models
         public Nullable<System.DateTime> Endtime { get; set; }
         public string WorkstatusID { get; set; }
         public string WriterID { get; set; }
-        public int fans { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report_table> Report_table { get; set; }

@@ -17,7 +17,6 @@ namespace OriginalWorldProject.Models
         public int Re_message_num { get; set; }
         public string Moodsymbol_num { get; set; }
         public int RtamessageID { get; set; }
-        public string Attribute1 { get; set; }
     
         public virtual Moodshee Moodshee { get; set; }
         public virtual Rta_message Rta_message { get; set; }

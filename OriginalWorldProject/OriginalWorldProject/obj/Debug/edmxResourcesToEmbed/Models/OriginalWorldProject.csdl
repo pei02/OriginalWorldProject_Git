@@ -131,7 +131,6 @@
     <Property Name="Re_message_num" Type="Int32" Nullable="false" />
     <Property Name="Moodsymbol_num" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="RtamessageID" Type="Int32" Nullable="false" />
-    <Property Name="Attribute1" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="Moodshee" Relationship="Self.Relationship58" FromRole="Re_message" ToRole="Moodshee" />
     <NavigationProperty Name="Rta_message" Relationship="Self.Relationship59" FromRole="Re_message" ToRole="Rta_message" />
   </EntityType>
@@ -290,7 +289,6 @@
     <Property Name="Endtime" Type="DateTime" Precision="3" />
     <Property Name="WorkstatusID" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="WriterID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="fans" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Report_table" Relationship="Self.Relationship195" FromRole="Works" ToRole="Report_table" />
     <NavigationProperty Name="Star_table" Relationship="Self.Relationship82" FromRole="Works" ToRole="Star_table" />
     <NavigationProperty Name="Track_work" Relationship="Self.Relationship69" FromRole="Works" ToRole="Track_work" />
