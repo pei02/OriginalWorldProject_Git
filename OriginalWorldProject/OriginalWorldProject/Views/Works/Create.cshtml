@@ -1,0 +1,107 @@
+﻿@model OriginalWorldProject.Models.Works
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    List<string> type = ViewBag.type;
+    List<string> type_name = ViewBag.type_name;
+    int num;
+}
+
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-10">
+                <span class="text-fm text-white ts-36">新增作品</span>
+            </div>
+            <div class="col-md-2 row">
+                <div class="offset-8"></div>
+                <div class="col-4">
+                    @Html.ActionLink(" ", "Index", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle-s btn-orange fas fa-reply",@style="margin-bottom:-30px"})
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="border-bottom mb-5"></p>
+
+
+    @using (Html.BeginForm("Create", "Works", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="card mb-3 bg-dark_op text-white">
+            <div class="text-center bg-dark" style="height:300px">
+                <img id="blah" src="~/img/img_.png" alt="your image" class="w-auto" height="300" />
+            </div>
+            <div class="w-100">
+                <label class=" btn-orange-s btn-block btn-sq text-center ts-20">
+                    <input type="file" id="imgInp" accept="image/gif, image/jpeg, image/png" name="Cover" style="display:none" />
+                    <i class="fas fa-plus"></i>
+                </label>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Worksname, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Worksname, new { htmlAttributes = new { @class = "form-control", @placeholder = "請輸入作品名稱" } })
+                        @Html.ValidationMessageFor(model => model.Worksname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2  control-label">作品類型</label>
+                    <div class="col-md-10">
+                        <div class="btn-group-toggle row" data-toggle="buttons">
+                            @{
+                                num = 0;
+                                foreach (var i in type)
+                                {
+                                    <div class="col-2">
+                                        <label class="btn btn-block btn-orange-s active">
+                                            <input type="checkbox" autocomplete="off" name="type" value="@type[num]"> @type_name[num]
+                                        </label>
+                                    </div>
+                                    num++;
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" hidden>
+                    @Html.LabelFor(model => model.WriterID, "WriterID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WriterID, new { htmlAttributes = new { @class = "form-control", @Value = Session["Writter_ID"], @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.WriterID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 bg-info">
+                <input type="submit" value="新增" class="btn btn-info btn-block" />
+            </div>
+        </div>
+
+    }
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#imgInp").change(function () {
+                readURL(this);
+            });
+        </script>
+
+    }

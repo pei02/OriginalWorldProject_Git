@@ -1,0 +1,67 @@
+﻿@model OriginalWorldProject.Models.Works
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Works</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Worksname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Worksname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cover)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cover)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Serialtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serialtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Work_status.Workstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Work_status.Workstatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Writer.Pseudonym)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Writer.Pseudonym)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorksID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

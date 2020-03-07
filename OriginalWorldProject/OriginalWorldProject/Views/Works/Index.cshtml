@@ -1,0 +1,87 @@
+﻿@*@model IEnumerable<OriginalWorldProject.Models.Works>*@
+@model OriginalWorldProject.ViewModel.WorksClass
+@using PagedList.Mvc
+@using PagedList
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+}
+
+<div class="row">
+    <div class="col-md-11">
+        <table>
+            <tr>
+                <td>
+                    <span class="text-fm text-white ts-36">作品列表</span>
+                </td>
+                <td class="text-center" style="width:30px;">
+                    <a class="text-orange" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search" id="search_button">
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-minus-circle" style="display:none"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    @***********************************************方便測試用,記得刪***********************************************@
+    <div class="col-md-1">
+        @Html.ActionLink(" ", "Create", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-green fas fa-user-plus" })
+    </div>
+    @****************************************************************************************************************@
+
+</div>
+
+<p class="border-bottom mb-5"></p>
+
+<table class="table-x table-x-striped table-dark table-x-hover" id="tab">
+    <tr class="text-fm text-center ts-16">
+        <td>
+            作者
+        </td>
+        <td>
+            作品名稱
+        </td>
+        <td>
+            連載時間
+        </td>
+        <td>
+            完結時間
+        </td>
+        <td>
+            作品狀態
+        </td>
+        <td></td>
+    </tr>
+
+    @foreach (var item in Model.Works)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Writer.Pseudonym)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Worksname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Serialtime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Endtime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Work_status.Workstatus)
+    </td>
+
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.WorksID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
+        @Html.ActionLink(" ", "Details", new { id = item.WorksID, Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-purple far fa-file-alt" })
+    </td>
+</tr>
+    }
+
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model.WorksPageList, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>

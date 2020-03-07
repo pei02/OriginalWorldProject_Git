@@ -176,18 +176,18 @@ namespace OriginalWorldProject.Models
         public string WriterID { get; set; }
 
         [DisplayName("筆名")]
-        [Required]
+        [Required(ErrorMessage ="請輸入筆名")]
         public string Pseudonym { get; set; }
 
         [DisplayName("權限狀態")]
         public bool W_status { get; set; }
 
         [DisplayName("會員編號")]
-        [Required]
+        [Required(ErrorMessage = "請輸入會員編號")]
         public string MemberID { get; set; }
 
         [DisplayName("作家申請書編號")]
-        [Required]
+        [Required(ErrorMessage ="請輸入作家申請書編號")]
         public int Writer_application_ID { get; set; }
 
     }
@@ -208,8 +208,40 @@ namespace OriginalWorldProject.Models
         public string WriterID { get; set; }
 
         [DisplayName("簡介")]
+        [StringLength(200, ErrorMessage = "簡介不得超過200字!!")]
         public string Writer_profile { get; set; }
  
+    }
+    public class MetadataWorks
+    {
+        [DisplayName("作品編號")]
+        [Key]
+        public string WorksID { get; set; }
+
+
+        [DisplayName("作品名稱")]
+        [Required(ErrorMessage ="請輸入作品名稱")]
+        [StringLength(25, ErrorMessage = "簡介不得超過25字!!")]
+        public string Worksname { get; set; }
+
+        [DisplayName("封面")]
+        public byte[] Cover { get; set; }
+
+        [DisplayName("連載時間")]
+        [Required(ErrorMessage = "請輸入連載時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        public System.DateTime Serialtime { get; set; }
+
+        [DisplayName("完結時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> Endtime { get; set; }
+
+        [DisplayName("作品狀態")]
+        public string WorkstatusID { get; set; }
+
+        [DisplayName("作者編號")]
+        public string WriterID { get; set; }
+
     }
 
     public class CheckAdmName : ValidationAttribute

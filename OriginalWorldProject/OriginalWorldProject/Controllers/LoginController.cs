@@ -80,11 +80,13 @@ namespace OriginalWorldProject.Controllers
             else {
                 val = 1;
             }
+            var Writter_ID = db.Writer.Where(w => w.MemberID == All_Mem.MemberID).Select(w => w.WriterID).FirstOrDefault();
 
             Session["Member"] = All_Mem;
             Session["Verify_status"] = val;
             Session["Member_Nickname"] = All_Mem.Nickname;
             Session["Member_ID"] = All_Mem.MemberID;
+            Session["Writter_ID"] = Writter_ID;
             return RedirectToAction("Index", "Writer_application");
         }
 

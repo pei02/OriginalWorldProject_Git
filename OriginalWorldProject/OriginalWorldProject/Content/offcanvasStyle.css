@@ -10,16 +10,15 @@ html {
     margin: 0;
     height: 100%;
 }
-
-.footer,
-.push {
-    height: 50px;
-}
-
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
     background-color: transparent;
+}
+
+.footer,
+.push {
+    height: 50px;
 }
 
 #wrapper {
@@ -59,7 +58,10 @@ html {
 #wrapper.toggled #sidebar-wrapper {
     width: 220px;
 }
-
+#page-content-wrapper {
+    width: 100%;
+    padding-top: 70px;
+}
 
 
 #wrapper.toggled #page-content-wrapper {
@@ -95,9 +97,10 @@ html {
             height: 100%;
             width: 5px;
             background-color: #1c1c1c;
-            -webkit-transition: width .5s ease-in;
-            -moz-transition: width .5s ease-in;
-            transition: width .5s ease-in;
+            -webkit-transition: width .2s ease-in;
+            -moz-transition: width .2s ease-in;
+            -ms-transition: width .2s ease-in;
+            transition: width .2s ease-in;
         }
 
 
@@ -144,11 +147,11 @@ html {
         .sidebar-nav li:hover:before,
         .sidebar-nav li.open:hover:before {
             width: 100%;
-            -webkit-transition: width .5s ease-in;
-            -moz-transition: width .5s ease-in;
-            transition: width .5s ease-in;
+            -webkit-transition: width .2s ease-in;
+            -moz-transition: width .2s ease-in;
+            -ms-transition: width .2s ease-in;
+            transition: width .2s ease-in;
         }
-
         .sidebar-nav li a {
             display: block;
             color: #ddd;
@@ -172,7 +175,16 @@ html {
         font-size: 22px;
         line-height: 46px;
     }
-
+    .sidebar-nav .dropdown-menu {
+        position: relative;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        background-color: #222;
+        box-shadow: none;
+    }
 .custom-btn {
     color: white;
     background-color: transparent;
