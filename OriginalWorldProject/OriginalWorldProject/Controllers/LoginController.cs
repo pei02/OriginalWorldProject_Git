@@ -67,7 +67,7 @@ namespace OriginalWorldProject.Controllers
         {
             var All_Mem = db.Member.Where(a => a.Email == Account && a.M_Password == M_Password  || a.Account == Account && a.M_Password == M_Password).FirstOrDefault();
             int val;
-
+            int wq;
             if (All_Mem == null)
             {
                 ViewBag.Message = "帳號或密碼錯誤!!";
@@ -78,16 +78,42 @@ namespace OriginalWorldProject.Controllers
                 val = 0;
             }
             else {
+                string writter_pse = db.Writer.Where(w => w.MemberID == All_Mem.MemberID).Select(w => w.Pseudonym).FirstOrDefault();
                 val = 1;
+                if (All_Mem.Writter_qualifications == false)
+                {
+                    wq = 0;
+                    Session["Writter_qualifications"] = wq;
+                }
+                else {
+                    wq = 1;
+                    if (writter_pse.Length > 5) { 
+                     Session["writter_pse"] = writter_pse.Substring(0,5);
+                    }
+                    Session["writter_pse"] = writter_pse;
+                    Session["Writter_qualifications"] = wq;
+                    
+                }
+            
             }
             var Writter_ID = db.Writer.Where(w => w.MemberID == All_Mem.MemberID).Select(w => w.WriterID).FirstOrDefault();
 
+            if (All_Mem.Nickname.Length > 5)
+            {
+                Session["Member_Nickname"] = All_Mem.Nickname.Substring(0, 5);
+            }
+            else { 
+             Session["Member_Nickname"] = All_Mem.Nickname;
+            }
+
+
             Session["Member"] = All_Mem;
             Session["Verify_status"] = val;
-            Session["Member_Nickname"] = All_Mem.Nickname;
+           
             Session["Member_ID"] = All_Mem.MemberID;
             Session["Writter_ID"] = Writter_ID;
-            return RedirectToAction("Index", "Writer_application");
+            
+            return RedirectToAction("Index", "Home");
         }
 
 

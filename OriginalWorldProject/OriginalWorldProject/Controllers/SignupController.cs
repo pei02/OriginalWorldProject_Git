@@ -73,9 +73,9 @@ namespace OriginalWorldProject.Controllers
             }
             if (nickname_vaild != null || account_vaild != null || email_vaild != null || confirm_pwd != m_password)
             {
-                if (nickname_vaild != null) ViewBag.Nickname = "名稱已被使用!!";
-                if (account_vaild != null) ViewBag.Account = "帳號已被註冊!!";
-                if (email_vaild != null) ViewBag.Email = "信箱已被註冊!!";
+                if (nickname_vaild != null) ViewBag.Nickname = "暱稱、";
+                if (account_vaild != null) ViewBag.Account = "帳號、";
+                if (email_vaild != null) ViewBag.Email = "信箱，";
                 if (confirm_pwd != m_password) ViewBag.Confirm_pwd = "密碼不相符!!";
             }
 
@@ -116,9 +116,10 @@ namespace OriginalWorldProject.Controllers
                 member.Verify_status = true;
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Members");
+                //return RedirectToAction("Index", "Home");
+                return Content("<script>alert('註冊成功!! 請重新登入');window.location.href='/Login/Mem_Login';</script>");
 
-            }
+                }
             }
              return View(member);
 

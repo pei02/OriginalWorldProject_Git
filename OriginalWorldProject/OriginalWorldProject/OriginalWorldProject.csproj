@@ -305,6 +305,8 @@
     <Content Include="img\im_icon.png" />
     <Content Include="img\Login_bg.gif" />
     <Content Include="img\Low_Authority.png" />
+    <Content Include="img\Mem_bg2.jpg" />
+    <Content Include="img\Mem_login.jpeg" />
     <Content Include="img\w-logo_backstage_icon.png" />
     <Content Include="img\w-logo_icon.png" />
     <Content Include="Models\OriginalWorldProject.Context.tt">
@@ -489,9 +491,10 @@
     <Content Include="Views\Members\Forget_pwdmail.cshtml" />
     <Content Include="Views\Members\Edit_pwd.cshtml" />
     <Content Include="Views\Works\Create.cshtml" />
-    <Content Include="Views\Works\Details.cshtml" />
     <Content Include="Views\Works\Edit.cshtml" />
     <Content Include="Views\Works\Index.cshtml" />
+    <Content Include="Views\Works\Writer_Edit.cshtml" />
+    <Content Include="Views\Shared\_Mem_LoginLayoutStyle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

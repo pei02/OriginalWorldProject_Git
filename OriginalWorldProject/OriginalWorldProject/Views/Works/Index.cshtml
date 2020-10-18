@@ -24,11 +24,11 @@
             </tr>
         </table>
     </div>
-    @***********************************************方便測試用,記得刪***********************************************@
+    @***********************************************方便測試用,記得刪**********************************************
     <div class="col-md-1">
         @Html.ActionLink(" ", "Create", new { Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-green fas fa-user-plus" })
     </div>
-    @****************************************************************************************************************@
+    ***************************************************************************************************************@
 
 </div>
 
@@ -44,9 +44,6 @@
         </td>
         <td>
             連載時間
-        </td>
-        <td>
-            完結時間
         </td>
         <td>
             作品狀態
@@ -67,15 +64,11 @@
         @Html.DisplayFor(modelItem => item.Serialtime)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Endtime)
-    </td>
-    <td>
         @Html.DisplayFor(modelItem => item.Work_status.Workstatus)
     </td>
 
     <td>
-        @Html.ActionLink(" ", "Edit", new { id = item.WorksID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
-        @Html.ActionLink(" ", "Details", new { id = item.WorksID, Page = Request.QueryString["page"] }, new { @class = "btn-circle btn-purple far fa-file-alt" })
+        @Html.ActionLink(" ", "Edit", new { WorksID = item.WorksID, Page = Request.QueryString["page"] }, new { @class = "btn-circle  btn-blue far fa-edit" })
     </td>
 </tr>
     }

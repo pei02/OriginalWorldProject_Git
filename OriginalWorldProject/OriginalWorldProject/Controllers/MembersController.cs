@@ -221,10 +221,10 @@ namespace OriginalWorldProject.Controllers
             var id = db.Member.Where(w => w.Email == email).Select(w => w.MemberID).FirstOrDefault();
             if (email_vaild != null)
             {
-                return RedirectToAction("Forget_pwdmail", new { memberID = id , Email= email });
+                return RedirectToAction("Forget_pwdmail", new { memberID = id, Email = email });
             }
             ViewBag.email_vaild = "信箱不存在,請重新輸入!!";
-            return View(email);
+            return View();
         }
 
         public ActionResult Forget_pwdmail(string memberID,string Email)

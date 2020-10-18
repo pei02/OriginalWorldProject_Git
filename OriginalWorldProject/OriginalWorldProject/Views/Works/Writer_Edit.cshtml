@@ -2,7 +2,10 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_BackstageLayoutStyle .cshtml";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    List<string> type_ = ViewBag.type_;
+    List<string> type_name = ViewBag.type_name;
+    List<string> type_list = ViewBag.type_list;
     var type_table = ViewBag.type_table;
     var ws = Json.Encode(ViewBag.ws);
     string[] work_status = { "WS1", "WS2", "WS3", "WS4", "WS5" };
@@ -50,10 +53,6 @@
             }
         </div>
         <div class="w-100">
-            @*<label class=" btn-orange-s btn-block btn-sq text-center ts-20">
-                    <input type="file" id="imgInp" accept="image/gif, image/jpeg, image/png" name="Cover" style="display:none" />
-                    <i class="fas fa-plus"></i>
-                </label>*@
             <label class="btn-danger btn-block btn-sq text-center ts-20">
                 <a id="res" class="btn-block">
                     <i class="fas fa-minus"></i>
@@ -66,7 +65,6 @@
         <div class="card-body">
             <div class="form-group row">
                 <label class="control-label col-md-2 text-right">作者</label>
-                @*@Html.LabelFor(model => model.WriterID, "WriterID", htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <div class="col-md-10">
                     <label class="control-label">@ViewBag.Pseudonym </label>
                     <div hidden>
@@ -88,14 +86,25 @@
             <div class="form-group row">
                 <label class="control-label col-md-2 text-right">作品類型 </label>
                 <div class="col-md-10">
-                    @{
+                    <div class="btn-group-toggle row" data-toggle="buttons">
+                        @{
+                            num = 0;
+                            foreach (var i in type_)
+                            {
+                                
+                                    checked_ = i==type_list.Where(w=>w.Equals(i)).FirstOrDefault() ? "checked" : "";
+                                    <div class="col-2">
+                                        <label class="btn btn-block btn-orange-s">
+                                            <input type="checkbox" autocomplete="off" name="type" value="@type_[num]" @checked_> @type_name[num]
+                                        </label>
+                                    </div>
+                                    num++;
+                                
 
-                        foreach (var i in type_table)
-                        {
-                            <span class="badge badge-orange mr-3">@i</span>
+                            }
+
                         }
-
-                    }
+                    </div>
                 </div>
             </div>
             <div hidden>
@@ -125,15 +134,34 @@
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         @{
                             num = 0;
-                            foreach (var i in work_status)
+                            if (ViewBag.status != "WS5")
                             {
-                                checked_ = i == ViewBag.status ? "checked" : "";
-                                
-                                    <label class="btn btn-orange-s rounded-1 mr-2">
-                                        <input type="radio" name="WorkstatusID" id="option1" autocomplete="off" value="@i" @checked_> @status[num]
-                                    </label>
-                             
-                                num++;
+                                foreach (var i in work_status)
+                                {
+                                    checked_ = i == ViewBag.status ? "checked" : "";
+
+                                    if (i != "WS5")
+                                    {
+                                        <label class="btn btn-orange-s rounded-1 mr-2">
+                                            <input type="radio" name="WorkstatusID" id="option1" autocomplete="off" value="@i" @checked_> @status[num]
+                                        </label>
+                                    }
+                                    else
+                                    {
+                                        <label class="btn btn-secondary rounded-1 mr-2 disabled">
+                                            <input type="radio" name="WorkstatusID" id="option1" autocomplete="off" value="@i" @checked_> @status[num]
+                                        </label>
+                                    }
+                                    num++;
+                                }
+
+                            }
+                            else
+                            {
+                                <label class="btn btn-danger rounded-1 disabled">
+                                    <input type="radio" name="WorkstatusID" id="option1" autocomplete="off" value="WS5"> 已下架
+                                </label>
+
                             }
                         }
                     </div>

@@ -6,10 +6,16 @@
     border-radius: 0.25rem;
 }
 .alert-red {
-    color: #780000;
-    background-color: #ff8f8f;
-    border-color: #ff4d4d;
+    color: #ff2f00;
+    background-color: rgba(255, 55, 0, 0.15);
+    
 }
+/*******************************************************************/
+/*****************************margin********************************/
+.m-10 {
+    margin: 10rem !important;
+}
+
 /*******************************************************************/
 /************************background-color***************************/
 .over-flow {
@@ -110,6 +116,7 @@ a.badge-pink:hover, a.badge-pink:focus {
 .bg-orange {
     background-color: #ff8d00 !important;
 }
+
 .bg-black {
     background-color: #232323 !important;
 }
@@ -122,8 +129,17 @@ a.badge-pink:hover, a.badge-pink:focus {
 .bg-brown {
     background-color: rgba(255, 106, 0, 0.19) !important;
 }
+.bg-orange-op {
+    background-color: rgba(255, 125, 0, 0.12) !important;
+}
 .bg-dark_op {
     background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.bg-op {
+    background-color: rgba(255, 255, 255, 0.00) !important;
+}
+.bg-white-op {
+    background-color: rgba(255, 255, 255, 0.05) !important;
 }
 /*******************************************************************/
 /*****************************rounded*******************************/
@@ -138,13 +154,34 @@ a.badge-pink:hover, a.badge-pink:focus {
     border-top-right-radius: 1.25rem !important;
 }
 /*******************************************************************/
-/************************background-img***************************/
+/****************************jumptron*******************************/
+.jumbotronx {
+    padding: 2rem 1rem;
+    background-color: #e9ecef;
+}
+.jumb-h {
+    height: 70rem;
+}
+
+.jumb-800 {
+height:40rem;
+}
+/*******************************************************************/
+/*************************background-img****************************/
 .Login-bg {
     background-image: url(../img/Login_bg.gif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
+}
+
+.Mem_login_bg {
+    background-image: url(../img/Mem_bg2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top center;
 }
 /******************************************************************/
 /****************************text-family***************************/
@@ -155,6 +192,10 @@ a.badge-pink:hover, a.badge-pink:focus {
 /*****************************width********************************/
 .w-default {
     width: 30px;
+}
+
+.w-35 {
+    width: 35% !important;
 }
 /******************************************************************/
 /*****************************height********************************/
@@ -172,7 +213,9 @@ a.badge-pink:hover, a.badge-pink:focus {
 .text-orange {
     color: #ff8d00 !important;
 }
-
+.text-orange-b {
+    color: rgb(255, 70, 0) !important;
+}
 a.text-orange:hover, a.text-orange:focus {
     color: #d57600 !important;
 }
@@ -400,7 +443,7 @@ input[type=checkbox] {
 
 .btn-circle:focus, .btn-circle.focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    color:#fff;
 }
 
 .btn-circle.disabled, .btn-circle:disabled {
@@ -457,8 +500,54 @@ a.btn-circle-s.disabled,
 fieldset:disabled a.btn-circle-s {
     pointer-events: none;
 }
+/**********************************************************************/
+.btn-pill {
+    display: inline-block;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding-top:0.4em;
+    padding-bottom:0.4em;
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    font-weight:500;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 10rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
-/*************************************************************/
+@media (prefers-reduced-motion: reduce) {
+    .btn-pill {
+        transition: none;
+    }
+}
+
+.btn-pill:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+.btn-pill:focus, .btn-pill.focus {
+    outline: 0;
+}
+
+.btn-pill.disabled, .btn-pill:disabled {
+    opacity: 0.65;
+}
+
+a.btn-pill.disabled,
+fieldset:disabled a.btn-pill {
+    pointer-events: none;
+}
+/*********************************************************************/
 /************************btn-circle-color****************************/
 .btn-blue {
     color: #fff;
@@ -588,6 +677,27 @@ fieldset:disabled a.btn-circle-s {
         color: #fff;
         background-color: rgb(167, 167, 167);
         border-color: rgb(167, 167, 167);
+    }
+
+.btn-outline-orange {
+    color: #fff;
+    border-color: #ff8d00;
+}
+
+    .btn-outline-orange:hover {
+        color: #fff;
+        /*border-color: #ff6a00;*/
+    }
+
+
+.btn-outline-blue {
+    color: #fff;
+    border-color: #008aa3;
+}
+
+    .btn-outline-blue:hover {
+        color: #fff;
+        /*border-color: #016779;*/
     }
     /******************************************************/
 .btn-orange-s {

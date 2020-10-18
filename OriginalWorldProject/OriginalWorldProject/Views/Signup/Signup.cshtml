@@ -3,150 +3,144 @@
 
 @{
     ViewBag.Title = "Signup";
-    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    Layout = "~/Views/Shared/_Mem_LoginLayoutStyle.cshtml";
 }
-
-
-
-<h2>Signup</h2>
-
-@using (Html.BeginForm("Signup", "Signup", FormMethod.Post, new { id = "check-form" }))
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal text-white">
-    <h4>Member</h4>
-    @{
-        if (ViewBag.Nickname != null || ViewBag.Account != null || ViewBag.Email != null || ViewBag.Phone != null || ViewBag.confirm_pwd != null)
+<div class="row h-100 align-items-center">
+    <div class="col-1"></div>
+    <div class="bg-white-op align-self-center col rounded-125">
+        <h3 class="text-orange m-3 text-center">
+            <img src="~/img/w-logo_icon.png" width="180" />
+        </h3>
+        <hr />
+        @using (Html.BeginForm("Signup", "Signup", FormMethod.Post, new { id = "check-form" }))
         {
-            <div class="alert alert-red alert-dismissible fade show" role="alert">
-                <p><strong>※注意</strong></p>
-                <p>@ViewBag.Nickname</p>
-                <p>@ViewBag.Accoun</p>
-                <p>@ViewBag.Email</p>
-                <p>@ViewBag.Phone</p>
-                <p>@ViewBag.confirm_pwd</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal text-white text-fm  container w-35 text-center">
+        @{
+            if (ViewBag.Nickname != null || ViewBag.Account != null || ViewBag.Email != null || ViewBag.Phone != null || ViewBag.confirm_pwd != null)
+            {
+                <div class="alert alert-red alert-dismissible fade show text-left" role="alert">
+                    <h6><strong>※注意：@ViewBag.Nickname @ViewBag.Accoun @ViewBag.Email 已被使用!!</strong>
+                    <br />
+                    <strong class="offset-2">&nbsp;@ViewBag.confirm_pwd</strong>
+                    </h6>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
         }
-    }
 
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.MemberID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
-
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", @id = "Nickname" } })
-            @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @id = "Account" } })
-            @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div id="show_hide_password">
-        <div class="form-group">
-            @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.MemberID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.M_Password, new { @class = "form-control", @id = "M_Password" })
-                @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control", @id = "Confirm_pwd" })
-                @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+
+        <div class="form-group row col-12 align-items-end">
+            @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-3" })
+            @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control col-9", @id = "Nickname", @placeholder = "請輸入暱稱" } })
+            <div class="row col-12 text-left">
+                @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-orange-b  offset-3" })
             </div>
         </div>
-            <div class="col-md-10 mt-2 mb-2">
+
+        <div class="form-group row col-12 align-items-end">
+            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-3" })
+            @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control col-9", @id = "Account", @placeholder = "請輸入帳號" } })
+            <div class="row col-12 text-left">
+                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-orange-b  offset-3" })
+            </div>
+            </div>
+        <div id="show_hide_password">
+            <div class="form-group row col-12 align-items-end">
+                @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-3" })
+                @Html.PasswordFor(model => model.M_Password, new { @class = "form-control col-9", @id = "M_Password", @placeholder = "請輸入密碼" })
+                <div class="row col-12 text-left">
+                    @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-orange-b  offset-3 " })
+                </div>
+                </div>
+            <div class="form-group row col-12 align-items-end">
+                @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-3" })
+                @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control col-9", @id = "Confirm_pwd", @placeholder = "請再次輸入密碼" })
+                <div class="row col-12  text-left">
+                    @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-orange-b  offset-3 " })
+                </div>
+                </div>
+            <div class="mt-3 mb-3 row justify-content-end col-12">
                 <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
             </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "Email" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
-    </div>
+        <div class="form-group row col-12 align-items-end">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-3" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-9", @id = "Email", @placeholder = "請輸入信箱" } })
+            <div class="row col-12 text-left">
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-orange-b offset-3" })
+            </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                @*@Html.EditorFor(model => model.Gender)*@
-                <label class="btn btn-orange-s rounded active mr-1">
-                    <input type="radio" name="Gender" id="Genderf" autocomplete="off" value="true" checked> 男
-                </label>
-                <label class="btn btn-orange-s rounded">
-                    <input type="radio" name="Gender" id="Genderm" autocomplete="off" value="false"> 女
-                </label>
-                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            <div class="form-group row col-12 align-items-end">
+                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-3" })
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control col-9", @id = "Birthday",@type="date", @placeholder = "請輸入生日" } })
+                <div class="row col-12">
+                    @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-orange-b  offset-3" })
+                </div>
+                </div>
+
+            <div class="form-group row col-12 align-items-end">
+                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-3" })
+                <div class="btn-group btn-group-toggle col-9" data-toggle="buttons">
+                    @*@Html.EditorFor(model => model.Gender)*@
+                    <label class="btn btn-orange-s rounded-125 active mr-3">
+                        <input type="radio" name="Gender" id="Genderf" autocomplete="off" value="true" checked> 男
+                    </label>
+                    <label class="btn btn-orange-s rounded-125">
+                        <input type="radio" name="Gender" id="Genderm" autocomplete="off" value="false"> 女
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.M_status)
+                        @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Writter_qualifications)
+                        @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <button class="btn btn-orange btn-pill btn-block g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
+                    註冊
+                </button>
+            </div>
+            <div class="form-group justify-content-start  text-fm mt-3 mb-3">
+                <a href="@Url.Content("~/Login/Mem_Login")" class="text-decoration-none"><span class="text-orange-b"><strong>我已有帳號</strong></span></a>
             </div>
         </div>
+
+
+        }
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @id = "Birthday" } })
-            @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.M_status)
-                @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Writter_qualifications)
-                @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
-                <i class="fas fa-check"></i>
-            </button>
-        </div>
-    </div>
+    <div class="col-3"></div>
 </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 
 @section Scripts {
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>

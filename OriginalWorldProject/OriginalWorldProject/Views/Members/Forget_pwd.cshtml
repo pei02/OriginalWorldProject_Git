@@ -1,12 +1,37 @@
 ﻿
 @{
     ViewBag.Title = "Forget_pwd";
-    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    Layout = "~/Views/Shared/_Mem_LoginLayoutStyle.cshtml";
 }
 
-<h2>Forget_pwd</h2>
+
 <form method="post">
     @Html.AntiForgeryToken()
-    <input id="email" type="text" name="email" />
-    <input id="Submit1" type="submit" value="submit" />
+    <div class="jumbotronx jumbotron-fluid jumb-h bg-op">
+        <table class="w-100 h-100">
+            <tr class="justify-content-center">
+                <td class="col-1"></td>
+                <td class="h-100">
+                    <div class="w-75 h-50 bg-white-op rounded-125 justify-content-center">
+                        <h3 class="text-orange text-center mt-1">
+                            <img src="~/img/w-logo_icon.png" width="180" />
+                        </h3><hr />
+                        <div class="w-100 h-75">
+                            <div class="col-12 row justify-content-center align-items-center h-100">
+                                <input id="email" type="text" name="email" placeholder="請輸入信箱" class="form-control" />
+                                <input id="Submit1" type="submit" value="送出" class="btn btn-orange" />
+                                <span class="text-orange-b text-fm"><strong> @ViewBag.email_vaild</strong></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </td>
+                <td class="col-3"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
 </form>

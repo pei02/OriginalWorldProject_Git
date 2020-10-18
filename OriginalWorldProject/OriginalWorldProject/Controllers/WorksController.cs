@@ -10,6 +10,7 @@ using OriginalWorldProject.Models;
 using OriginalWorldProject.ViewModel;
 using OriginalWorldProject.App_Code;
 using PagedList;
+using System.IO;
 
 namespace OriginalWorldProject.Controllers
 {
@@ -28,21 +29,6 @@ namespace OriginalWorldProject.Controllers
             };
             return View(worksClass);
         }
-
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Works works = db.Works.Find(id);
-            if (works == null)
-            {
-                return HttpNotFound();
-            }
-            return View(works);
-        }
-
 
         [Member_LoginRule]
         public ActionResult Create()
@@ -83,45 +69,45 @@ namespace OriginalWorldProject.Controllers
 
             NewID newID = new NewID();
             string new_id = newID.NewID_fuction(old_id, "T", 1, 9);
-            
-                if (ModelState.IsValid)
+
+            if (ModelState.IsValid)
+            {
+                works.WorksID = new_id;
+                works.Worksname = Worksname;
+
+                if (Cover != null)
                 {
-                    works.WorksID = new_id;
-                    works.Worksname = Worksname;
-
-                    if (Cover != null)
-                    {
-                        works.Cover = new byte[Cover.ContentLength];
-                        Cover.InputStream.Read(works.Cover, 78, Cover.ContentLength - 78);
-                    }
-
-                    works.Serialtime = DateTime.Now;
-                    works.Endtime = null;
-                    works.WorkstatusID = "WS1";
-                    works.WriterID = WriterID;
-
-                    db.Works.Add(works);
-                    db.SaveChanges();
-                    foreach (var i in type)
-                    {
-                        Create_Type_table(type[num], new_id);
-                        num++;
-                    }
-
-
-                    return RedirectToAction("Index");
+                    works.Cover = new byte[Cover.ContentLength];
+                    Cover.InputStream.Read(works.Cover, 78, Cover.ContentLength - 78);
                 }
-            
+
+                works.Serialtime = DateTime.Now;
+                works.Endtime = null;
+                works.WorkstatusID = "WS1";
+                works.WriterID = WriterID;
+
+                db.Works.Add(works);
+                db.SaveChanges();
+                foreach (var i in type)
+                {
+                    Create_Type_table(type[num], new_id);
+                    num++;
+                }
+
+
+                return RedirectToAction("Index");
+            }
+
 
             return View(works);
         }
 
-     
+
         public void Create_Type_table(string type, string WorksID)
         {
             int id = db.Type_table.OrderByDescending(w => w.AM_ID).Select(w => w.AM_ID).FirstOrDefault();
             id++;
-           
+
             Type_table type_Table = new Type_table();
             type_Table.AM_ID = id;
             type_Table.WorksID = WorksID;
@@ -131,35 +117,158 @@ namespace OriginalWorldProject.Controllers
         }
 
 
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string WorksID)
         {
-            if (id == null)
+            if (WorksID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Works works = db.Works.Find(id);
+            Works works = db.Works.Find(WorksID);
             if (works == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.WorkstatusID = new SelectList(db.Work_status, "WorkstatusID", "Workstatus", works.WorkstatusID);
-            ViewBag.WriterID = new SelectList(db.Writer, "WriterID", "Pseudonym", works.WriterID);
+            if (works.Cover != null)
+            {
+                string img = Convert.ToBase64String(works.Cover);
+                ViewBag.img = img;
+            }
+            var ws = db.Works.Where(w => w.WorksID == WorksID).Select(w => w.WorkstatusID).FirstOrDefault();
+
+            var writter = from w in db.Works
+                          join a in db.Writer on w.WriterID equals a.WriterID
+                          where w.WorksID == WorksID
+                          select a.Pseudonym;
+
+            var type = from w in db.Type_table
+                       join t in db.Work_type on w.WorktypeID equals t.WorktypeID
+                       where w.WorksID == WorksID
+                       select t.Worktype;
+            ViewBag.ws = ws;
+            ViewBag.type_table = type;
+            ViewBag.Pseudonym = writter.FirstOrDefault();
+            ViewBag.status = works.WorkstatusID;
             return View(works);
         }
+      
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Works works)
+        public ActionResult Edit(string WorksID, string Worksname, DateTime Serialtime, string WriterID, HttpPostedFileBase Cover, string img, string WorkstatusID)
         {
+           
+            Works works = new Works();
             if (ModelState.IsValid)
             {
+                works.WorksID = WorksID;
+                works.Worksname = Worksname;
+                if (Cover != null)
+                {
+                    works.Cover = new byte[Cover.ContentLength];
+                    Cover.InputStream.Read(works.Cover, 78, Cover.ContentLength - 78);
+                }
+                else
+                {
+                    works.Cover = Convert.FromBase64String(img);
+                }
+                works.Serialtime = Serialtime;
+                works.WorkstatusID = WorkstatusID;
+                works.WriterID = WriterID;
                 db.Entry(works).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.WorkstatusID = new SelectList(db.Work_status, "WorkstatusID", "Workstatus", works.WorkstatusID);
-            ViewBag.WriterID = new SelectList(db.Writer, "WriterID", "Pseudonym", works.WriterID);
             return View(works);
         }
+
+        public ActionResult Writer_Edit(string WorksID)
+        {
+            if (WorksID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Works works = db.Works.Find(WorksID);
+            if (works == null)
+            {
+                return HttpNotFound();
+            }
+            if (works.Cover != null)
+            {
+                string img = Convert.ToBase64String(works.Cover);
+                ViewBag.img = img;
+            }
+            var ws = db.Works.Where(w => w.WorksID == WorksID).Select(w => w.WorkstatusID).FirstOrDefault();
+
+            var writter = from w in db.Works
+                          join a in db.Writer on w.WriterID equals a.WriterID
+                          where w.WorksID == WorksID
+                          select a.Pseudonym;
+
+            var type = from w in db.Type_table
+                       join t in db.Work_type on w.WorktypeID equals t.WorktypeID
+                       where w.WorksID == WorksID
+                       select t;
+                       
+
+            var type_ = db.Work_type.Select(t => t.WorktypeID).ToList();
+            var type_name = db.Work_type.Select(t => t.Worktype).ToList();
+            ViewBag.type_ = type_;
+            ViewBag.type_name = type_name;
+
+            ViewBag.ws = ws;
+            ViewBag.type_table = type.Select(t=>t.Worktype);
+            ViewBag.type_list = type.Select(t=>t.WorktypeID).ToList();
+            ViewBag.Pseudonym = writter.FirstOrDefault();
+            ViewBag.status = works.WorkstatusID;
+            return View(works);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Writer_Edit(string WorksID, string Worksname, DateTime Serialtime, string WriterID, HttpPostedFileBase Cover, string img, string WorkstatusID, List<string> type)
+        {
+            string old_id = db.Works.OrderByDescending(m => m.WorksID).Select(m => m.WorksID).FirstOrDefault();
+            NewID newID = new NewID();
+            string new_id = newID.NewID_fuction(old_id, "T", 1, 9);
+
+            var num = 0;
+            Works works = new Works();
+            if (ModelState.IsValid)
+            {
+                works.WorksID = WorksID;
+                works.Worksname = Worksname;
+                if (Cover != null)
+                {
+                    works.Cover = new byte[Cover.ContentLength];
+                    Cover.InputStream.Read(works.Cover, 78, Cover.ContentLength - 78);
+                }
+                else
+                {
+                    works.Cover = Convert.FromBase64String(img);
+                }
+                works.Serialtime = Serialtime;
+                works.WorkstatusID = WorkstatusID;
+                works.WriterID = WriterID;
+                db.Entry(works).State = EntityState.Modified;
+                db.SaveChanges();
+                foreach (var i in type)
+                {
+                    Create_Type_table(type[num], new_id);
+                    num++;
+                }
+                return RedirectToAction("Index");
+            }
+            return View(works);
+        }
+
+        public FileContentResult GetImage(string id)
+        {
+            Works works = db.Works.Find(id);
+            MemoryStream ms = new MemoryStream(works.Cover, 78, works.Cover.Length - 78);
+            return File(ms.ToArray(), "image/png");
+
+        }
+
     }
 }

@@ -2,16 +2,55 @@
 
 @{
     ViewBag.Title = "Forget_pwdmail";
-    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    Layout = "~/Views/Shared/_Mem_LoginLayoutStyle.cshtml";
 }
-
-<h2>Forget_pwdmail</h2>
 
 @using (Html.BeginForm("Forget_pwdmail", "Members", FormMethod.Post, new { id = "verify_form" }))
 {
     @Html.AntiForgeryToken()
 
-    <div>
+    <div class="jumbotronx jumbotron-fluid jumb-h bg-op">
+        <table class="w-100 h-100">
+            <tr class="justify-content-center">
+                <td class="col-1"></td>
+                <td class="h-100">
+                    <div class="w-75 h-50 bg-white-op rounded-125 justify-content-center">
+                        <h3 class="text-orange text-center mt-1">
+                            <img src="~/img/w-logo_icon.png" width="180" />
+                        </h3>
+                        <hr />
+                             <div class="w-100 h-75  row align-content-center justify-content-center">
+                                 <div class="row justify-content-center">
+                                     <div class="flex-column">
+                                         <input id="verify_code" type="text" name="verify_code" class="form-control" placeholder="請輸入驗證碼"  required/>
+                                         <input type="submit" value="送出" class="btn btn-block btn-orange mt-1" id="btn_sub" />
+                                     </div>
+                                     <div class="flex-column">
+                                         <div>
+                                             <img id="code" hidden />
+                                             <input type="button" onclick="verify_form.code.src = '/Members/VerificationEmail?' + Math.random()" id="btn_verify" value="傳送驗證碼" class="btn btn-orange-y">
+                                         </div>
+                                         <div class="row align-content-end justify-content-center mt-2">
+                                             <span class="text-white text-fm" id="notice" hidden>驗證碼已發送</span>
+                                             <span class="text-orange-b text-fm" id="verify">@ViewBag.verify_code</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
+                    </div>
+                </td>
+                <td class="col-3"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+
+    @*<div>
         <img id="code" hidden />
         <input type="button" onclick="verify_form.code.src = '/Members/VerificationEmail?' + Math.random()" id="btn_verify" value="傳送驗證碼">
     </div>
@@ -24,18 +63,17 @@
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-danger" />
         </div>
-    </div>
+    </div>*@
 
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     <script>
         $('#btn_verify').mousedown(function () {
             $('#notice').removeAttr("hidden");
+        });
+        $('#btn_verify').mousedown(function () {
+            $('#verify').hide();
         });
     </script>
 

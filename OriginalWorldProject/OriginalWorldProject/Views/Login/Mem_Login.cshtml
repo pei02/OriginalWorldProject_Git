@@ -2,39 +2,93 @@
 
 @{
     ViewBag.Title = "Mem_Login";
-    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    Layout = "~/Views/Shared/_Mem_LoginLayoutStyle.cshtml";
 }
-
-<h2>Mem_Login</h2>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal text-white">
+    <div class="jumbotronx jumbotron-fluid jumb-img jumb-h bg-op">
+            <table class="h-100 w-100" align="center">
+                <tr class="justify-content-center">
+                    <td class="align-middle" align="center">
+                        <div class="rounded-125 bg-orange-op w-50  p-3">
+                            <h3 class="text-orange mt-1 text-center">
+                                <img src="~/img/w-logo_icon.png" width="180" />
+                            </h3>
+                            <div class="form-horizontal text-white">
+                                <div class="form-group mt-5">
+                                    <div class="input-group justify-content-center">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-orange text-white" id="Account"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control bg-brown text-orange" id="Account" name="Account" type="text" placeholder="請輸入帳號或信箱" required>
+                                    </div>
+                                </div>
+                                <div id="show_hide_password">
+                                    <div class="form-group">
+                                        <div class="input-group justify-content-center">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-orange text-white"><i class="fas fa-key"></i></span>
+                                            </div>
+                                            <input class="form-control bg-brown text-orange" id="M_Password" name="M_Password" type="password" placeholder="請輸入密碼" required>
+                                        </div>
+                                        <div class="input-group justify-content-center mt-3">
+                                            <div class="row col-8">
+                                                <div class="col-8">
+                                                    <span class="text-orange text-fm">@ViewBag.Message</span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-4">
+                                    <div class="mb-3">
+                                        <div class="input-group justify-content-center">
+                                            <input class="btn btn-pill btn-orange-y btn-block" type="submit" value="登入">
+                                        </div>
+                                        @*<div class="col-6">
+                                        <a href="@Url.Content("~/Signup/Signup")" class="btn btn-orange btn-block">
+                                            <span>註冊</span>
+                                        </a>
+                                    </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input class="form-control" id="Account" name="Account" type="text">
-            </div>
-        </div>
+                                        <div class="text-right text-fm  justify-content-end mr-5 mt-5">
+                                            <a href="@Url.Content("~/Signup/Signup")" class="text-decoration-none"><span class="text-orange">註冊帳號　|</span></a>
+                                            <a href="@Url.Content("~/Members/Forget_pwd")" class="text-decoration-none"><span class="text-orange">　忘記密碼</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input class="form-control"  id="M_Password" name="M_Password" type="text">
-            </div>
-        </div>
-        <span class="text-danger">@ViewBag.Message</span>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+                        </div>
+
+                    </td>
+                    <td class="w-50"></td>
+                </tr>
+            </table>  
     </div>
 }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').removeClass("fa-eye").addClass("fa-eye-slash");
+                    $('#pwd_show_color').removeClass("badge-orange").addClass("badge-secondary");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("fa-eye-slash").addClass("fa-eye");
+                    $('#pwd_show_color').removeClass("badge-secondary").addClass("badge-orange");
+                }
+            });
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        });
+      
+    </script>
+
+}

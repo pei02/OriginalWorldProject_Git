@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Edit_pwd";
-    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    Layout = "~/Views/Shared/_Mem_LoginLayoutStyle.cshtml";
 }
 
 
@@ -10,108 +10,241 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal text-white">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MemberID)
+    <div class="jumbotronx jumbotron-fluid jumb-h bg-op">
+        <table class="w-100 h-100">
+            <tr class="justify-content-center">
+                <td class="col-1"></td>
+                <td class="h-100">
+                    <div class="w-75 h-50 bg-white-op rounded-125 justify-content-center">
+                        <h3 class="text-orange text-center mt-1">
+                            <img src="~/img/w-logo_icon.png" width="180" />
+                        </h3><hr />
+                        <div class="form-horizontal text-white h-100">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.MemberID)
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div id="show_hide_password">
-            <div class="form-group">
-                @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.M_Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
-                    <span class="text-danger">@ViewBag.pwdvaild</span>
-                </div>
-            </div>
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-10 mt-2 mb-2">
-                <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
-            </div>
-        </div>
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Gender)
-                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+                            <div class="row justify-content-center align-content-center h-75">
+                                <div id="show_hide_password" class="row justify-content-center w-50 text-center text-fm">
+                                    <div class="form-group row col-12">
+                                        @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-3" })
+                                        @Html.PasswordFor(model => model.M_Password, new { @class = "form-control col-9", @placeholder = "請輸入密碼" })
+                                        <div class="row col-12  text-left">
+                                            @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-orange-b  offset-3" })
+                                            <span class="text-danger">@ViewBag.pwdvaild</span>
+                                        </div>
+                                    </div>
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="form-group row col-12">
+                                        @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-3" })
+                                        @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control col-9", @placeholder = "請再次輸入密碼" })
+                                        <div class="row col-12  text-left">
+                                            @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-orange-b  offset-3" })
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 mb-3 row justify-content-end col-12">
+                                        <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
+                                    </div>
+                                    <div class="form-group col-12 row">
+                                            <input type="submit" value="重設密碼" class="btn btn-block btn-pill  btn-red offset-3 text-white"/>
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.M_status)
-                    @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Writter_qualifications)
-                    @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
 
-        <div class="form-group" hidden>
-            @Html.LabelFor(model => model.Verify_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Verify_status)
-                    @Html.ValidationMessageFor(model => model.Verify_status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Gender)
+                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.M_status)
+                                        @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Writter_qualifications)
+                                        @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" hidden>
+                                @Html.LabelFor(model => model.Verify_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Verify_status)
+                                        @Html.ValidationMessageFor(model => model.Verify_status, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div class="form-group col-12 row justify-content-center border border-danger">
+                                   <input type="submit" value="Save" class="btn btn-block btn-pill btn-orange" />
+                                </div>*@
+
+                        </div>
+
+                    </div>
+                </td>
+                <td class="col-3"></td>
+            </tr>
+
+        </table>
+
     </div>
+
+
+
+    @*<div class="form-horizontal text-white">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MemberID)
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Nickname, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nickname, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Nickname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="show_hide_password">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.M_Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.M_Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.M_Password, "", new { @class = "text-danger" })
+                        <span class="text-danger">@ViewBag.pwdvaild</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Confirm_pwd, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Confirm_pwd, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Confirm_pwd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-10 mt-2 mb-2">
+                    <span class="badge badge-secondary text-fm" id="pwd_show_color"><a href="" class="text-white"><i class="fa fa-eye-slash" aria-hidden="true"></i>顯示密碼</a></span>
+                </div>
+            </div>
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Gender)
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.M_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.M_status)
+                        @Html.ValidationMessageFor(model => model.M_status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Writter_qualifications, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Writter_qualifications)
+                        @Html.ValidationMessageFor(model => model.Writter_qualifications, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" hidden>
+                @Html.LabelFor(model => model.Verify_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Verify_status)
+                        @Html.ValidationMessageFor(model => model.Verify_status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>*@
 }
 
 <div>
