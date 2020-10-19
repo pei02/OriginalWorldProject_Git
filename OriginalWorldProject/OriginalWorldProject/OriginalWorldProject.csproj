@@ -303,7 +303,6 @@
     <Content Include="img\full.png" />
     <Content Include="img\img_.png" />
     <Content Include="img\im_icon.png" />
-    <Content Include="img\Login_bg.gif" />
     <Content Include="img\Low_Authority.png" />
     <Content Include="img\Mem_bg2.jpg" />
     <Content Include="img\Mem_login.jpeg" />
@@ -495,6 +494,7 @@
     <Content Include="Views\Works\Index.cshtml" />
     <Content Include="Views\Works\Writer_Edit.cshtml" />
     <Content Include="Views\Shared\_Mem_LoginLayoutStyle.cshtml" />
+    <Content Include="Views\Shared\_FrontendLayoutStyle02.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

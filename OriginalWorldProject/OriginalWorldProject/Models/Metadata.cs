@@ -218,7 +218,6 @@ namespace OriginalWorldProject.Models
         [Key]
         public string WorksID { get; set; }
 
-
         [DisplayName("作品名稱")]
         [Required(ErrorMessage ="請輸入作品名稱")]
         [StringLength(25, ErrorMessage = "簡介不得超過25字!!")]

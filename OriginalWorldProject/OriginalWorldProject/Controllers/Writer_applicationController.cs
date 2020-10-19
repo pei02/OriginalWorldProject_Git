@@ -118,7 +118,7 @@ namespace OriginalWorldProject.Controllers
                     writer_application.Writer_application_ID = New_id;
                     db.Writer_application.Add(writer_application);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return Content("<script>alert('已提交申請書!!');window.location.href='/Home/Index';</script>");
                 }
             }
             if (Pseudonym_vaild != null) ViewBag.Pseudonym_vaild = "筆名已被註冊!!";

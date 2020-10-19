@@ -236,8 +236,8 @@ namespace OriginalWorldProject.Controllers
                 Conn.Open();
                 Cmd.ExecuteNonQuery();
                 Conn.Close();
-
-                return Content("<script>alert('密碼修改成功!!');</script>");
+                Session.Clear();
+                return Content("<script>alert('修改密碼成功,請重新登入!!');window.location.href='/Login/Adm_Login';</script>");
 
             }
             catch (DbException ex)

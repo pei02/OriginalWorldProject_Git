@@ -2,86 +2,90 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_FrontendLayoutStyle.cshtml";
+    Layout = "~/Views/Shared/_FrontendLayoutStyle02.cshtml";
 }
 
-<h2>Create</h2>
+
 
 @using (Html.BeginForm("Create", "Writer_application", FormMethod.Post, new { id = "check-form" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal text-white">
-    <h4>Writer_application</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    
-    @{
-        if (ViewBag.Pseudonym_vaild != null)
-        {
-
-            <div class="alert alert-red alert-dismissible fade show" role="alert">
-                <p><strong>※注意</strong>  @ViewBag.Pseudonym_vaild</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class="form-horizontal text-white text-fm">
+            <div>
+                <span class="text-fm text-white ts-36">作家申請書</span>
             </div>
+
+
+        <p class="border-bottom mb-5"></p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @{
+            if (ViewBag.Pseudonym_vaild != null)
+            {
+
+                <div class="alert alert-red alert-dismissible fade show" role="alert">
+                    <p><strong>※注意</strong>  @ViewBag.Pseudonym_vaild</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
         }
-    }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Pseudonym, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control", @id = "Pseudonym" } })
-            @Html.ValidationMessageFor(model => model.Pseudonym, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pseudonym, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Pseudonym, new { htmlAttributes = new { @class = "form-control", @id = "Pseudonym" } })
+                @Html.ValidationMessageFor(model => model.Pseudonym, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Works_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Works_name, new { htmlAttributes = new { @class = "form-control", @id = "Works_name" } })
+                @Html.ValidationMessageFor(model => model.Works_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Introduction, new { @class = "form-control", @rows = "10", @id = "Introduction" })
+                @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Work_preview, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Work_preview, new { @class = "form-control", @rows = "20", @id = "Work_preview" })
+                @Html.ValidationMessageFor(model => model.Work_preview, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            @Html.LabelFor(model => model.MemberID, "MemberID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control", @Value = Session["Member_ID"], @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-block btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
+                    提交
+                </button>
+                <span class="text-danger">@ViewBag.msg</span>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Works_name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Works_name, new { htmlAttributes = new { @class = "form-control", @id = "Works_name" } })
-            @Html.ValidationMessageFor(model => model.Works_name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Introduction, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Introduction, new { @class = "form-control", @rows = "10", @id = "Introduction" })
-            @Html.ValidationMessageFor(model => model.Introduction, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Work_preview, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Work_preview, new { @class = "form-control", @rows = "20", @id = "Work_preview" })
-            @Html.ValidationMessageFor(model => model.Work_preview, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" hidden>
-        @Html.LabelFor(model => model.MemberID, "MemberID", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control", @Value = Session["Member_ID"], @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button class="btn-circle btn-orange-y g-recaptcha" data-sitekey="6Lf9vdoUAAAAAFGpxuA3UtwzqbpLm4J_fPWrJLnf" data-callback="onSubmit" id="btn_sub">
-                <i class="fas fa-check"></i>
-            </button>
-            <span class="text-danger">@ViewBag.msg</span>
-        </div>
-    </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="m-3">
+    @Html.ActionLink("返回前頁", "../Home/Index")
 </div>
 @section Scripts {
 
